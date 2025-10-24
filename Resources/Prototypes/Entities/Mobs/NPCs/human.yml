@@ -55,7 +55,7 @@
 - type: entity
   parent: BaseMobHuman # Starlight Edit: MobHuman -> BaseMobHuman
   suffix: Dead
-  save: false # mobs are currently not saveable.
+  save: true # mobs are currently not saveable.
   id: SalvageHumanCorpse
   name: unidentified corpse
   description: I think they're dead.
