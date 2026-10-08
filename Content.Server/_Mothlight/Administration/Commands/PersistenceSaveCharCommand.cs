@@ -1,3 +1,4 @@
+using Content.Server.Administration;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Robust.Shared.Configuration;
@@ -6,14 +7,14 @@ using Robust.Shared.Map;
 using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Utility;
 
-namespace Content.Server.Administration.Commands;
+namespace Content.Server._Mothlight.Administration.Commands;
 
 [AdminCommand(AdminFlags.Server)]
-public sealed class PersistenceSaveChar : LocalizedEntityCommands
+public sealed partial class PersistenceSaveChar : LocalizedEntityCommands
 {
-    [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly SharedMapSystem _map = default!;
-    [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
+    [Dependency] private IConfigurationManager _config = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private MapLoaderSystem _mapLoader = default!;
 
     public override string Command => "persistencesavechar";
 

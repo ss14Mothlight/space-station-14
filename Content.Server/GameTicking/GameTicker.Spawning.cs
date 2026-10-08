@@ -246,7 +246,7 @@ namespace Content.Server.GameTicking
             EntityUid station,
             string? jobId = null,
             bool lateJoin = true,
-            bool silent = false)
+            bool silent = false, bool save = false) // Mothlight edit
         {
             var jobBans = _banManager.GetJobBans(player.UserId);
             if (jobBans == null || jobId != null && jobBans.Contains(jobId)) //TODO: use IsRoleBanned directly?
@@ -261,7 +261,7 @@ namespace Content.Server.GameTicking
                     return;
             }
 
-            SpawnPlayer(player, null, station, jobId, lateJoin, silent);
+            SpawnPlayer(player, null, station, jobId, lateJoin, silent, save); // Mothlight edit
         }
 
         private void SpawnPlayer(ICommonSession player,
@@ -269,7 +269,7 @@ namespace Content.Server.GameTicking
             EntityUid station,
             string? jobId = null,
             bool lateJoin = true,
-            bool silent = false)
+            bool silent = false, bool save = false) // Mothlight edit
         {
             // Can't spawn players with a dummy ticker!
             if (DummyTicker)
@@ -379,7 +379,7 @@ namespace Content.Server.GameTicking
             }
             //starlight end
 
-            _newLifeSystem.SaveCharacterToUsed(player.UserId, playerPreferences.IndexOfCharacter(character));     //🌟Starlight🌟
+            // _newLifeSystem.SaveCharacterToUsed(player.UserId, playerPreferences.IndexOfCharacter(character));     //🌟Starlight🌟 // Mothlight - disable
 
             DoSpawn(player, character, station, jobId, silent, out var mob, out var jobPrototype, out var jobName);
 
@@ -453,6 +453,11 @@ namespace Content.Server.GameTicking
                 station,
                 character);
             RaiseLocalEvent(mob, aev, true);
+            // Mothlight begin - persistence
+            if (!save) return;
+            var savePath = new ResPath($"{player.ContentData()!.UserId}]{character.Name}");
+            _loader.TrySaveGeneric(mob, savePath, out _);
+            // Mothlight end
         }
 
         /// <summary>

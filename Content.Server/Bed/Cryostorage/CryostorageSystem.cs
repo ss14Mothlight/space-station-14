@@ -29,7 +29,10 @@ using Robust.Shared.Enums;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Content.Server._Starlight.Bed.Cryostorage;
+using Content.Server.GameTicking;
 using Content.Shared.Anomaly.Components;
+using Robust.Shared.EntitySerialization.Systems;
+using Robust.Shared.Utility;
 
 namespace Content.Server.Bed.Cryostorage;
 
@@ -52,6 +55,13 @@ public sealed partial class CryostorageSystem : SharedCryostorageSystem
     [Dependency] private StationRecordsSystem _stationRecords = default!;
     [Dependency] private TransformSystem _transform = default!;
     [Dependency] private UserInterfaceSystem _ui = default!;
+
+    #region Mothlight
+
+    [Dependency] private GameTicker _ticker = null!;
+    [Dependency] private MapLoaderSystem _loader = null!;
+
+    #endregion
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -202,31 +212,41 @@ public sealed partial class CryostorageSystem : SharedCryostorageSystem
 
                 _stationJobs.TryRemovePlayerJobs(uniqueStation, userId.Value, stationJobs);
             }
+            // Mothlight begin
+            RemComp<AnomalyComponent>(ent.Owner); // Starlight - kill anomaly infection when host cryosleep
+            var savePath = new ResPath($"{userId}]{name}");
+            _loader.TrySaveGeneric(ent, savePath, out _);
+            if (Mind.TryGetMind(userId.Value, out var mind) &&
+                HasComp<CryostorageContainedComponent>(mind.Value.Comp.CurrentEntity))
+                _ghostSystem.OnGhostAttempt(mind.Value, false);
+            _transform.DetachEntity(ent, Transform(ent));
+            QueueDel(ent);
         }
 
         _audio.PlayPvs(cryostorageComponent.RemoveSound, ent);
 
-        EnsurePausedMap();
-        if (PausedMap == null)
-        {
-            Log.Error("CryoSleep map was unexpectedly null");
-            return;
-        }
 
-        if (!CryoSleepRejoiningEnabled || !comp.AllowReEnteringBody)
-        {
-            if (userId != null && Mind.TryGetMind(userId.Value, out var mind) &&
-                HasComp<CryostorageContainedComponent>(mind.Value.Comp.CurrentEntity))
-            {
-                _ghostSystem.OnGhostAttempt(mind.Value, false);
-            }
-        }
-
-        RemComp<AnomalyComponent>(ent.Owner); // Starlight - kill anomaly infection when host cryosleep
-        comp.AllowReEnteringBody = false;
-        _transform.SetParent(ent, PausedMap.Value);
-        cryostorageComponent.StoredPlayers.Add(ent);
-        Dirty(ent, comp);
+        // EnsurePausedMap();
+        // if (PausedMap == null)
+        // {
+        //     Log.Error("CryoSleep map was unexpectedly null");
+        //     return;
+        // }
+        //
+        // if (!CryoSleepRejoiningEnabled || !comp.AllowReEnteringBody)
+        // {
+        //     if (userId != null && Mind.TryGetMind(userId.Value, out var mind) &&
+        //         HasComp<CryostorageContainedComponent>(mind.Value.Comp.CurrentEntity))
+        //     {
+        //         _ghostSystem.OnGhostAttempt(mind.Value, false);
+        //     }
+        // }
+        //
+        // comp.AllowReEnteringBody = false;
+        // _transform.SetParent(ent, PausedMap.Value);
+        // cryostorageComponent.StoredPlayers.Add(ent);
+        // Dirty(ent, comp);
+            // Mothlight end
         UpdateCryostorageUIState((cryostorageEnt.Value, cryostorageComponent));
         AdminLog.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(ent):player} was entered into cryostorage inside of {ToPrettyString(cryostorageEnt.Value)}");
 
