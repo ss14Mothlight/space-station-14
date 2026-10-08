@@ -113,6 +113,10 @@ public sealed partial class CrewManifestSystem : EntitySystem
     /// <returns>The name and crew manifest entries (unordered) of the station.</returns>
     public (string name, CrewManifestEntries? entries) GetCrewManifest(EntityUid station)
     {
+        // Mothlight - stations loaded from a save already have their records, but nothing built the manifest yet
+        if (!_cachedEntries.ContainsKey(station) && HasComp<StationRecordsComponent>(station))
+            BuildCrewManifest(station);
+
         var valid = _cachedEntries.TryGetValue(station, out var manifest);
         return (valid ? MetaData(station).EntityName : string.Empty, valid ? manifest : null);
     }

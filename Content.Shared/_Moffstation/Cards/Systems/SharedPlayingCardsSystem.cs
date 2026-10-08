@@ -63,23 +63,20 @@ public abstract partial class SharedPlayingCardsSystem : EntitySystem
                     : null,
             _ => card.ThrowUnknownInheritor<PlayingCardInDeck, PlayingCardComponent?>(),
         };
-        if (ret is null)
-        {
-            return this.AssertOrLogError<PlayingCardComponent?>(
-                $"Failed to get {nameof(PlayingCardComponent)} from {card}",
-                null
-            );
-        }
 
         return ret;
     }
 
     /// Returns null in the exceptional case that the net ent can't be resolved to an entity.
-    private Entity<PlayingCardComponent>? NetEntToCard(NetEntity netEnt) =>
-        CompOrNull<PlayingCardComponent>(GetEntity(netEnt)) ?? this.AssertOrLogError<Entity<PlayingCardComponent>?>(
-            $"Net Entity ({netEnt}) is missing expected {nameof(PlayingCardComponent)} ({ToPrettyString(GetEntity(netEnt))})",
-            null
-        );
+    private Entity<PlayingCardComponent>? NetEntToCard(NetEntity netEnt)
+    {
+        var uid = GetEntity(netEnt);
+
+        if (!TryComp<PlayingCardComponent>(uid, out var comp))
+            return null;
+
+        return (uid, comp);
+    }
 
     /// This function just sets the given <paramref name="comp"/>'s <see cref="PlayingCardComponent.FaceDown"/> and
     /// returns the component. This is useful for setting the component's value inline.

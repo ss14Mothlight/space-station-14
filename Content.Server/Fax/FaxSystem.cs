@@ -165,6 +165,7 @@ public sealed partial class FaxSystem : EntitySystem
     {
         _itemSlotsSystem.AddItemSlot(uid, PaperSlotId, component.PaperSlot);
         UpdateAppearance(uid, component);
+        Refresh(uid, component);
     }
 
     private void OnComponentRemove(EntityUid uid, FaxMachineComponent component, ComponentRemove args)

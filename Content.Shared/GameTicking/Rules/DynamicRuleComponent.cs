@@ -18,7 +18,7 @@ public sealed partial class DynamicRuleComponent : Component
     /// <summary>
     /// The last time budget was updated.
     /// </summary>
-    [DataField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan LastBudgetUpdate;
 
     /// <summary>

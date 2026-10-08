@@ -1,5 +1,6 @@
 using Content.Shared.Damage;
 using Robust.Shared.Physics.Collision.Shapes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._Starlight.EntityEffects.Components;
 
@@ -10,7 +11,7 @@ public sealed partial class DissolvableComponent : Component
     [DataField]
     public bool Resisting;
 
-    [DataField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan? ResistingStartedOn = null;
 
     [DataField]
@@ -22,7 +23,7 @@ public sealed partial class DissolvableComponent : Component
     public TimeSpan UpdateDelay = TimeSpan.FromSeconds(1);
 
     [ViewVariables(VVAccess.ReadOnly)]
-    [DataField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan LastTimeUpdated = TimeSpan.Zero;
     # endregion
 

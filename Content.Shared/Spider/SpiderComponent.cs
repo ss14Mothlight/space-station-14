@@ -1,6 +1,7 @@
 using Content.Shared.Actions;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.Spider;
 
@@ -31,7 +32,7 @@ public sealed partial class SpiderComponent : Component
     /// <summary>
     /// The next time the spider can spawn a web when not controlled by a player.
     /// </summary>
-    [DataField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan? NextWebSpawn;
 
     #region Starlight

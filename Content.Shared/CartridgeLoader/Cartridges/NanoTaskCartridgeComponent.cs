@@ -1,4 +1,5 @@
 using Content.Shared.CartridgeLoader.Cartridges;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.CartridgeLoader.Cartridges;
 
@@ -23,7 +24,7 @@ public sealed partial class NanoTaskCartridgeComponent : Component
     /// <summary>
     /// When the user can print again
     /// </summary>
-    [DataField, AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan NextPrintAllowedAfter = TimeSpan.Zero;
 
     /// <summary>

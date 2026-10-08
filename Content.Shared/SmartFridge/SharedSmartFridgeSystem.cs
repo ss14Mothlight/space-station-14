@@ -30,6 +30,7 @@ public abstract partial class SharedSmartFridgeSystem : EntitySystem
 
         SubscribeLocalEvent<SmartFridgeComponent, InteractUsingEvent>(OnInteractUsing, after: [typeof(AnchorableSystem)]);
         SubscribeLocalEvent<SmartFridgeComponent, EntInsertedIntoContainerMessage>(OnItemInserted);
+        SubscribeLocalEvent<SmartFridgeComponent, ComponentStartup>(OnStartup); // Mothlight
         SubscribeLocalEvent<SmartFridgeComponent, EntRemovedFromContainerMessage>(OnItemRemoved);
         SubscribeLocalEvent<SmartFridgeComponent, AfterAutoHandleStateEvent>((ent, ref _) => UpdateUI(ent));
 
@@ -78,6 +79,28 @@ public abstract partial class SharedSmartFridgeSystem : EntitySystem
 
         args.Handled = DoInsert(ent, args.User, [args.Used], true);
     }
+
+    // Mothlight begin - persistence
+    /// <summary>
+    /// Loaded fridges come back with their items already in the container, so rebuild the entry lookup.
+    /// </summary>
+    private void OnStartup(Entity<SmartFridgeComponent> ent, ref ComponentStartup args)
+    {
+        // Already filled in from a server state on the client.
+        if (ent.Comp.ContainedEntries.Count > 0 || !_container.TryGetContainer(ent, ent.Comp.Container, out var container))
+            return;
+
+        foreach (var item in container.ContainedEntities)
+        {
+            var key = new SmartFridgeEntry(Identity.Name(item, EntityManager));
+            if (!ent.Comp.Entries.Contains(key))
+                ent.Comp.Entries.Add(key);
+
+            ent.Comp.ContainedEntries.TryAdd(key, new());
+            ent.Comp.ContainedEntries[key].Add(GetNetEntity(item));
+        }
+    }
+    // Mothlight end
 
     private void OnItemInserted(Entity<SmartFridgeComponent> ent, ref EntInsertedIntoContainerMessage args)
     {

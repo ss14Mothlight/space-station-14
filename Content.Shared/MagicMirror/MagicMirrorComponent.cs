@@ -10,7 +10,7 @@ namespace Content.Shared.MagicMirror;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class MagicMirrorComponent : Component
 {
-    [DataField]
+    [ViewVariables] // Mothlight - in-progress do-afters aren't saved
     public DoAfterId? DoAfter;
 
     /// <summary>

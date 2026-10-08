@@ -6,6 +6,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.Disposal.Components;
 
@@ -61,7 +62,7 @@ public sealed partial class DisposalUnitComponent : Component
     /// The next time that the insertion sound is allowed to be played.
     /// Used to reduce audio spam when dumping multiple items into the unit.
     /// </summary>
-    [DataField, AutoNetworkedField, AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NextAllowedInsertSound = TimeSpan.Zero;
 
     /// <summary>
@@ -79,7 +80,7 @@ public sealed partial class DisposalUnitComponent : Component
     /// <summary>
     /// Next time the disposal unit will be pressurized.
     /// </summary>
-    [DataField, AutoNetworkedField, AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NextPressurized = TimeSpan.Zero;
 
     /// <summary>
@@ -109,7 +110,7 @@ public sealed partial class DisposalUnitComponent : Component
     /// <summary>
     /// Last time that an entity tried to exit this disposal unit.
     /// </summary>
-    [DataField, AutoNetworkedField, AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan LastExitAttempt;
 
     /// <summary>
@@ -159,7 +160,7 @@ public sealed partial class DisposalUnitComponent : Component
     /// <summary>
     /// Next time this unit will flush. Is the lesser of <see cref="FlushDelay"/> and <see cref="AutomaticEngageTime"/>
     /// </summary>
-    [DataField, AutoNetworkedField, AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan? NextFlush;
 
     /// <summary>

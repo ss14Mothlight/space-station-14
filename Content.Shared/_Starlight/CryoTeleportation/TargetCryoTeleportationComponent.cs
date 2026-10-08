@@ -1,6 +1,7 @@
 using Content.Shared.Roles;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._Starlight.CryoTeleportation;
 
@@ -16,7 +17,7 @@ public sealed partial class TargetCryoTeleportationComponent : Component
     /// <summary>
     /// Time when player detached from entity.
     /// </summary>
-    [DataField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan? ExitTime;
 
     [DataField]

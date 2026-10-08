@@ -10,6 +10,7 @@ using Content.Shared._Starlight.Commands;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
+using Content.Shared.Ghost;
 using Content.Shared.Roles;
 using Content.Shared.Station.Components;
 using Robust.Shared.Configuration;
@@ -18,8 +19,12 @@ using Robust.Shared.Toolshed;
 
 namespace Content.Server._Mothlight.Administration.Commands;
 
-[ToolshedCommand]
-[AdminCommand(AdminFlags.Fun)]
+/// <summary>
+/// Late-joins a persistent character: loads their save if there is one, otherwise spawns them fresh and saves that.
+/// Admins can pass <c>false</c> for <c>load</c> to discard the existing save and start over.
+/// </summary>
+[ToolshedCommand(Name="joingamepersist")]
+[AnyCommand]
 public sealed partial class JoinGameCommand : ToolshedCommand
 {
     [Dependency] private IAdminManager _admin = null!;
@@ -46,6 +51,12 @@ public sealed partial class JoinGameCommand : ToolshedCommand
         _jobs ??= GetSys<StationJobsSystem>();
         _slots ??= GetSys<ContainerSpawnJobSlotSystem>();
 
+        if (!load && !_admin.HasAdminFlag(ctx.Session!, AdminFlags.Fun))
+        {
+            CommandMarkup.Error(ctx, "Only admins can start a persistent character over.");
+            return;
+        }
+
         if (_ticker.RunLevel == GameRunLevel.PreRoundLobby)
         {
             CommandMarkup.Error(ctx, "Round has not started.");
@@ -54,12 +65,14 @@ public sealed partial class JoinGameCommand : ToolshedCommand
 
         if (_ticker.PlayerGameStatuses.TryGetValue(ctx.Session!.UserId, out var status) &&
             status == PlayerGameStatus.JoinedGame)
-        {
-            IoCManager.Resolve<ILogManager>().GetSawmill("toolshed]joingame").Warning(
-                $"Player {ctx.Session.Name} ({ctx.Session.UserId}) Tried to join game while already in-game.");
-            CommandMarkup.Warn(ctx, "Tried to join game while already in-game.");
-            return;
-        }
+            if (ctx.Session.AttachedEntity is not null)
+                if (!TryComp<GhostComponent>(ctx.Session.AttachedEntity.Value, out _))
+                {
+                    IoCManager.Resolve<ILogManager>().GetSawmill("toolshed]joingame").Warning(
+                        $"Player {ctx.Session.Name} ({ctx.Session.UserId}) Tried to join game while already in-game.");
+                    CommandMarkup.Warn(ctx, "Tried to join game while already in-game.");
+                    return;
+                }
 
         _slots.RefreshJobSlots();
         var jobProto = _proto.Index(job);

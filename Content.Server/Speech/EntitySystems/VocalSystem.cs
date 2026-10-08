@@ -30,6 +30,7 @@ public sealed partial class VocalSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<VocalComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<VocalComponent, ComponentStartup>(OnStartup); // Mothlight
         SubscribeLocalEvent<VocalComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<VocalComponent, SexChangedEvent>(OnSexChanged);
         SubscribeLocalEvent<VocalComponent, EmoteEvent>(OnEmote);
@@ -72,6 +73,13 @@ public sealed partial class VocalSystem : EntitySystem
         // try to add scream action when vocal comp added
         _actions.AddAction(uid, ref component.ScreamActionEntity, component.ScreamAction);
         LoadSounds(uid, component);
+    }
+
+    // Mothlight - the chosen sound set isn't saved, and loaded entities don't get MapInit
+    private void OnStartup(EntityUid uid, VocalComponent component, ComponentStartup args)
+    {
+        if (component.EmoteSounds == null)
+            LoadSounds(uid, component);
     }
 
     private void OnShutdown(EntityUid uid, VocalComponent component, ComponentShutdown args)

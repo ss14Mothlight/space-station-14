@@ -7,10 +7,20 @@ public sealed partial class ItemSlotsSystem
     private void InitializeLock()
     {
         SubscribeLocalEvent<ItemSlotsLockComponent, MapInitEvent>(OnLockMapInit);
+        SubscribeLocalEvent<ItemSlotsLockComponent, ComponentStartup>(OnLockStartup); // Mothlight
         SubscribeLocalEvent<ItemSlotsLockComponent, LockToggledEvent>(OnLockToggled);
     }
 
     private void OnLockMapInit(Entity<ItemSlotsLockComponent> ent, ref MapInitEvent args)
+    {
+        if (!TryComp(ent.Owner, out LockComponent? lockComp))
+            return;
+
+        UpdateLocks(ent, lockComp.Locked);
+    }
+
+    // Mothlight - loaded entities don't get MapInit, re-apply the locks from the saved lock state
+    private void OnLockStartup(Entity<ItemSlotsLockComponent> ent, ref ComponentStartup args)
     {
         if (!TryComp(ent.Owner, out LockComponent? lockComp))
             return;

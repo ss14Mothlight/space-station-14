@@ -3,6 +3,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.Turrets;
 
@@ -88,7 +89,7 @@ public sealed partial class DeployableTurretComponent : Component
     /// <summary>
     /// The time that the current animation should complete (in seconds)
     /// </summary>
-    [DataField, AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan AnimationCompletionTime = TimeSpan.Zero;
 
     /// <summary>

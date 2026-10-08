@@ -92,12 +92,14 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
         SubscribeLocalEvent<SolutionComponent, ComponentHandleState>(OnSolutionHandleState);
         SubscribeLocalEvent<SolutionComponent, ComponentInit>(OnComponentInit);
         SubscribeLocalEvent<SolutionComponent, MapInitEvent>(OnSolutionInit);
+        SubscribeLocalEvent<SolutionComponent, ComponentStartup>(OnSolutionStartup); // Mothlight
         SubscribeLocalEvent<SolutionComponent, ComponentShutdown>(OnSolutionShutdown);
 
         SubscribeLocalEvent<ExaminableSolutionComponent, ExaminedEvent>(OnExamineSolution);
         SubscribeLocalEvent<ExaminableSolutionComponent, GetVerbsEvent<ExamineVerb>>(OnSolutionExaminableVerb);
 
         SubscribeLocalEvent<SolutionManagerComponent, MapInitEvent>(OnManagerInit);
+        SubscribeLocalEvent<SolutionManagerComponent, ComponentStartup>(OnManagerStartup); // Mothlight
         SubscribeLocalEvent<SolutionManagerComponent, ComponentShutdown>(OnManagerShutdown);
         SubscribeLocalEvent<SolutionManagerComponent, EntInsertedIntoContainerMessage>(OnSolutionAdded);
         SubscribeLocalEvent<SolutionManagerComponent, EntRemovedFromContainerMessage>(OnSolutionRemoved);
@@ -866,6 +868,7 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
 
     private void OnSolutionInit(Entity<SolutionComponent> entity, ref MapInitEvent args)
     {
+        _pendingVisualRefresh.Remove(entity); // Mothlight
         UpdateChemicals(entity);
     }
 
@@ -1076,6 +1079,70 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
     {
         InitializeManager(entity);
     }
+
+    // Mothlight begin - persistence
+    /// <summary>
+    /// Entities loaded from a save come back with their solution entities already inside the container, which
+    /// doesn't raise <see cref="EntInsertedIntoContainerMessage"/>. Rebuild the solution cache from the container
+    /// so loaded maps/characters can find their solutions (lungs, bloodstream, beakers...).
+    /// </summary>
+    private void OnManagerStartup(Entity<SolutionManagerComponent> entity, ref ComponentStartup args)
+    {
+        if (!ContainerSystem.TryGetContainer(entity, entity.Comp.Container, out var container))
+            return;
+
+        foreach (var contained in container.ContainedEntities)
+        {
+            if (!SolutionQuery.TryComp(contained, out var solution))
+                continue;
+
+            EnsureComp<ContainedSolutionComponent>(contained, out var containedComp);
+            containedComp.Container = entity.Owner;
+            entity.Comp.Solutions[solution.Id] = (contained, solution);
+        }
+
+        // The prototype's starting solutions were already created before this was saved, don't create them again.
+        if (entity.Comp.Solutions.Count > 0)
+            entity.Comp.SolutionEnts = null;
+    }
+
+    /// <summary>
+    /// Solutions that started up but haven't had a MapInit yet. Fresh solutions update their visuals at MapInit, but
+    /// loaded ones never get it, and appearance data isn't saved, so their fill level and colour (bottles, puddles...)
+    /// would stay blank until the solution next changed.
+    /// </summary>
+    private readonly HashSet<EntityUid> _pendingVisualRefresh = new();
+
+    private void OnSolutionStartup(Entity<SolutionComponent> entity, ref ComponentStartup args)
+    {
+        // The server's appearance state reaches clients, so only it needs to do this.
+        if (Net.IsServer)
+            _pendingVisualRefresh.Add(entity);
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        if (_pendingVisualRefresh.Count == 0)
+            return;
+
+        // Refreshed the tick after loading, so everything else on the entity has started up by then.
+        foreach (var uid in _pendingVisualRefresh)
+        {
+            if (TerminatingOrDeleted(uid) || !SolutionQuery.TryComp(uid, out var solution))
+                continue;
+
+            // Same as what a real change does, minus reactions and overflow.
+            var owner = GetSolutionOwner((uid, solution));
+            var changedEv = new SolutionChangedEvent((uid, solution));
+            RaiseLocalEvent(owner, ref changedEv);
+            UpdateAppearance(owner, (uid, solution));
+        }
+
+        _pendingVisualRefresh.Clear();
+    }
+    // Mothlight end
 
     private void InitializeManager(Entity<SolutionManagerComponent> entity)
     {

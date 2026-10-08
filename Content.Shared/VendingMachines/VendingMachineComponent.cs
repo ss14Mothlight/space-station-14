@@ -64,13 +64,13 @@ namespace Content.Shared.VendingMachines
         [ViewVariables]
         public bool DispenseOnHitCoolingDown => DispenseOnHitEnd != null;
 
-        [DataField, AutoPausedField]
+        [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
         public TimeSpan? EjectEnd;
 
-        [DataField, AutoPausedField]
+        [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
         public TimeSpan? DenyEnd;
 
-        [DataField]
+        [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
         public TimeSpan? DispenseOnHitEnd;
 
         public string? NextItemToEject;

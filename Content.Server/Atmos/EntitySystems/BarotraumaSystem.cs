@@ -35,6 +35,14 @@ namespace Content.Server.Atmos.EntitySystems
 
             SubscribeLocalEvent<PressureImmunityComponent, ComponentInit>(OnPressureImmuneInit);
             SubscribeLocalEvent<PressureImmunityComponent, ComponentRemove>(OnPressureImmuneRemove);
+            SubscribeLocalEvent<BarotraumaComponent, ComponentStartup>(OnBarotraumaStartup); // Mothlight
+        }
+
+        // Mothlight - the cached resistances aren't saved, recompute them for loaded entities
+        private void OnBarotraumaStartup(EntityUid uid, BarotraumaComponent barotrauma, ComponentStartup args)
+        {
+            barotrauma.HasImmunity = HasComp<PressureImmunityComponent>(uid);
+            UpdateCachedResistances(uid, barotrauma);
         }
 
         private void OnPressureImmuneInit(EntityUid uid, PressureImmunityComponent pressureImmunity, ComponentInit args)

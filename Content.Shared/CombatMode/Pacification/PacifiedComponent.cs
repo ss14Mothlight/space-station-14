@@ -1,6 +1,7 @@
 using Content.Shared.Alert;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.CombatMode.Pacification;
 
@@ -40,7 +41,7 @@ public sealed partial class PacifiedComponent : Component
     /// <summary>
     /// Time at which the next popup can be shown.
     /// </summary>
-    [DataField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     [AutoPausedField]
     public TimeSpan? NextPopupTime = null;
 

@@ -32,6 +32,7 @@ namespace Content.Server.Atmos.Piping.Binary.EntitySystems
 
             SubscribeLocalEvent<GasVolumePumpComponent, AtmosDeviceUpdateEvent>(OnVolumePumpUpdated);
             SubscribeLocalEvent<GasVolumePumpComponent, AtmosDeviceDisabledEvent>(OnVolumePumpLeaveAtmosphere);
+            SubscribeLocalEvent<GasVolumePumpComponent, AtmosDeviceEnabledEvent>(OnVolumePumpJoinAtmosphere);
 
             SubscribeLocalEvent<GasVolumePumpComponent, DeviceNetworkPacketEvent>(OnPacketRecv);
         }
@@ -105,6 +106,13 @@ namespace Content.Server.Atmos.Piping.Binary.EntitySystems
             Dirty(uid, pump);
             UpdateAppearance(uid, pump);
             _userInterfaceSystem.CloseUi(uid, GasVolumePumpUiKey.Key);
+        }
+
+        private void OnVolumePumpJoinAtmosphere(EntityUid uid, GasVolumePumpComponent pump, ref AtmosDeviceEnabledEvent args)
+        {
+            pump.Enabled = pump.DesiredEnabled;
+            Dirty(uid, pump);
+            UpdateAppearance(uid, pump);
         }
 
         private void OnPacketRecv(EntityUid uid, GasVolumePumpComponent component, DeviceNetworkPacketEvent args)

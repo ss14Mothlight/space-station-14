@@ -30,7 +30,7 @@ public sealed partial class WiresComponent : Component
     ///     The seed that dictates the wires appearance, as well as
     ///     the status ordering on the UI client side.
     /// </summary>
-    [ViewVariables]
+    [DataField]
     public int WireSeed { get; set; }
 
     [ViewVariables]

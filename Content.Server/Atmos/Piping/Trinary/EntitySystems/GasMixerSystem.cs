@@ -44,6 +44,7 @@ namespace Content.Server.Atmos.Piping.Trinary.EntitySystems
             SubscribeLocalEvent<GasMixerComponent, GasMixerToggleStatusMessage>(OnToggleStatusMessage);
 
             SubscribeLocalEvent<GasMixerComponent, AtmosDeviceDisabledEvent>(OnMixerLeaveAtmosphere);
+            SubscribeLocalEvent<GasMixerComponent, AtmosDeviceEnabledEvent>(OnMixerJoinAtmosphere);
         }
 
         private void OnInit(EntityUid uid, GasMixerComponent mixer, ComponentInit args)
@@ -149,6 +150,12 @@ namespace Content.Server.Atmos.Piping.Trinary.EntitySystems
             UpdateAppearance(uid, mixer);
             _userInterfaceSystem.CloseUi(uid, GasFilterUiKey.Key);
         }
+        private void OnMixerJoinAtmosphere(EntityUid uid, GasMixerComponent mixer, ref AtmosDeviceEnabledEvent args)
+        {
+            mixer.Enabled = mixer.DesiredEnabled;
+            DirtyUI(uid, mixer);
+            UpdateAppearance(uid, mixer);
+        }
 
         private void OnMixerActivate(EntityUid uid, GasMixerComponent mixer, ActivateInWorldEvent args)
         {
@@ -191,6 +198,7 @@ namespace Content.Server.Atmos.Piping.Trinary.EntitySystems
         private void OnToggleStatusMessage(EntityUid uid, GasMixerComponent mixer, GasMixerToggleStatusMessage args)
         {
             mixer.Enabled = args.Enabled;
+            mixer.DesiredEnabled = args.Enabled;
             _adminLogger.Add(LogType.AtmosPowerChanged, LogImpact.Medium,
                 $"{ToPrettyString(args.Actor):player} set the power on {ToPrettyString(uid):device} to {args.Enabled}");
             DirtyUI(uid, mixer);

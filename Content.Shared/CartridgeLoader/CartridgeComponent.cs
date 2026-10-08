@@ -19,7 +19,7 @@ public sealed partial class CartridgeComponent : Component
     [DataField]
     public SpriteSpecifier? Icon;
 
-    [AutoNetworkedField]
+    [DataField, AutoNetworkedField] // Mothlight - persistence
     public InstallationStatus InstallationStatus = InstallationStatus.Cartridge;
 }
 

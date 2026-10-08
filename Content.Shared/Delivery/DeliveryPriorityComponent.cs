@@ -1,4 +1,5 @@
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.Delivery;
 
@@ -44,6 +45,6 @@ public sealed partial class DeliveryPriorityComponent : Component
     /// <summary>
     /// The time by which this has to be delivered.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
     public TimeSpan DeliverUntilTime;
 }

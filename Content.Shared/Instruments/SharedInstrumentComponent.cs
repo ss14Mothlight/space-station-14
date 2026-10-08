@@ -45,7 +45,7 @@ public abstract partial class SharedInstrumentComponent : Component
 [AutoGenerateComponentState(true)]
 public sealed partial class ActiveInstrumentComponent : Component
 {
-    [DataField]
+    // Mothlight - not a DataField, MIDI tracks of a playing instrument break saving
     [AutoNetworkedField]
     public MidiTrack?[] Tracks = [];
 }

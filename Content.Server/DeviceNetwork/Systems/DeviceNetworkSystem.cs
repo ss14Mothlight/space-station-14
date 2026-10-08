@@ -1,13 +1,16 @@
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DeviceNetwork;
-using JetBrains.Annotations;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Random;
-using System.Buffers;
-using System.Diagnostics.CodeAnalysis;
 using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.DeviceNetwork.Events;
 using Content.Shared.DeviceNetwork.Systems;
 using Content.Shared.Examine;
+using Content.Shared.Fax.Components;
+using JetBrains.Annotations;
+using Robust.Shared.Map.Components;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
+using System.Buffers;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Server.DeviceNetwork.Systems
 {
@@ -42,6 +45,7 @@ namespace Content.Server.DeviceNetwork.Systems
         public override void Initialize()
         {
             SubscribeLocalEvent<DeviceNetworkComponent, MapInitEvent>(OnMapInit);
+            SubscribeLocalEvent<DeviceNetworkComponent, ComponentInit>(OnCompInit);
             SubscribeLocalEvent<DeviceNetworkComponent, ComponentShutdown>(OnNetworkShutdown);
             SubscribeLocalEvent<DeviceNetworkComponent, ExaminedEvent>(OnExamine);
 
@@ -119,8 +123,46 @@ namespace Content.Server.DeviceNetwork.Systems
                 device.TransmitFrequency = xmit.Frequency;
             }
 
-            if (device.AutoConnect)
+            // Mothlight - already connected from ComponentInit, connecting again would re-roll the address
+            if (device.AutoConnect && !IsConnected(device))
                 ConnectDevice(uid, device);
+        }
+
+        // Mothlight - persistence
+        private bool IsConnected(DeviceNetworkComponent device)
+        {
+            return _networks.TryGetValue(device.DeviceNetId, out var net)
+                   && net.Devices.TryGetValue(device.Address, out var existing)
+                   && existing == device;
+        }
+
+        // Mothlight - loaded entities don't get MapInit, so connect them here as well
+        private void OnCompInit(EntityUid uid, DeviceNetworkComponent device, ComponentInit args)
+        {
+            if (device.ReceiveFrequency == null
+                && device.ReceiveFrequencyId != null
+                && _protoMan.TryIndex<DeviceFrequencyPrototype>(device.ReceiveFrequencyId, out var receive))
+            {
+                device.ReceiveFrequency = receive.Frequency;
+            }
+
+            if (device.TransmitFrequency == null
+                && device.TransmitFrequencyId != null
+                && _protoMan.TryIndex<DeviceFrequencyPrototype>(device.TransmitFrequencyId, out var xmit))
+            {
+                device.TransmitFrequency = xmit.Frequency;
+            }
+
+            // Devices on a map that hasn't been initialized yet connect at MapInit like before. Connecting them now
+            // would make two copies of the same pre-init map fight over their saved addresses.
+            if (device.AutoConnect && IsOnInitializedMap(uid))
+                ConnectDevice(uid, device);
+        }
+
+        private bool IsOnInitializedMap(EntityUid uid)
+        {
+            return Transform(uid).MapUid is not { } map
+                   || CompOrNull<MapComponent>(map)?.MapInitialized != false;
         }
 
         private DeviceNet GetNetwork(int netId)

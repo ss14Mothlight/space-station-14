@@ -1,4 +1,5 @@
 ﻿using Content.Server.Store.Systems;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Server.Store.Components;
 
@@ -21,7 +22,7 @@ public sealed partial class StoreRefundComponent : Component
     /// <summary>
     ///     The time this entity was bought
     /// </summary>
-    [DataField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan? BoughtTime;
 
     /// <summary>

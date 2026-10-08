@@ -23,6 +23,6 @@ public sealed partial class TypingIndicatorClothingComponent : Component
     /// <summary>
     ///     This stores the time the item was equipped in someones inventory. If null, item is currently not equipped.
     /// </summary>
-    [DataField, AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan? GotEquippedTime = null;
 }

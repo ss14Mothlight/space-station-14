@@ -40,6 +40,7 @@ public abstract partial class SharedSprayPainterSystem : EntitySystem
 
         SubscribeLocalEvent<SprayPainterComponent, SprayPainterDoAfterEvent>(OnPainterDoAfter);
         SubscribeLocalEvent<SprayPainterComponent, GetVerbsEvent<AlternativeVerb>>(OnPainterGetAltVerbs);
+        SubscribeLocalEvent<PaintedComponent, ComponentStartup>(OnCompStart);
         SubscribeLocalEvent<PaintableComponent, InteractUsingEvent>(OnPaintableInteract);
         SubscribeLocalEvent<PaintedComponent, ExaminedEvent>(OnPainedExamined);
 
@@ -87,6 +88,11 @@ public abstract partial class SharedSprayPainterSystem : EntitySystem
 
     #region Interaction
 
+    private void OnCompStart(Entity<PaintedComponent> ent, ref ComponentStartup args)
+    {
+        if(ent.Comp.PaintProto != null && ent.Comp.PaintProto != "")
+            Appearance.SetData(ent, PaintableVisuals.Prototype, ent.Comp.PaintProto);
+    }
     private void OnPainterDoAfter(Entity<SprayPainterComponent> ent, ref SprayPainterDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled)
@@ -104,6 +110,7 @@ public abstract partial class SharedSprayPainterSystem : EntitySystem
 
         var paintedComponent = EnsureComp<PaintedComponent>(target);
         paintedComponent.DryTime = _timing.CurTime + ent.Comp.FreshPaintDuration;
+        paintedComponent.PaintProto = args.Prototype;
         Dirty(target, paintedComponent);
 
         var ev = new EntityPaintedEvent(

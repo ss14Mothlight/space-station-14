@@ -1,5 +1,6 @@
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.Damage.Components;
 
@@ -66,13 +67,13 @@ public sealed partial class DamageOnInteractComponent : Component
     /// <summary>
     /// Tracks the last time this entity was interacted with, but only if the interaction resulted in the user taking damage
     /// </summary>
-    [DataField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan LastInteraction = TimeSpan.Zero;
 
     /// <summary>
     /// Tracks the time that this entity can be interacted with, but only if the interaction resulted in the user taking damage
     /// </summary>
-    [DataField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan NextInteraction = TimeSpan.Zero;
 
     /// <summary>

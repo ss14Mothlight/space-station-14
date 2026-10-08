@@ -2,6 +2,7 @@ using System.Numerics;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.Throwing
 {
@@ -23,13 +24,13 @@ namespace Content.Shared.Throwing
         /// <summary>
         ///     The <see cref="IGameTiming.CurTime"/> timestamp at which this entity was thrown.
         /// </summary>
-        [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+        [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
         public TimeSpan? ThrownTime;
 
         /// <summary>
         ///     Compared to <see cref="IGameTiming.CurTime"/> to land this entity, if any.
         /// </summary>
-        [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+        [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
         [AutoPausedField]
         public TimeSpan? LandTime;
 

@@ -1,5 +1,6 @@
 using Content.Shared.Destructible.Thresholds;
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.Xenoarchaeology.Artifact.XAT.Components;
 
@@ -12,7 +13,7 @@ public sealed partial class XATTimerComponent : Component
     /// <summary>
     /// Next time timer going to activate.
     /// </summary>
-    [DataField, AutoNetworkedField, AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NextActivation;
 
     /// <summary>

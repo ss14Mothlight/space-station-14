@@ -50,7 +50,7 @@ public sealed partial class DamageForceSaySystem : EntitySystem
 
     private void TryForceSay(EntityUid uid, DamageForceSayComponent component, bool useSuffix=true)
     {
-        if (!TryComp<ActorComponent>(uid, out var actor))
+        if (!TryComp<ActorComponent>(uid, out var actor) || actor.PlayerSession == null)
             return;
 
         // disallow if cooldown hasn't ended
@@ -73,7 +73,7 @@ public sealed partial class DamageForceSaySystem : EntitySystem
 
     private void AllowNextSpeech(EntityUid uid)
     {
-        if (!TryComp<ActorComponent>(uid, out var actor))
+        if (!TryComp<ActorComponent>(uid, out var actor) || actor.PlayerSession == null) // Mothlight
             return;
 
         var nextCrit = EnsureComp<AllowNextCritSpeechComponent>(uid);

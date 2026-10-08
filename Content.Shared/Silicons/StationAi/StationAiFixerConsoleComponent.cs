@@ -1,6 +1,7 @@
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.Silicons.StationAi;
 
@@ -35,13 +36,13 @@ public sealed partial class StationAiFixerConsoleComponent : Component
     /// <summary>
     /// The time at which the current action commenced.
     /// </summary>
-    [DataField, AutoNetworkedField, AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan ActionStartTime = TimeSpan.FromSeconds(0);
 
     /// <summary>
     /// The time at which the current action will end.
     /// </summary>
-    [DataField, AutoNetworkedField, AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan ActionEndTime = TimeSpan.FromSeconds(0);
 
     /// <summary>

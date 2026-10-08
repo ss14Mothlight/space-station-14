@@ -1,4 +1,4 @@
-﻿using Robust.Shared.Prototypes;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Alert;
@@ -8,11 +8,13 @@ namespace Content.Shared.Alert;
 /// I.e., entirely defined by the category, if a category was specified, otherwise
 /// falls back to the id.
 /// </summary>
-[Serializable, NetSerializable]
-public struct AlertKey
+[DataDefinition, Serializable, NetSerializable]
+public partial struct AlertKey
 {
+    [DataField]
     public ProtoId<AlertPrototype>? AlertType { get; private set; } = default!;
-    public readonly ProtoId<AlertCategoryPrototype>? AlertCategory;
+    [DataField]
+    public ProtoId<AlertCategoryPrototype>? AlertCategory;
 
     /// NOTE: if the alert has a category you must pass the category for this to work
     /// properly as a key. I.e. if the alert has a category and you pass only the alert type, and you

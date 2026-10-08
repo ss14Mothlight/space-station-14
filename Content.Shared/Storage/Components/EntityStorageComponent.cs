@@ -5,6 +5,7 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.Storage.Components;
 
@@ -32,7 +33,7 @@ public sealed partial class EntityStorageComponent : Component, IGasMixtureHolde
     /// <summary>
     /// The next time a player stuck inside the entity storage can attempt to open it from inside.
     /// </summary>
-    [DataField, AutoNetworkedField, AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NextInternalOpenAttempt;
 
     /// <summary>

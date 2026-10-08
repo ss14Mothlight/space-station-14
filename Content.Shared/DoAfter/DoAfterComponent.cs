@@ -18,7 +18,7 @@ public sealed partial class DoAfterComponent : Component
     /// <summary>
     /// collection of id + doafter
     /// </summary>
-    [DataField]
+    [DataField(readOnly: true)] // Mothlight - in-progress do-afters can't survive a save, don't write them
     public Dictionary<ushort, DoAfter> DoAfters = new();
 
     // Used by obsolete async do afters

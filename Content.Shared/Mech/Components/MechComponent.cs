@@ -59,7 +59,7 @@ public sealed partial class MechComponent : Component
     /// <summary>
     /// How much "health" the mech has left.
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField] // Mothlight - persistence
     public FixedPoint2 Integrity;
 
     /// <summary>
@@ -72,7 +72,7 @@ public sealed partial class MechComponent : Component
     /// How much energy the mech has.
     /// Derived from the currently inserted battery.
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    [DataField, ViewVariables(VVAccess.ReadWrite), AutoNetworkedField] // Mothlight - persistence
     public FixedPoint2 Energy = 0;
 
     /// <summary>

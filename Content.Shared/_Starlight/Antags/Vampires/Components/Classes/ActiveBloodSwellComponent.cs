@@ -2,6 +2,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.FixedPoint;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._Starlight.Antags.Vampires.Components.Classes;
 
@@ -11,7 +12,7 @@ namespace Content.Shared._Starlight.Antags.Vampires.Components.Classes;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ActiveBloodSwellComponent : Component
 {
-    [DataField, AutoNetworkedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
     public TimeSpan EndTime;
 
     [DataField, AutoNetworkedField]

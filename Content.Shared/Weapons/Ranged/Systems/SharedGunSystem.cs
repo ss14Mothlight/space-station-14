@@ -125,7 +125,18 @@ public abstract partial class SharedGunSystem : EntitySystem
         SubscribeLocalEvent<GunComponent, CycleModeEvent>(OnCycleMode);
         SubscribeLocalEvent<GunComponent, HandSelectedEvent>(OnGunSelected);
         SubscribeLocalEvent<GunComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<GunComponent, ComponentStartup>(OnStartup); // Mothlight
     }
+
+    // Mothlight begin - persistence
+    /// <summary>
+    /// The modified stats aren't saved, and MapInit doesn't run again for loaded entities.
+    /// </summary>
+    private void OnStartup(Entity<GunComponent> gun, ref ComponentStartup args)
+    {
+        RefreshModifiers((gun, gun));
+    }
+    // Mothlight end
 
     private void OnMapInit(Entity<GunComponent> gun, ref MapInitEvent args)
     {

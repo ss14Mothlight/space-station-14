@@ -135,7 +135,16 @@ namespace Content.Server.GameTicking
             }
 
             // Let game rules dictate what maps we should load.
-            RaiseLocalEvent(new LoadingMapsEvent(maps));
+            var loadingEv = new LoadingMapsEvent(maps); // Mothlight edit
+            RaiseLocalEvent(loadingEv);
+
+            // Mothlight begin - a game rule (i.e. world persistence) already loaded the main map for us
+            if (loadingEv.LoadedDefaultMap is { } loadedMap)
+            {
+                DefaultMap = loadedMap;
+                return;
+            }
+            // Mothlight end
 
             if (maps.Count == 0)
             {
@@ -426,7 +435,8 @@ namespace Content.Server.GameTicking
                 RaiseLocalEvent(new DynamicRuleCooldownRoundStartedEvent(currentPreset)); // Starlight
 
             // MapInitialize *before* spawning players, our codebase is too shit to do it afterwards...
-            _map.InitializeMap(DefaultMap);
+            if (!_map.IsInitialized(DefaultMap)) // Mothlight - persisted worlds are loaded already initialized
+                _map.InitializeMap(DefaultMap);
 
             StartGamePresetRules(); // Starlight - Start any map-attached game rules
 
@@ -888,6 +898,12 @@ namespace Content.Server.GameTicking
     public sealed class LoadingMapsEvent : EntityEventArgs
     {
         public List<GameMapPrototype> Maps;
+
+        /// <summary>
+        /// Mothlight - set by a handler that loaded the main map itself (e.g. from a world save).
+        /// When set, <see cref="Maps"/> is ignored and this becomes the round's default map.
+        /// </summary>
+        public MapId? LoadedDefaultMap;
 
         public LoadingMapsEvent(List<GameMapPrototype> maps)
         {

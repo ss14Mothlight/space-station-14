@@ -1,4 +1,5 @@
 using Content.Server.Singularity.EntitySystems;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Server.Singularity.Components;
 
@@ -51,7 +52,7 @@ public sealed partial class GravityWellComponent : Component
     /// <summary>
     /// The next time at which this gravity well should pulse.
     /// </summary>
-    [DataField, Access(typeof(GravityWellSystem)), AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), Access(typeof(GravityWellSystem)), AutoPausedField]
     public TimeSpan NextPulseTime { get; internal set; } = default!;
 
     /// <summary>

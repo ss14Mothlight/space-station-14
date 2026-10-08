@@ -1,4 +1,5 @@
 using Robust.Shared.Utility;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._Starlight.Railroading.Components.Tasks;
 
@@ -11,10 +12,10 @@ public sealed partial class RailroadTimerTaskComponent : Component
     [DataField]
     public TimeSpan Duration = TimeSpan.FromMinutes(1);
 
-    [DataField, AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan Started = TimeSpan.Zero;
 
-    [DataField, AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan EndTime = TimeSpan.Zero;
 
     [DataField]

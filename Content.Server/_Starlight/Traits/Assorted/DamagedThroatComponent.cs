@@ -50,14 +50,14 @@ public sealed partial class DamagedThroatComponent : Component
     /// <summary>
     ///     The minimum time between damage applications.
     /// </summary>
-    [DataField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     [AutoPausedField]
     public TimeSpan Cooldown = TimeSpan.FromSeconds(1);
 
     /// <summary>
     ///     Time without speaking normally before damage resets to base.
     /// </summary>
-    [DataField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     [AutoPausedField]
     public TimeSpan ResetCooldown = TimeSpan.FromSeconds(30);
 

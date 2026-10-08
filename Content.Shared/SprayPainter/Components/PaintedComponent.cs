@@ -15,4 +15,7 @@ public sealed partial class PaintedComponent : Component
     /// </summary>
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan DryTime;
+
+    [DataField, AutoNetworkedField]
+    public string PaintProto;
 }

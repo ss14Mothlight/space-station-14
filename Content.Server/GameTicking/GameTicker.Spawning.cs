@@ -454,9 +454,8 @@ namespace Content.Server.GameTicking
                 character);
             RaiseLocalEvent(mob, aev, true);
             // Mothlight begin - persistence
-            if (!save) return;
-            var savePath = new ResPath($"{player.ContentData()!.UserId}]{character.Name}");
-            _loader.TrySaveGeneric(mob, savePath, out _);
+            if (save)
+                _charPersistence.TrySaveCharacter(mob, player.UserId, character.Name);
             // Mothlight end
         }
 

@@ -4,6 +4,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 using Content.Shared._Starlight.Language; // Starlight
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.Telephone;
 
@@ -44,7 +45,7 @@ public sealed partial class TelephoneComponent : Component
     /// <summary>
     /// The time at which the next tone will be played
     /// </summary>
-    [DataField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan NextRingToneTime;
 
     /// <summary>

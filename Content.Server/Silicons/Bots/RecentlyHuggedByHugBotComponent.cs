@@ -1,4 +1,5 @@
 ﻿using Content.Shared.Silicons.Bots;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Server.Silicons.Bots;
 
@@ -10,6 +11,6 @@ namespace Content.Server.Silicons.Bots;
 [RegisterComponent, AutoGenerateComponentPause]
 public sealed partial class RecentlyHuggedByHugBotComponent : Component
 {
-    [DataField, AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan CooldownCompleteAfter = TimeSpan.MinValue;
 }

@@ -1,5 +1,23 @@
-cryostorage-insert-message-permanent = [color=white]You are now inside of a [bold][color=cyan]cryogenic sleep unit[/color][/bold]. If you [bold]disconnect[/bold], [bold]ghost[/bold], or [bold]wait {$time} minutes[/bold], [color=red]your body will be removed[/color] and your job slot will be opened. You can exit at any time to prevent this.[/color]
-cryostorage-insert-message-temp = [color=white]You are now inside of a [bold][color=cyan]cryogenic sleep unit[/color][/bold]. If you [bold]ghost[/bold] or [bold]wait {$time} minutes[/bold], [color=red]your body will be removed[/color] and your job slot will be opened. If you [bold][color=cyan]disconnect[/color][/bold], your body will be safely held until you rejoin.[/color]
+cryostorage-insert-message-permanent = [color=white]You are now inside of a [bold][color=cyan]cryogenic sleep unit[/color][/bold]. If you [bold]disconnect[/bold], [bold]ghost[/bold], or [bold]wait {$time}[/bold], [color=red]your body will be removed[/color] and your job slot will be opened. You can exit at any time to prevent this.[/color]
+cryostorage-insert-message-temp = [color=white]You are now inside of a [bold][color=cyan]cryogenic sleep unit[/color][/bold]. If you [bold]ghost[/bold] or [bold]wait {$time}[/bold], [color=red]your body will be removed[/color] and your job slot will be opened. If you [bold][color=cyan]disconnect[/color][/bold], your body will be safely held until you rejoin.[/color]
+
+# Mothlight - grace period formatted with whichever units it actually needs
+cryostorage-grace-period = { $minutes ->
+    [0] { $seconds } { $seconds ->
+        [one] second
+       *[other] seconds
+    }
+   *[other] { $minutes } { $minutes ->
+        [one] minute
+       *[other] minutes
+    }{ $seconds ->
+        [0] {""}
+       *[other] {" "}{ $seconds } { $seconds ->
+            [one] second
+           *[other] seconds
+        }
+    }
+}
 
 cryostorage-ui-window-title = Cryogenic Sleep Unit
 cryostorage-ui-label-slot-name = [bold]{CAPITALIZE($slot)}:[/bold]

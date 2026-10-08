@@ -69,7 +69,7 @@ namespace Content.Server.Chemistry.EntitySystems
             SubscribeLocalEvent<ReagentDispenserComponent, ReagentDispenserEjectContainerMessage>(OnEjectReagentMessage);
             SubscribeLocalEvent<ReagentDispenserComponent, ReagentDispenserClearContainerSolutionMessage>(OnClearContainerSolutionMessage);
 
-            SubscribeLocalEvent<ReagentDispenserComponent, MapInitEvent>(OnMapInit, before: new[] { typeof(ItemSlotsSystem) });
+            SubscribeLocalEvent<ReagentDispenserComponent, ComponentInit>(OnInit, before: new[] { typeof(ItemSlotsSystem) }); // Mothlight - was MapInit, loaded dispensers need their beaker slot too
             // Starlight Start
             SubscribeLocalEvent<ReagentDispenserComponent, ComponentRemove>(OnComponentRemove);
             SubscribeLocalEvent<ReagentDispenserComponent, PowerCellChangedEvent>(OnPowerCellChanged);
@@ -476,7 +476,7 @@ namespace Content.Server.Chemistry.EntitySystems
         /// <summary>
         /// Initializes the beaker slot
         /// </summary>
-        private void OnMapInit(Entity<ReagentDispenserComponent> ent, ref MapInitEvent args)
+        private void OnInit(Entity<ReagentDispenserComponent> ent, ref ComponentInit args)
         {
             _itemSlotsSystem.AddItemSlot(ent.Owner, SharedReagentDispenser.OutputSlotName, ent.Comp.BeakerSlot);
         }

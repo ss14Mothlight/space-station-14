@@ -576,6 +576,8 @@ public sealed partial class PlayTimeTrackingManager : ISharedPlaytimeManager, IP
 
     private PlayTimeData? DirtyPlayer(ICommonSession player)
     {
+        if (player == null) // Mothlight - loaded/cryo'd bodies can call this without a session
+            return null;
         if (!_playTimeData.TryGetValue(player, out var data) || !data.Initialized)
             return null;
 

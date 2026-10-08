@@ -1,4 +1,4 @@
-﻿using Robust.Shared.Serialization;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.Research.Components
 {
@@ -13,7 +13,7 @@ namespace Content.Shared.Research.Components
         /// <summary>
         /// The server the client is connected to
         /// </summary>
-        [ViewVariables(VVAccess.ReadOnly)]
+        [ViewVariables(VVAccess.ReadOnly), DataField]
         public EntityUid? Server { get; set; }
     }
 

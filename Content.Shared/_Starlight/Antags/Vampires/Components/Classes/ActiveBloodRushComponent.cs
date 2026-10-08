@@ -1,4 +1,5 @@
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._Starlight.Antags.Vampires.Components.Classes;
 
@@ -8,7 +9,7 @@ namespace Content.Shared._Starlight.Antags.Vampires.Components.Classes;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ActiveBloodRushComponent : Component
 {
-    [DataField, AutoNetworkedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
     public TimeSpan EndTime;
 
     [DataField, AutoNetworkedField]

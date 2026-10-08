@@ -3,6 +3,7 @@ using Content.Shared.Atmos.Piping.Unary.Components;
 using Content.Shared.DeviceLinking;
 using Content.Shared.Guidebook;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Server.Atmos.Piping.Unary.Components
 {
@@ -66,7 +67,7 @@ namespace Content.Server.Atmos.Piping.Unary.Components
         /// <summary>
         /// The time when the manual pressure lockout will be reenabled.
         /// </summary>
-        [DataField]
+        [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
         [AutoPausedField]
         public TimeSpan ManualLockoutReenabledAt;
         /// <summary>

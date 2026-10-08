@@ -3,6 +3,7 @@ using Content.Shared.Item;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 // ReSharper disable once CheckNamespace
 namespace Content.Shared.Kitchen
@@ -58,10 +59,10 @@ namespace Content.Shared.Kitchen
         /// <summary>
         /// Tracks the elapsed time of the current cook timer.
         /// </summary>
-        [DataField]
+        [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
         public TimeSpan CurrentCookTimeEnd = TimeSpan.Zero;
 
-        [DataField, ViewVariables(VVAccess.ReadWrite)]
+        [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), ViewVariables(VVAccess.ReadWrite)]
         public TimeSpan StartedCookTime = TimeSpan.Zero; // Starlight-edit
 
         /// <summary>

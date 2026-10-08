@@ -2,13 +2,14 @@
 using Content.Shared.Destructible.Thresholds;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Server.StationEvents.Components;
 
 [RegisterComponent, Access(typeof(MeteorSwarmSystem)), AutoGenerateComponentPause]
 public sealed partial class MeteorSwarmComponent : Component
 {
-    [DataField, AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan NextWaveTime;
 
     /// <summary>

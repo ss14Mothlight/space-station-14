@@ -1,6 +1,7 @@
 using Content.Shared._Starlight.Antags.Abductor.EntitySystems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._Starlight.Antags.Abductor.Components;
 
@@ -20,7 +21,7 @@ public sealed partial class AbductorVictimComponent : Component
     [DataField("organ"), AutoNetworkedField]
     public AbductorOrganType Organ = AbductorOrganType.None;
 
-    [DataField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan? LastActivation;
 }
 

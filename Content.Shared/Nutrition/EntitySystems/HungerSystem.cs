@@ -33,12 +33,17 @@ public sealed partial class HungerSystem : EntitySystem
     {
         base.Initialize();
 
+        SubscribeLocalEvent<HungerComponent, ComponentStartup>(OnCompInit);
         SubscribeLocalEvent<HungerComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<HungerComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<HungerComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovespeed);
         SubscribeLocalEvent<HungerComponent, RejuvenateEvent>(OnRejuvenate);
     }
 
+    private void OnCompInit(EntityUid uid, HungerComponent component, ComponentStartup args)
+    {
+        DoHungerThresholdEffects(uid, component, true);
+    }
     private void OnMapInit(EntityUid uid, HungerComponent component, MapInitEvent args)
     {
         var amount = _random.Next(

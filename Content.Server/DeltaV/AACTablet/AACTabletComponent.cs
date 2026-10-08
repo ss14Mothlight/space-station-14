@@ -1,3 +1,4 @@
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Server.DeltaV.AACTablet;
 
 [RegisterComponent]
@@ -8,6 +9,6 @@ public sealed partial class AACTabletComponent : Component
     public TimeSpan Cooldown = TimeSpan.FromSeconds(1);
 
     // Time that the next phrase can be sent.
-    [DataField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan NextPhrase;
 }

@@ -1,5 +1,6 @@
 using Content.Shared.Medical.SuitSensor;
 using Robust.Shared.Audio; // Starlight
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Server.Medical.CrewMonitoring;
 
@@ -28,7 +29,7 @@ public sealed partial class CrewMonitoringConsoleComponent : Component
     /// <summary>
     ///     STARLIGHT: When the last update was received. Used to determine if the server is online.
     /// </summary>
-    [DataField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan LastSensorDataReceivedAt = TimeSpan.Zero;
 
     /// <summary>
@@ -59,7 +60,7 @@ public sealed partial class CrewMonitoringConsoleComponent : Component
     /// <summary>
     ///     STARLIGHT: When the last paging trigger was received.
     /// </summary>
-    [DataField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan LastPagingTriggerReceivedAt = TimeSpan.Zero;
 
     /// <summary>
@@ -71,7 +72,7 @@ public sealed partial class CrewMonitoringConsoleComponent : Component
     /// <summary>
     ///     STARLIGHT: When the paging visuals timeout.
     /// </summary>
-    [DataField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan PagingVisualsTimeoutAt = TimeSpan.Zero;
 
     /// <summary>

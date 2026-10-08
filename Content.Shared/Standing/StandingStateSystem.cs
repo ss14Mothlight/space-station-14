@@ -28,6 +28,19 @@ public sealed partial class StandingStateSystem : EntitySystem
         SubscribeLocalEvent<StandingStateComponent, RefreshFrictionModifiersEvent>(OnRefreshFrictionModifiers);
         SubscribeLocalEvent<StandingStateComponent, TileFrictionEvent>(OnTileFriction);
         SubscribeLocalEvent<StandingStateComponent, EndClimbEvent>(OnEndClimb);
+        SubscribeLocalEvent<StandingStateComponent, ComponentStartup>(OnCompStart);
+    }
+
+
+    private void OnCompStart(Entity<StandingStateComponent> ent, ref ComponentStartup args)
+    {
+        // Mothlight - a loaded entity that was lying down needs its lying-down effects re-applied.
+        // Down() bails out if we're already down, so pretend we're standing first.
+        if (!ent.Comp.Standing)
+        {
+            ent.Comp.Standing = true;
+            Down(ent, false, false, true);
+        }
     }
 
     private void OnMobTargetCollide(Entity<StandingStateComponent> ent, ref AttemptMobTargetCollideEvent args)

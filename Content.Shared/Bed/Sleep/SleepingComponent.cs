@@ -3,6 +3,7 @@ using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.Bed.Sleep;
 
@@ -25,7 +26,7 @@ public sealed partial class SleepingComponent : Component
     [DataField]
     public TimeSpan Cooldown = TimeSpan.FromSeconds(1f);
 
-    [DataField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     [AutoNetworkedField, AutoPausedField]
     public TimeSpan CooldownEnd;
 

@@ -1,3 +1,4 @@
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Shared._Starlight.Railroading.Components.Handlers.Fax;
 
 [RegisterComponent, AutoGenerateComponentPause]
@@ -15,7 +16,7 @@ public sealed partial class RailroadFaxOnChosenComponent : Component, IRailroadF
     [DataField]
     public TimeSpan Delay = TimeSpan.Zero;
 
-    [DataField, AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
     public TimeSpan? SendAt;
 
     [DataField]

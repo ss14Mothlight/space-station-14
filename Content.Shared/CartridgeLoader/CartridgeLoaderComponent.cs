@@ -20,7 +20,7 @@ public sealed partial class CartridgeLoaderComponent : Component
     /// <summary>
     /// The currently running program that has its ui showing
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField] // Mothlight - persistence
     public EntityUid? ActiveProgram = default;
 
     /// <summary>

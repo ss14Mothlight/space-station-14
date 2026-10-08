@@ -409,7 +409,7 @@ namespace Content.Server.Chemistry.EntitySystems
                 }
             }
 
-            if (!TryComp(container, out StorageComponent? storage))
+            if (!TryComp(container, out StorageComponent? storage) || storage.Container == null)
                 return null;
 
             //Starlight-start

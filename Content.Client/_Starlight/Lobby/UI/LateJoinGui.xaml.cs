@@ -72,7 +72,7 @@ namespace Content.Client._Starlight.Lobby.UI
                 if (slot < 0)
                     return;
                 _sawmill.Info($"Late joining as ID: {jobId}");
-                _consoleHost.ExecuteCommand($"joingame {slot} {CommandParsing.Escape(jobId)} {station}");
+                _consoleHost.ExecuteCommand($"joingamepersist {slot} {jobId} {station} true"); // Mothlight - persistent late join
                 Close();
             };
 

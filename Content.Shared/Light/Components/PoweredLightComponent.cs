@@ -49,10 +49,10 @@ namespace Content.Shared.Light.Components
         [AutoNetworkedField]
         public bool CurrentLit;
 
-        [DataField, AutoNetworkedField, AutoPausedField]
+        [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
         public TimeSpan LastThunk;
 
-        [DataField, AutoPausedField]
+        [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
         public TimeSpan? LastGhostBlink;
 
         [DataField]

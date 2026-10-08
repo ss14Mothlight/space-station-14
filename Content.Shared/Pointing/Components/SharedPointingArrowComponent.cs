@@ -1,5 +1,6 @@
 using Robust.Shared.GameStates;
 using System.Numerics;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.Pointing.Components;
 
@@ -16,7 +17,7 @@ public abstract partial class SharedPointingArrowComponent : Component
     /// <summary>
     /// When the pointing arrow ends
     /// </summary>
-    [DataField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     [ViewVariables(VVAccess.ReadWrite)]
     public TimeSpan EndTime;
 }

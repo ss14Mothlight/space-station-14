@@ -1,0 +1,17 @@
+- type: entity
+  parent: BaseGameRule
+  id: WorldPersistence
+  components:
+  - type: WorldPersistenceRule
+
+- type: gamePreset
+  id: Persistence
+  alias:
+  - persistence
+  - persistent
+  name: persistence-title
+  description: persistence-description
+  showInVote: false
+  minPlayers: 0
+  rules:
+  - WorldPersistence

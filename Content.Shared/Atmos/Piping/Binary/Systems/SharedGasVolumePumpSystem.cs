@@ -43,6 +43,7 @@ public abstract partial class SharedGasVolumePumpSystem : EntitySystem
     private void OnToggleStatusMessage(EntityUid uid, GasVolumePumpComponent pump, GasVolumePumpToggleStatusMessage args)
     {
         pump.Enabled = args.Enabled;
+        pump.DesiredEnabled = args.Enabled;
         _adminLogger.Add(LogType.AtmosPowerChanged, LogImpact.Medium,
             $"{ToPrettyString(args.Actor):player} set the power on {ToPrettyString(uid):device} to {args.Enabled}");
 

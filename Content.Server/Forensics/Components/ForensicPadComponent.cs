@@ -8,8 +8,9 @@ namespace Content.Server.Forensics
     {
         [DataField("scanDelay")]
         public float ScanDelay = 3.0f;
-
+        [DataField]
         public bool Used = false;
+        [DataField]
         public String Sample = string.Empty;
     }
 }

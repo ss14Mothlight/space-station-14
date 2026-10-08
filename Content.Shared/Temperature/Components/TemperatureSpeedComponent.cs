@@ -1,5 +1,6 @@
 using Content.Shared.Temperature.Systems;
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.Temperature.Components;
 
@@ -25,6 +26,6 @@ public sealed partial class TemperatureSpeedComponent : Component
     /// <summary>
     /// The time at which the temperature slowdown is updated.
     /// </summary>
-    [DataField, AutoNetworkedField, AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan? NextSlowdownUpdate;
 }

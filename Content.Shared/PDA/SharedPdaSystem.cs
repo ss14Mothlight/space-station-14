@@ -16,6 +16,7 @@ namespace Content.Shared.PDA
             base.Initialize();
 
             SubscribeLocalEvent<PdaComponent, ComponentInit>(OnComponentInit);
+            SubscribeLocalEvent<PdaComponent, ComponentStartup>(OnComponentStartup); // Mothlight
             SubscribeLocalEvent<PdaComponent, ComponentRemove>(OnComponentRemove);
 
             SubscribeLocalEvent<PdaComponent, EntInsertedIntoContainerMessage>(OnItemInserted);
@@ -34,6 +35,20 @@ namespace Content.Shared.PDA
 
             UpdatePdaAppearance(uid, pda);
         }
+
+        // Mothlight begin - persistence
+        /// <summary>
+        /// Loaded PDAs come back with their ID already in the slot, which doesn't raise an insert event.
+        /// </summary>
+        private void OnComponentStartup(EntityUid uid, PdaComponent pda, ComponentStartup args)
+        {
+            if (pda.ContainedId == null && pda.IdSlot.Item is { } id)
+            {
+                pda.ContainedId = id;
+                UpdatePdaAppearance(uid, pda);
+            }
+        }
+        // Mothlight end
 
         private void OnComponentRemove(EntityUid uid, PdaComponent pda, ComponentRemove args)
         {

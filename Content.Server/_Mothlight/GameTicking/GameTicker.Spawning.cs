@@ -1,5 +1,7 @@
 using System.Linq;
+using Content.Server._Mothlight.Persistence;
 using Content.Server.GameTicking.Events;
+using Content.Server.Station.Systems;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
@@ -23,6 +25,10 @@ namespace Content.Server.GameTicking;
 
 public sealed partial class GameTicker
 {
+    [Dependency] private CharacterPersistenceSystem _charPersistence = default!;
+    [Dependency] private WorldPersistenceRuleSystem _worldPersistence = default!;
+    [Dependency] private StationSystem _stationSystem = default!;
+
     private void SpawnPlayerPersistentLoad(ICommonSession player,
         HumanoidCharacterProfile character,
         EntityUid station,
@@ -85,43 +91,60 @@ public sealed partial class GameTicker
             return;
         }
 
-        var data = player.ContentData();
-
-        _playTimeTrackings.PlayerRolesChanged(player);
-        var savePath = new ResPath($"{data!.UserId}]{character.Name}");
-        _loader.TryLoadEntity(savePath, out var mobMaybe);
-        var ec = (Entity<TransformComponent>)mobMaybe!;
-        EntityUid? pe = ec.Owner;
-        var mob = (EntityUid)pe;
-
-        if (TryComp<MindContainerComponent>(mob, out _))
-            _mind.WipeMind(mob);
-        _sawmill.Info("MAKING NEW MIND");
-        var newMind = _mind.CreateMind(data!.UserId, character.Name);
-        _mind.SetUserId(newMind, data.UserId);
-        _mind.TransferTo(newMind, mob);
-        _playerManager.SetAttachedEntity(player, mob, true);
-        _adminLogger.Add(LogType.LateJoin,
-            LogImpact.Medium,
-            $"Player {player.Name} late joined as {character.Name:characterName}. Loaded char");
-
-        var points = EntityQueryEnumerator<SpawnPointComponent, TransformComponent>();
+        // Pick where they're going first, so a missing spawn point can't leave them stuck in nullspace.
         var possiblePositions = new List<EntityCoordinates>();
-        while (points.MoveNext(out var uid, out var spawnPoint, out var xform))
+        var points = EntityQueryEnumerator<SpawnPointComponent, TransformComponent>();
+        while (points.MoveNext(out _, out var spawnPoint, out var xform))
         {
             if (spawnPoint.SpawnType != SpawnPointType.LateJoin)
+                continue;
+
+            if (station.IsValid() && xform.GridUid is { } grid && _stationSystem.GetOwningStation(grid) != station)
                 continue;
 
             possiblePositions.Add(xform.Coordinates);
         }
 
-        if (possiblePositions.Count <= 0)
+        if (possiblePositions.Count == 0)
+        {
+            _sawmill.Error($"No late-join spawn points to load {player.Name}'s character {character.Name} at.");
             return;
+        }
 
         var spawnLoc = _robustRandom.Pick(possiblePositions);
 
-        _transform.SetCoordinates(mob, spawnLoc);
+        // On a persistent world, put them back where they left off.
+        var preferSavedPosition = _worldPersistence.HasActiveRule();
+        if (!_charPersistence.TryLoadCharacter(player.UserId, character, spawnLoc, station, out var loaded, preferSavedPosition))
+        {
+            // Nothing saved (or the save is broken), start them off fresh and save that instead.
+            _chatManager.DispatchServerMessage(player, "No saved character found, spawning a new one.");
+            SpawnPlayer(player, character, station, jobId, lateJoin, silent, save: true);
+            return;
+        }
 
+        var mob = loaded.Value;
+
+        PlayerJoinGame(player, silent);
+        _playTimeTrackings.PlayerRolesChanged(player);
+
+        var newMind = _mind.CreateMind(player.UserId, character.Name);
+        _mind.SetUserId(newMind, player.UserId);
+        newMind.Comp.Voice = character.Voice;
+        newMind.Comp.SiliconVoice = character.SiliconVoice;
+        _mind.TransferTo(newMind, mob);
+
+        if (jobId != null)
+        {
+            _roles.MindAddJobRole(newMind, silent: silent, jobPrototype: jobId);
+            if (station.IsValid())
+                _stationJobs.TryAssignJob(station, jobId, player.UserId);
+        }
+
+        _admin.UpdatePlayerList(player);
+        _adminLogger.Add(LogType.LateJoin,
+            LogImpact.Medium,
+            $"Player {player.Name} late joined as {character.Name:characterName} with {ToPrettyString(mob):entity}. Loaded saved character.");
 
         if (!silent && TryComp(station, out MetaDataComponent? metaData))
         {

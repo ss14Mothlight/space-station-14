@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared._Mothlight.StationRecords;
 using System.Linq;
 using Robust.Shared.Utility;
 
@@ -32,7 +33,7 @@ public sealed partial class StationRecordSet
     /// <summary>
     /// Dictionary between a record's type and then each record indexed by id.
     /// </summary>
-    [DataField]
+    [DataField(customTypeSerializer: typeof(StationRecordTablesSerializer))] // Mothlight - Type keys can't be saved as-is
     private Dictionary<Type, Dictionary<uint, object>> _tables = new();
 
     /// <summary>

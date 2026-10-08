@@ -19,7 +19,7 @@ public sealed partial class MechEquipmentComponent : Component
     /// <summary>
     /// The mech that the equipment is inside of.
     /// </summary>
-    [ViewVariables] public EntityUid? EquipmentOwner;
+    [DataField, ViewVariables] public EntityUid? EquipmentOwner; // Mothlight - persistence
 
     [DataField("equipmentType")] public EquipmentType EquipmentType = EquipmentType.Active;
 }

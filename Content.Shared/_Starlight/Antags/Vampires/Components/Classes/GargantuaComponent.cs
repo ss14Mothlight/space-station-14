@@ -2,6 +2,7 @@ using System.Numerics;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._Starlight.Antags.Vampires.Components.Classes;
 
@@ -37,7 +38,7 @@ public sealed partial class GargantuaComponent : VampireClassComponent
 
     [DataField]
     public TimeSpan BloodSwellShootPopupCooldown = TimeSpan.FromSeconds(1f);
-    [DataField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan? BloodSwellShootNextPopupTime;
 
     [DataField]

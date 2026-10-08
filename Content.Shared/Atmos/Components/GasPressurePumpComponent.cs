@@ -9,6 +9,9 @@ public sealed partial class GasPressurePumpComponent : Component
     [DataField, AutoNetworkedField]
     public bool Enabled = true;
 
+    [DataField]
+    public bool DesiredEnabled = true;
+
     [DataField("inlet")]
     public string InletName = "inlet";
 

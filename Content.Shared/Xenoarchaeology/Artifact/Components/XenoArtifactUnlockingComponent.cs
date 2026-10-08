@@ -1,5 +1,6 @@
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.Xenoarchaeology.Artifact.Components;
 
@@ -18,7 +19,7 @@ public sealed partial class XenoArtifactUnlockingComponent : Component
     /// <summary>
     /// The time at which the unlocking state ends.
     /// </summary>
-    [DataField, AutoNetworkedField, AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan EndTime;
 
     /// <summary>

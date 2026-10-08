@@ -2,6 +2,7 @@ using Content.Shared.Actions;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._Starlight.CrawlUnder;
 
@@ -45,7 +46,7 @@ public sealed partial class CrawlUnderObjectsComponent : Component
     /// <summary>
     ///     CLIENT ONLY When we last showed a failed-to-do-xyz popup for an interaction that was blocked by sneaking.
     /// </summary>
-    [DataField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan LastFailedPopup = TimeSpan.Zero;
 
     /// <summary>

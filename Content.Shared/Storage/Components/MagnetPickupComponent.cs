@@ -1,5 +1,6 @@
 using Content.Shared.Inventory;
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.Storage.Components;
 
@@ -11,7 +12,8 @@ namespace Content.Shared.Storage.Components;
 [AutoGenerateComponentPause]
 public sealed partial class MagnetPickupComponent : Component
 {
-    [ViewVariables(VVAccess.ReadWrite), DataField("nextScan")]
+    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     [AutoPausedField]
     [AutoNetworkedField]
     public TimeSpan NextScan = TimeSpan.Zero;

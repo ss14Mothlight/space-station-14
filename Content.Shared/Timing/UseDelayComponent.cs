@@ -1,5 +1,6 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.Timing;
 
@@ -39,9 +40,9 @@ public sealed partial class UseDelayInfo
 {
     [DataField]
     public TimeSpan Length { get; set; }
-    [DataField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan StartTime { get; set; }
-    [DataField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan EndTime { get; set; }
 
     public UseDelayInfo(TimeSpan length, TimeSpan startTime = default, TimeSpan endTime = default)

@@ -1,6 +1,7 @@
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.Mining.Components;
 
@@ -16,7 +17,7 @@ public sealed partial class MiningScannerViewerComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan PingDelay = TimeSpan.FromSeconds(5);
 
-    [DataField, AutoNetworkedField, AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NextPingTime = TimeSpan.MaxValue;
 
     [DataField]

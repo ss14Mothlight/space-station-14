@@ -1,5 +1,6 @@
 using Content.Shared._Starlight.Scent.Systems;
 using Robust.Shared.GameStates;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._Starlight.Scent.Components;
 
@@ -17,7 +18,7 @@ public sealed partial class ScentMarkerComponent : Component
     /// Absolute despawn timestamp. Lets the fade animation recompute remaining time correctly
     /// whenever it restarts.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
     public TimeSpan ExpiresAt;
 
     /// <summary>

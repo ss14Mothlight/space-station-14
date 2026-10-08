@@ -90,6 +90,7 @@ public sealed partial class ActionContainerSystem : EntitySystem
 
         DebugTools.AssertOwner(uid, comp);
         comp ??= EnsureComp<ActionsContainerComponent>(uid);
+        EnsureContainerReady(uid, comp); // Mothlight
 
         if (Exists(actionId))
         {
@@ -104,9 +105,13 @@ public sealed partial class ActionContainerSystem : EntitySystem
 
             actionId = ent;
             action = ent.Comp;
-            DebugTools.Assert(Transform(ent).ParentUid == uid);
-            DebugTools.Assert(_container.IsEntityInContainer(ent));
-            DebugTools.Assert(ent.Comp.Container == uid);
+            // Mothlight - while an entity is still being loaded its containers aren't fully set up yet
+            if (LifeStage(uid) >= EntityLifeStage.Initialized)
+            {
+                DebugTools.Assert(Transform(ent).ParentUid == uid);
+                DebugTools.Assert(_container.IsEntityInContainer(ent));
+                DebugTools.Assert(ent.Comp.Container == uid);
+            }
             return true;
         }
 
@@ -251,6 +256,7 @@ public sealed partial class ActionContainerSystem : EntitySystem
 
         DebugTools.AssertOwner(uid, comp);
         comp ??= EnsureComp<ActionsContainerComponent>(uid);
+        EnsureContainerReady(uid, comp); // Mothlight
         if (!_container.Insert(ent.Owner, comp.Container))
         {
             Log.Error($"Failed to insert action {ToPrettyString(ent)} into {ToPrettyString(uid)}");
@@ -309,6 +315,19 @@ public sealed partial class ActionContainerSystem : EntitySystem
         if (ent.Comp.AttachedEntity is {} actions)
             _actions.RemoveAction(actions, (ent, ent));
     }
+
+    // Mothlight begin - persistence
+    /// <summary>
+    /// Other components' init handlers can add actions before this component has initialized. On a fresh entity
+    /// that's fine, but a loaded entity already has its actions, so we'd check a container that doesn't exist yet.
+    /// </summary>
+    private void EnsureContainerReady(EntityUid uid, ActionsContainerComponent comp)
+    {
+        // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
+        if (comp.Container == null)
+            comp.Container = _container.EnsureContainer<Container>(uid, ActionsContainerComponent.ContainerId);
+    }
+    // Mothlight end
 
     private void OnInit(EntityUid uid, ActionsContainerComponent component, ComponentInit args)
     {

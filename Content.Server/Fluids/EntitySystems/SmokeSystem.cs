@@ -245,6 +245,8 @@ public sealed partial class SmokeSystem : EntitySystem
     /// </summary>
     public void SmokeReact(EntityUid entity, EntityUid smokeUid, SmokeComponent? component = null)
     {
+        if (!smokeUid.IsValid()) // Mothlight - loaded smoke can reference an entity that no longer exists
+            return;
         if (!Resolve(smokeUid, ref component))
             return;
 

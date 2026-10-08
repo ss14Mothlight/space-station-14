@@ -1,6 +1,7 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 using Robust.Shared.Spawners;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._ES.Core.Timer.Components;
 
@@ -20,7 +21,7 @@ public sealed partial class ESTimedDespawnComponent : Component
     /// <summary>
     /// The time at which the entity will despawn
     /// </summary>
-    [DataField, AutoNetworkedField, AutoPausedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan DespawnTime;
 
     /// <summary>

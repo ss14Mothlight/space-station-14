@@ -28,6 +28,10 @@ public sealed partial class MobStateActionsSystem : EntitySystem
         if (!TryComp<MobStateActionsComponent>(uid, out var mobStateActionsComp))
             return;
 
+        // Mothlight - loaded entities already have their actions granted
+        if (mobStateActionsComp.GrantedActions.Count > 0)
+            return;
+
         ComposeActions(uid, mobStateActionsComp, component.CurrentState);
     }
 

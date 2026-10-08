@@ -29,10 +29,8 @@ using Robust.Shared.Enums;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Content.Server._Starlight.Bed.Cryostorage;
-using Content.Server.GameTicking;
+using Content.Server._Mothlight.Persistence;
 using Content.Shared.Anomaly.Components;
-using Robust.Shared.EntitySerialization.Systems;
-using Robust.Shared.Utility;
 
 namespace Content.Server.Bed.Cryostorage;
 
@@ -58,8 +56,7 @@ public sealed partial class CryostorageSystem : SharedCryostorageSystem
 
     #region Mothlight
 
-    [Dependency] private GameTicker _ticker = null!;
-    [Dependency] private MapLoaderSystem _loader = null!;
+    [Dependency] private CharacterPersistenceSystem _charPersistence = null!;
 
     #endregion
 
@@ -214,11 +211,15 @@ public sealed partial class CryostorageSystem : SharedCryostorageSystem
             }
             // Mothlight begin
             RemComp<AnomalyComponent>(ent.Owner); // Starlight - kill anomaly infection when host cryosleep
-            var savePath = new ResPath($"{userId}]{name}");
-            _loader.TrySaveGeneric(ent, savePath, out _);
             if (Mind.TryGetMind(userId.Value, out var mind) &&
                 HasComp<CryostorageContainedComponent>(mind.Value.Comp.CurrentEntity))
                 _ghostSystem.OnGhostAttempt(mind.Value, false);
+            // Don't persist the link to this pod, it won't exist when they're loaded back in.
+            RemComp<CryostorageContainedComponent>(ent);
+            if (HasComp<PersistentCharacterComponent>(ent))
+                _charPersistence.TrySaveCharacter(ent.Owner);
+            else
+                _charPersistence.TrySaveCharacter(ent, userId.Value, name);
             _transform.DetachEntity(ent, Transform(ent));
             QueueDel(ent);
         }
@@ -322,8 +323,13 @@ public sealed partial class CryostorageSystem : SharedCryostorageSystem
             ? "cryostorage-insert-message-temp"
             : "cryostorage-insert-message-permanent";
 
-        var msg = Loc.GetString(locKey, ("time", comp.GracePeriod.TotalMinutes));
-        if (TryComp<ActorComponent>(args.Entity, out var actor))
+        // Mothlight - format the grace period in minutes and/or seconds, instead of fractional minutes
+        var grace = TimeSpan.FromSeconds(Math.Round(comp.GracePeriod.TotalSeconds));
+        var time = Loc.GetString("cryostorage-grace-period",
+            ("minutes", (int) grace.TotalMinutes),
+            ("seconds", grace.Seconds));
+        var msg = Loc.GetString(locKey, ("time", time));
+        if (TryComp<ActorComponent>(args.Entity, out var actor) && actor.PlayerSession?.Channel != null) // Mothlight
             _chatManager.ChatMessageToOne(ChatChannel.Server, msg, msg, uid, false, actor.PlayerSession.Channel);
     }
 

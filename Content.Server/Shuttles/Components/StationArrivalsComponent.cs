@@ -9,7 +9,8 @@ namespace Content.Server.Shuttles.Components;
 [RegisterComponent, Access(typeof(ArrivalsSystem))]
 public sealed partial class StationArrivalsComponent : Component
 {
-    [DataField("shuttle")]
+    // Mothlight - not saved, the shuttle lives on another map and gets set up at runtime
+    [ViewVariables]
     public EntityUid Shuttle;
 
     [DataField("shuttlePath")] public ResPath ShuttlePath = new("/Maps/Shuttles/arrivals.yml");

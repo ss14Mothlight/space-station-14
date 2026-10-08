@@ -1,4 +1,5 @@
 using Robust.Shared.Audio;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared._Starlight.StationRadio.Components;
 
@@ -15,7 +16,7 @@ public sealed partial class StationRadioServerComponent : Component
     /// <summary>
     /// For determining where the sound should resume.
     /// </summary>
-    [DataField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     public TimeSpan? PlaybackStartTime;
 }
 
