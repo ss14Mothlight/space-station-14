@@ -1,0 +1,31 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: constructionGraph
+  id: StorageCanisterGraph
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: canister
+          steps:
+            - material: Steel
+              amount: 15
+              doAfter: 1
+
+    - node: canister
+      entity: StorageCanister
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetSteel1
+              # Mothlight: 13 instead of 15, giving back all 15 is worth more than the canister (MaterialArbitrageTest).
+              amount: 13
+            - !type:DeleteEntity {}
+          conditions:
+            - !type:EntityAnchored
+              anchored: false
+          steps:
+            - tool: Welding
+              doAfter: 5

@@ -1,0 +1,80 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: latheRecipe
+  id: IngotCopper1
+  result: IngotCopper1
+  completetime: 0
+  materials:
+    RawCopper: 100
+
+- type: latheRecipe
+  id: IngotTin1
+  result: IngotTin1
+  completetime: 0
+  materials:
+    RawTin: 100
+
+- type: latheRecipe
+  id: MaterialPhoron1
+  result: MaterialPhoron1
+  completetime: 0
+  materials:
+    RawPlasma: 200
+    RawBananium: 200
+    RawTitanium: 100
+
+- type: latheRecipe
+  id: MaterialPhoron10
+  result: MaterialPhoron10
+  completetime: 0
+  materials:
+    RawPlasma: 2000
+    RawBananium: 2000
+    RawTitanium: 1000
+
+- type: latheRecipe
+  id: MaterialPhoron30
+  result: MaterialPhoron
+  completetime: 2
+  materials:
+    RawPlasma: 6000
+    RawBananium: 6000
+    RawTitanium: 3000
+
+- type: latheRecipe
+  id: SheetAluminium1
+  result: SheetAluminium1
+  completetime: 0
+  materials:
+    RawAluminum: 100
+
+- type: latheRecipe
+  id: SheetBronze
+  result: SheetBronze1
+  completetime: 1
+  materials:
+    RawCopper: 67
+    RawTin: 33
+
+- type: latheRecipe
+  id: SheetBronze30
+  result: SheetBronze
+  completetime: 2
+  materials:
+    RawCopper: 2000
+    RawTin: 1000
+
+- type: latheRecipe
+  id: SheetTitanium1
+  result: SheetTitanium1
+  completetime: 0
+  materials:
+    RawTitanium: 100
+
+- type: latheRecipe
+  id: SheetTitanium30
+  result: SheetTitanium
+  completetime: 2
+  materials:
+    RawTitanium: 3000

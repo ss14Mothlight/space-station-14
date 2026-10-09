@@ -1,0 +1,18 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: entity
+  id: AltarDefault
+  parent: AltarBase
+  name: altar
+  description: An uncovered, nondescript altar.
+  components:
+  - type: Sprite
+    sprite: _Persistence/Structures/Furniture/Altars/Gods/nanotrasen.rsi
+    state: default
+  - type: Icon
+    sprite: _Persistence/Structures/Furniture/Altars/Gods/nanotrasen.rsi
+    state: default
+  - type: Construction
+    graph: AltarGraph
+    node: altarClear

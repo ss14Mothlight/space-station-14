@@ -1,0 +1,7 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: latheRecipe
+  parent: [ BaseCircuitboardRecipe, BaseSupplyMachineRecipeCategory ]
+  id: RecyclerMachineCircuitboard
+  result: RecyclerMachineCircuitboard

@@ -1,0 +1,26 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: ore
+  id: OreAluminum
+  oreEntity: AluminumOre1
+  minOreYield: 2
+  maxOreYield: 4
+
+- type: ore
+  id: OreCopper
+  oreEntity: CopperOre1
+  minOreYield: 2
+  maxOreYield: 4
+
+- type: ore
+  id: OreTin
+  oreEntity: TinOre1
+  minOreYield: 2
+  maxOreYield: 4
+
+- type: ore
+  id: OreTitanium
+  oreEntity: TitaniumOre1
+  minOreYield: 2
+  maxOreYield: 4

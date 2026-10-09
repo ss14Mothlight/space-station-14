@@ -1,0 +1,16 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: constructionGraph
+  id: TitaniumRod
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: titanium-rod
+      steps:
+      - material: Titanium
+        amount: 1
+        doAfter: 2
+  - node: titanium-rod
+    entity: PartRodTitanium2

@@ -46,7 +46,6 @@ public partial class MobStateSystem
         SubscribeLocalEvent<MobStateComponent, CombatModeShouldHandInteractEvent>(OnCombatModeShouldHandInteract);
         SubscribeLocalEvent<MobStateComponent, AttemptPacifiedAttackEvent>(OnAttemptPacifiedAttack);
         SubscribeLocalEvent<MobStateComponent, DamageModifyEvent>(OnDamageModify);
-        SubscribeLocalEvent<MobStateComponent, ComponentStartup>(OnStartup); // Mothlight
         SubscribeLocalEvent<MobStateComponent, AttemptToolRefineEvent>(OnAttemptToolRefine);
 
         SubscribeLocalEvent<MobStateComponent, UnbuckleAttemptEvent>(OnUnbuckleAttempt);
@@ -101,17 +100,6 @@ public partial class MobStateSystem
                 throw new NotImplementedException();
         }
     }
-
-    // Mothlight begin - persistence
-    /// <summary>
-    /// A mob loaded while crit/dead won't change state again, so re-apply that state's effects.
-    /// </summary>
-    private void OnStartup(EntityUid uid, MobStateComponent component, ComponentStartup args)
-    {
-        if (component.CurrentState != MobState.Alive)
-            OnStateEnteredSubscribers(uid, component, component.CurrentState);
-    }
-    // Mothlight end
 
     private void OnStateEnteredSubscribers(EntityUid target, MobStateComponent component, MobState state)
     {

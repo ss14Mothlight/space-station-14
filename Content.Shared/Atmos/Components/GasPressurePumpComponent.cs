@@ -10,7 +10,9 @@ public sealed partial class GasPressurePumpComponent : Component
     public bool Enabled = true;
 
     [DataField]
-    public bool DesiredEnabled = true;
+    // Mothlight - what a player last set it to, so it comes back on/off after a load. Null means it was never
+    // touched, and the prototype's state should be kept.
+    public bool? DesiredEnabled;
 
     [DataField("inlet")]
     public string InletName = "inlet";

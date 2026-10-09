@@ -1,0 +1,159 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: constructionGraph
+  id: ButtonFrameCautionGraph
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: caution
+          steps:
+            - material: Steel
+              amount: 1
+              doAfter: 1.0
+    - node: caution
+      entity: ButtonFrameCaution
+      edges:
+        - to: start
+          steps:
+            - tool: Screwing
+              doAfter: 1.0
+          completed:
+            - !type:GivePrototype
+              prototype: SheetSteel1
+              amount: 1
+            - !type:DeleteEntity {}
+
+- type: constructionGraph
+  id: ButtonFrameDangerGraph
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: danger
+          steps:
+            - material: Steel
+              amount: 1
+              doAfter: 1.0
+    - node: danger
+      entity: ButtonFrameCautionSecurity
+      edges:
+        - to: start
+          steps:
+            - tool: Screwing
+              doAfter: 1.0
+          completed:
+            - !type:GivePrototype
+              prototype: SheetSteel1
+              amount: 1
+            - !type:DeleteEntity {}
+
+- type: constructionGraph
+  id: ButtonFrameExitGraph
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: exit
+          steps:
+            - material: Steel
+              amount: 1
+              doAfter: 1.0
+    - node: exit
+      entity: ButtonFrameExit
+      edges:
+        - to: start
+          steps:
+            - tool: Screwing
+              doAfter: 1.0
+          completed:
+            - !type:GivePrototype
+              prototype: SheetSteel1
+              amount: 1
+            - !type:DeleteEntity {}
+
+- type: constructionGraph
+  id: ButtonFrameGreyGraph
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: grey
+          steps:
+            - material: Steel
+              amount: 1
+              doAfter: 1.0
+    - node: grey
+      entity: ButtonFrameGrey
+      edges:
+        - to: start
+          steps:
+            - tool: Screwing
+              doAfter: 1.0
+          completed:
+            - !type:GivePrototype
+              prototype: SheetSteel1
+              amount: 1
+            - !type:DeleteEntity {}
+
+- type: constructionGraph
+  id: ButtonFrameJanitorGraph
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: janitor
+          steps:
+            - material: Steel
+              amount: 1
+              doAfter: 1.0
+    - node: janitor
+      entity: ButtonFrameJanitor
+      edges:
+        - to: start
+          steps:
+            - tool: Screwing
+              doAfter: 1.0
+          completed:
+            - !type:GivePrototype
+              prototype: SheetSteel1
+              amount: 1
+            - !type:DeleteEntity {}
+
+- type: constructionGraph
+  id: LockableButtonDirectionalGraph
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: LockableButtonDirectionalNode
+          steps:
+            - material: Steel
+              amount: 1
+              doAfter: 2.0
+            - material: ReinforcedGlass
+              amount: 1
+            - material: Cable
+              amount: 1
+    - node: LockableButtonDirectionalNode
+      entity: LockableButton
+      edges:
+        - to: start
+          conditions:
+            - !type:Locked
+              locked: false
+          steps:
+            - tool: Screwing
+              doAfter: 2.0
+          completed:
+            - !type:GivePrototype
+              prototype: SheetSteel1
+              amount: 1
+            - !type:GivePrototype
+              prototype: SheetRGlass1
+              amount: 1
+            - !type:GivePrototype
+              prototype: CableApcStack1
+              amount: 1
+            - !type:DeleteEntity {}

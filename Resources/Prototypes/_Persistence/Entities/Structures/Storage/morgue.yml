@@ -1,0 +1,78 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: entity
+  id: CrematoriumAssembly
+  name: crematorium assembly
+  description: The assembly for an incinerator.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Pullable
+  - type: Rotatable
+  - type: Anchorable
+  - type: Sprite
+    sprite: _Persistence/Structures/Storage/morgue.rsi
+    layers:
+    - state: crema_assembly
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 1000
+        mask:
+        - MachineMask
+        layer:
+        - HalfWallLayer
+  - type: Appearance
+  - type: Transform
+    anchored: true
+  - type: StaticPrice
+    price: 0
+  - type: Construction
+    graph: CrematoriumGraph
+    node: crematorelectronics
+
+- type: entity
+  id: MorgueAssembly
+  name: morgue assembly
+  description: Used to store bodies once completed.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Pullable
+  - type: Rotatable
+  - type: Anchorable
+  - type: Sprite
+    sprite: _Persistence/Structures/Storage/morgue.rsi
+    layers:
+    - state: morgue_assembly
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 1000
+        mask:
+        - MachineMask
+        layer:
+        - HalfWallLayer
+  - type: Appearance
+  - type: Transform
+    anchored: true
+  - type: StaticPrice
+    price: 0
+  - type: Construction
+    graph: MorgueGraph
+    node: cables

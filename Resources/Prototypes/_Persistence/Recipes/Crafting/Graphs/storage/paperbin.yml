@@ -1,0 +1,26 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: constructionGraph
+  id: PaperBin
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: paperbin
+      steps:
+      - material: Steel
+        amount: 5
+        doAfter: 4
+
+
+  - node: paperbin
+    entity: PaperBin
+    edges:
+    - to: start
+      steps:
+      - tool: Screwing
+        doAfter: 5
+      completed:
+      - !type:EmptyAllContainers
+      - !type:DeleteEntity

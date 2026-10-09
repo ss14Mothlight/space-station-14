@@ -1,0 +1,33 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: entity
+  parent: BaseWallmountGlass
+  id: ExtinguisherCabinetAssembly
+  name: disassembled extinguisher cabinet
+  description: An unfinished fire extinguisher cabinet.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: Structures/Wallmounts/extinguisher_cabinet.rsi
+    state: frame
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 80
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger: !type:DamageTrigger
+        damage: 40
+      behaviors:
+      - !type:EmptyAllContainersBehaviour
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+  - type: Construction
+    graph: ExtinguisherCabinetGraph
+    node: glass

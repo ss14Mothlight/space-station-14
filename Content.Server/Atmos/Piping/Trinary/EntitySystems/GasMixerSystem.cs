@@ -152,7 +152,7 @@ namespace Content.Server.Atmos.Piping.Trinary.EntitySystems
         }
         private void OnMixerJoinAtmosphere(EntityUid uid, GasMixerComponent mixer, ref AtmosDeviceEnabledEvent args)
         {
-            mixer.Enabled = mixer.DesiredEnabled;
+            mixer.Enabled = mixer.DesiredEnabled ?? mixer.Enabled;
             DirtyUI(uid, mixer);
             UpdateAppearance(uid, mixer);
         }

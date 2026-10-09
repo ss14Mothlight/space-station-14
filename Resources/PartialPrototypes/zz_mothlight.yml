@@ -1,0 +1,4 @@
+# Mothlight partial prototypes. Files here are applied in name order, so the zz_ prefix makes this run after Starlight's
+# partialPrototypes.yml and can build on what it changes.
+
+- /Prototypes/_Mothlight/Partials

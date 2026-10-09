@@ -1,0 +1,16 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: stack
+  parent: BaseSheetStack
+  id: Bronze
+  name: stack-bronze
+  icon: { sprite: /Textures/_Persistence/Objects/Materials/Sheets/metal.rsi, state: bronze }
+  spawn: SheetBronze1
+
+- type: stack
+  parent: BaseSheetStack
+  id: Titanium
+  name: stack-titanium
+  icon: { sprite: /Textures/_Persistence/Objects/Materials/Sheets/metal.rsi, state: plastitanium }
+  spawn: SheetTitanium1

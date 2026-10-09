@@ -116,7 +116,7 @@ public abstract partial class SharedGasPressurePumpSystem : EntitySystem
 
     private void OnPumpJoinAtmosphere(Entity<GasPressurePumpComponent> ent, ref AtmosDeviceEnabledEvent args)
     {
-        ent.Comp.Enabled = ent.Comp.DesiredEnabled;
+        ent.Comp.Enabled = ent.Comp.DesiredEnabled ?? ent.Comp.Enabled;
         Dirty(ent);
         UpdateAppearance(ent);
     }

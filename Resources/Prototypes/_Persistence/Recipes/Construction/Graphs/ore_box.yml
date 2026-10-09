@@ -1,0 +1,20 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: constructionGraph
+  id: OreBoxGraph
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: ore_box
+      steps:
+      - material: Steel
+        amount: 2
+        doAfter: 1
+      - material: WoodPlank
+        amount: 5
+        doAfter: 1
+
+  - node: ore_box
+    entity: OreBox

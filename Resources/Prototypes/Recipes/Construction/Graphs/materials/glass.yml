@@ -4,6 +4,30 @@
   graph:
     - node: start
       edges:
+        # Mothlight begin - from SS14-Persistence
+        - to: SheetPhoronGlass
+          completed:
+            - !type:SetStackCount
+              amount: 1
+          steps:
+            - material: Glass
+              amount: 1
+            - material: Phoron
+              amount: 1
+
+        - to: SheetRPhoronGlass
+          completed:
+            - !type:SetStackCount
+              amount: 1
+          steps:
+            - material: Glass
+              amount: 1
+            - material: Phoron
+              amount: 1
+            - material: MetalRod
+              amount: 1
+        # Mothlight end
+
         - to: SheetRGlass
           completed:
             - !type:SetStackCount
@@ -134,3 +158,11 @@
 
     - node: SheetRUGlass1
       entity: SheetRUGlass
+
+    # Mothlight begin - from SS14-Persistence
+    - node: SheetPhoronGlass
+      entity: SheetPhoronGlass
+
+    - node: SheetRPhoronGlass
+      entity: SheetRPhoronGlass
+    # Mothlight end

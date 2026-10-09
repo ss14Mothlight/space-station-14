@@ -1,0 +1,622 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: entity
+  id: AsteroidRockAluminum
+  parent: AsteroidRock
+  description: An ore vein rich with aluminum.
+  suffix: Aluminum
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreAluminum
+  - type: Sprite
+    layers:
+    - state: rock_asteroid
+    - map: [ "enum.EdgeLayer.South" ]
+      state: rock_asteroid_south
+    - map: [ "enum.EdgeLayer.East" ]
+      state: rock_asteroid_east
+    - map: [ "enum.EdgeLayer.North" ]
+      state: rock_asteroid_north
+    - map: [ "enum.EdgeLayer.West" ]
+      state: rock_asteroid_west
+    - state: rock_lead
+      map: [ "enum.MiningScannerVisualLayers.Overlay" ]
+
+- type: entity
+  id: AsteroidRockCopper
+  parent: AsteroidRock
+  description: An ore vein rich with copper.
+  suffix: Copper
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreCopper
+  - type: Sprite
+    layers:
+    - state: rock_asteroid
+    - map: [ "enum.EdgeLayer.South" ]
+      state: rock_asteroid_south
+    - map: [ "enum.EdgeLayer.East" ]
+      state: rock_asteroid_east
+    - map: [ "enum.EdgeLayer.North" ]
+      state: rock_asteroid_north
+    - map: [ "enum.EdgeLayer.West" ]
+      state: rock_asteroid_west
+    - state: rock_copper
+      map: [ "enum.MiningScannerVisualLayers.Overlay" ]
+
+- type: entity
+  id: AsteroidRockTitanium
+  parent: AsteroidRock
+  description: An ore vein rich with titanium.
+  suffix: Titanium
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreTitanium
+  - type: Sprite
+    layers:
+    - state: rock_asteroid
+    - map: [ "enum.EdgeLayer.South" ]
+      state: rock_asteroid_south
+    - map: [ "enum.EdgeLayer.East" ]
+      state: rock_asteroid_east
+    - map: [ "enum.EdgeLayer.North" ]
+      state: rock_asteroid_north
+    - map: [ "enum.EdgeLayer.West" ]
+      state: rock_asteroid_west
+    - state: rock_marble
+      map: [ "enum.MiningScannerVisualLayers.Overlay" ]
+
+- type: entity
+  id: IronRockAluminum
+  parent: IronRock
+  description: An ore vein rich with aluminum.
+  suffix: Aluminum
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreAluminum
+  - type: Sprite
+    layers:
+    - state: ironrock
+    - map: [ "enum.EdgeLayer.South" ]
+      state: ironrock_south
+    - map: [ "enum.EdgeLayer.East" ]
+      state: ironrock_east
+    - map: [ "enum.EdgeLayer.North" ]
+      state: ironrock_north
+    - map: [ "enum.EdgeLayer.West" ]
+      state: ironrock_west
+    - state: rock_lead
+      map: [ "enum.MiningScannerVisualLayers.Overlay" ]
+
+- type: entity
+  id: IronRockCopper
+  parent: IronRock
+  description: An ore vein rich with copper.
+  suffix: Copper
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreCopper
+  - type: Sprite
+    layers:
+    - state: ironrock
+    - map: [ "enum.EdgeLayer.South" ]
+      state: ironrock_south
+    - map: [ "enum.EdgeLayer.East" ]
+      state: ironrock_east
+    - map: [ "enum.EdgeLayer.North" ]
+      state: ironrock_north
+    - map: [ "enum.EdgeLayer.West" ]
+      state: ironrock_west
+    - state: rock_copper
+      map: [ "enum.MiningScannerVisualLayers.Overlay" ]
+
+- type: entity
+  id: IronRockTin
+  parent: IronRock
+  description: An ore vein rich with tin.
+  suffix: Tin
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreTin
+  - type: Sprite
+    layers:
+    - state: ironrock
+    - map: [ "enum.EdgeLayer.South" ]
+      state: ironrock_south
+    - map: [ "enum.EdgeLayer.East" ]
+      state: ironrock_east
+    - map: [ "enum.EdgeLayer.North" ]
+      state: ironrock_north
+    - map: [ "enum.EdgeLayer.West" ]
+      state: ironrock_west
+    - state: rock_platinum
+      map: [ "enum.MiningScannerVisualLayers.Overlay" ]
+
+- type: entity
+  id: IronRockTinCrab
+  parent: IronRockIron
+  suffix: Iron Crab
+  components:
+  - type: OreVein
+    currentOre: OreIronCrab
+
+- type: entity
+  id: IronRockTitanium
+  parent: IronRock
+  description: An ore vein rich with titanium.
+  suffix: Titanium
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreTitanium
+  - type: Sprite
+    layers:
+    - state: ironrock
+    - map: [ "enum.EdgeLayer.South" ]
+      state: ironrock_south
+    - map: [ "enum.EdgeLayer.East" ]
+      state: ironrock_east
+    - map: [ "enum.EdgeLayer.North" ]
+      state: ironrock_north
+    - map: [ "enum.EdgeLayer.West" ]
+      state: ironrock_west
+    - state: rock_marble
+      map: [ "enum.MiningScannerVisualLayers.Overlay" ]
+
+- type: entity
+  id: WallRockAluminum
+  parent: WallRock
+  description: An ore vein rich with aluminum.
+  suffix: Aluminum
+  components:
+  - type: EntityRemap
+    mask:
+      AsteroidRock: AsteroidRockAluminum
+      WallRockBasalt: WallRockBasaltAluminum
+      WallRockChromite: WallRockChromiteAluminum
+      WallRockSand: WallRockSandAluminum
+      WallRockSnow: WallRockSnowAluminum
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreAluminum
+  - type: Sprite
+    layers:
+    - state: rock
+    - map: [ "enum.EdgeLayer.South" ]
+      state: rock_south
+    - map: [ "enum.EdgeLayer.East" ]
+      state: rock_east
+    - map: [ "enum.EdgeLayer.North" ]
+      state: rock_north
+    - map: [ "enum.EdgeLayer.West" ]
+      state: rock_west
+    - state: rock_lead
+      map: [ "enum.MiningScannerVisualLayers.Overlay" ]
+
+- type: entity
+  id: WallRockAndesiteAluminum
+  parent: WallRockAndesite
+  description: An ore vein rich with aluminum.
+  suffix: Aluminum
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreAluminum
+  - type: Sprite
+    layers:
+    - state: rock_andesite
+    - map: [ "enum.EdgeLayer.South" ]
+      state: rock_andesite_south
+    - map: [ "enum.EdgeLayer.East" ]
+      state: rock_andesite_east
+    - map: [ "enum.EdgeLayer.North" ]
+      state: rock_andesite_north
+    - map: [ "enum.EdgeLayer.West" ]
+      state: rock_andesite_west
+    - state: rock_lead
+      map: [ "enum.MiningScannerVisualLayers.Overlay" ]
+
+- type: entity
+  id: WallRockAndesiteCopper
+  parent: WallRockAndesite
+  description: An ore vein rich with copper.
+  suffix: Copper
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreCopper
+  - type: Sprite
+    layers:
+    - state: rock_andesite
+    - map: [ "enum.EdgeLayer.South" ]
+      state: rock_andesite_south
+    - map: [ "enum.EdgeLayer.East" ]
+      state: rock_andesite_east
+    - map: [ "enum.EdgeLayer.North" ]
+      state: rock_andesite_north
+    - map: [ "enum.EdgeLayer.West" ]
+      state: rock_andesite_west
+    - state: rock_copper
+      map: [ "enum.MiningScannerVisualLayers.Overlay" ]
+
+- type: entity
+  id: WallRockAndesiteTinCrab
+  parent: WallRockAndesiteTin
+  suffix: Iron Crab
+  components:
+  - type: OreVein
+    currentOre: OreIronCrab
+
+- type: entity
+  id: WallRockAndesiteTitanium
+  parent: WallRockAndesite
+  description: An ore vein rich with titanium.
+  suffix: Titanium
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreTitanium
+  - type: Sprite
+    layers:
+    - state: rock_andesite
+    - map: [ "enum.EdgeLayer.South" ]
+      state: rock_andesite_south
+    - map: [ "enum.EdgeLayer.East" ]
+      state: rock_andesite_east
+    - map: [ "enum.EdgeLayer.North" ]
+      state: rock_andesite_north
+    - map: [ "enum.EdgeLayer.West" ]
+      state: rock_andesite_west
+    - state: rock_marble
+      map: [ "enum.MiningScannerVisualLayers.Overlay" ]
+
+- type: entity
+  id: WallRockBasaltAluminum
+  parent: WallRockBasalt
+  description: An ore vein rich with aluminum.
+  suffix: Aluminum
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreAluminum
+  - type: Sprite
+    layers:
+    - state: rock_wall
+    - map: [ "enum.EdgeLayer.South" ]
+      state: rock_wall_south
+    - map: [ "enum.EdgeLayer.East" ]
+      state: rock_wall_east
+    - map: [ "enum.EdgeLayer.North" ]
+      state: rock_wall_north
+    - map: [ "enum.EdgeLayer.West" ]
+      state: rock_wall_west
+    - state: rock_lead
+      map: [ "enum.MiningScannerVisualLayers.Overlay" ]
+
+- type: entity
+  id: WallRockBasaltCopper
+  parent: WallRockBasalt
+  description: An ore vein rich with copper.
+  suffix: Copper
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreCopper
+  - type: Sprite
+    layers:
+    - state: rock_wall
+    - map: [ "enum.EdgeLayer.South" ]
+      state: rock_wall_south
+    - map: [ "enum.EdgeLayer.East" ]
+      state: rock_wall_east
+    - map: [ "enum.EdgeLayer.North" ]
+      state: rock_wall_north
+    - map: [ "enum.EdgeLayer.West" ]
+      state: rock_wall_west
+    - state: rock_copper
+      map: [ "enum.MiningScannerVisualLayers.Overlay" ]
+
+- type: entity
+  id: WallRockBasaltTitanium
+  parent: WallRockBasalt
+  description: An ore vein rich with titanium.
+  suffix: Titanium
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreTitanium
+  - type: Sprite
+    layers:
+    - state: rock_wall
+    - map: [ "enum.EdgeLayer.South" ]
+      state: rock_wall_south
+    - map: [ "enum.EdgeLayer.East" ]
+      state: rock_wall_east
+    - map: [ "enum.EdgeLayer.North" ]
+      state: rock_wall_north
+    - map: [ "enum.EdgeLayer.West" ]
+      state: rock_wall_west
+    - state: rock_marble
+      map: [ "enum.MiningScannerVisualLayers.Overlay" ]
+
+- type: entity
+  id: WallRockChromiteAluminum
+  parent: WallRockChromite
+  description: An ore vein rich with aluminum.
+  suffix: Aluminum
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreAluminum
+  - type: Sprite
+    layers:
+    - state: rock_chromite
+    - map: [ "enum.EdgeLayer.South" ]
+      state: rock_chromite_south
+    - map: [ "enum.EdgeLayer.East" ]
+      state: rock_chromite_east
+    - map: [ "enum.EdgeLayer.North" ]
+      state: rock_chromite_north
+    - map: [ "enum.EdgeLayer.West" ]
+      state: rock_chromite_west
+    - state: rock_lead
+      map: [ "enum.MiningScannerVisualLayers.Overlay" ]
+
+- type: entity
+  id: WallRockChromiteCopper
+  parent: WallRockChromite
+  description: An ore vein rich with copper.
+  suffix: Copper
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreCopper
+  - type: Sprite
+    layers:
+    - state: rock_chromite
+    - map: [ "enum.EdgeLayer.South" ]
+      state: rock_chromite_south
+    - map: [ "enum.EdgeLayer.East" ]
+      state: rock_chromite_east
+    - map: [ "enum.EdgeLayer.North" ]
+      state: rock_chromite_north
+    - map: [ "enum.EdgeLayer.West" ]
+      state: rock_chromite_west
+    - state: rock_copper
+      map: [ "enum.MiningScannerVisualLayers.Overlay" ]
+
+- type: entity
+  id: WallRockChromiteTitanium
+  parent: WallRockChromite
+  description: An ore vein rich with titanium.
+  suffix: Titanium
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreTitanium
+  - type: Sprite
+    layers:
+    - state: rock_chromite
+    - map: [ "enum.EdgeLayer.South" ]
+      state: rock_chromite_south
+    - map: [ "enum.EdgeLayer.East" ]
+      state: rock_chromite_east
+    - map: [ "enum.EdgeLayer.North" ]
+      state: rock_chromite_north
+    - map: [ "enum.EdgeLayer.West" ]
+      state: rock_chromite_west
+    - state: rock_marble
+      map: [ "enum.MiningScannerVisualLayers.Overlay" ]
+
+- type: entity
+  id: WallRockCopper
+  parent: WallRock
+  description: An ore vein rich with copper.
+  suffix: Copper
+  components:
+  - type: EntityRemap
+    mask:
+      AsteroidRock: AsteroidRockCopper
+      WallRockBasalt: WallRockBasaltCopper
+      WallRockChromite: WallRockChromiteCopper
+      WallRockSand: WallRockSandCopper
+      WallRockSnow: WallRockSnowCopper
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreCopper
+  - type: Sprite
+    layers:
+    - state: rock
+    - map: [ "enum.EdgeLayer.South" ]
+      state: rock_south
+    - map: [ "enum.EdgeLayer.East" ]
+      state: rock_east
+    - map: [ "enum.EdgeLayer.North" ]
+      state: rock_north
+    - map: [ "enum.EdgeLayer.West" ]
+      state: rock_west
+    - state: rock_copper
+      map: [ "enum.MiningScannerVisualLayers.Overlay" ]
+
+- type: entity
+  id: WallRockSandAluminum
+  parent: WallRockSand
+  description: An ore vein rich with aluminum.
+  suffix: Aluminum
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreAluminum
+  - type: Sprite
+    layers:
+    - state: rock_sand
+    - map: [ "enum.EdgeLayer.South" ]
+      state: rock_sand_south
+    - map: [ "enum.EdgeLayer.East" ]
+      state: rock_sand_east
+    - map: [ "enum.EdgeLayer.North" ]
+      state: rock_sand_north
+    - map: [ "enum.EdgeLayer.West" ]
+      state: rock_sand_west
+    - state: rock_lead
+      map: [ "enum.MiningScannerVisualLayers.Overlay" ]
+
+- type: entity
+  id: WallRockSandCopper
+  parent: WallRockSand
+  description: An ore vein rich with copper.
+  suffix: Copper
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreCopper
+  - type: Sprite
+    layers:
+    - state: rock_sand
+    - map: [ "enum.EdgeLayer.South" ]
+      state: rock_sand_south
+    - map: [ "enum.EdgeLayer.East" ]
+      state: rock_sand_east
+    - map: [ "enum.EdgeLayer.North" ]
+      state: rock_sand_north
+    - map: [ "enum.EdgeLayer.West" ]
+      state: rock_sand_west
+    - state: rock_copper
+      map: [ "enum.MiningScannerVisualLayers.Overlay" ]
+
+- type: entity
+  id: WallRockSandTitanium
+  parent: WallRockSand
+  description: An ore vein rich with titanium.
+  suffix: Titanium
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreTitanium
+  - type: Sprite
+    layers:
+    - state: rock_sand
+    - map: [ "enum.EdgeLayer.South" ]
+      state: rock_sand_south
+    - map: [ "enum.EdgeLayer.East" ]
+      state: rock_sand_east
+    - map: [ "enum.EdgeLayer.North" ]
+      state: rock_sand_north
+    - map: [ "enum.EdgeLayer.West" ]
+      state: rock_sand_west
+    - state: rock_marble
+      map: [ "enum.MiningScannerVisualLayers.Overlay" ]
+
+- type: entity
+  id: WallRockSnowAluminum
+  parent: WallRockSnow
+  description: An ore vein rich with aluminum.
+  suffix: Aluminum
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreAluminum
+  - type: Sprite
+    layers:
+    - state: rock_snow
+    - map: [ "enum.EdgeLayer.South" ]
+      state: rock_snow_south
+    - map: [ "enum.EdgeLayer.East" ]
+      state: rock_snow_east
+    - map: [ "enum.EdgeLayer.North" ]
+      state: rock_snow_north
+    - map: [ "enum.EdgeLayer.West" ]
+      state: rock_snow_west
+    - state: rock_lead
+      map: [ "enum.MiningScannerVisualLayers.Overlay" ]
+
+- type: entity
+  id: WallRockSnowCopper
+  parent: WallRockSnow
+  description: An ore vein rich with copper.
+  suffix: Copper
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreCopper
+  - type: Sprite
+    layers:
+    - state: rock_snow
+    - map: [ "enum.EdgeLayer.South" ]
+      state: rock_snow_south
+    - map: [ "enum.EdgeLayer.East" ]
+      state: rock_snow_east
+    - map: [ "enum.EdgeLayer.North" ]
+      state: rock_snow_north
+    - map: [ "enum.EdgeLayer.West" ]
+      state: rock_snow_west
+    - state: rock_copper
+      map: [ "enum.MiningScannerVisualLayers.Overlay" ]
+
+- type: entity
+  id: WallRockSnowTitanium
+  parent: WallRockSnow
+  description: An ore vein rich with titanium.
+  suffix: Titanium
+  components:
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreTitanium
+  - type: Sprite
+    layers:
+    - state: rock_snow
+    - map: [ "enum.EdgeLayer.South" ]
+      state: rock_snow_south
+    - map: [ "enum.EdgeLayer.East" ]
+      state: rock_snow_east
+    - map: [ "enum.EdgeLayer.North" ]
+      state: rock_snow_north
+    - map: [ "enum.EdgeLayer.West" ]
+      state: rock_snow_west
+    - state: rock_marble
+      map: [ "enum.MiningScannerVisualLayers.Overlay" ]
+
+- type: entity
+  id: WallRockTinCrab
+  parent: WallRockTin
+  suffix: Iron Crab
+  components:
+  - type: OreVein
+    currentOre: OreIronCrab
+
+- type: entity
+  id: WallRockTitanium
+  parent: WallRock
+  description: An ore vein rich with titanium.
+  suffix: Titanium
+  components:
+  - type: EntityRemap
+    mask:
+      AsteroidRock: AsteroidRockTitanium
+      WallRockBasalt: WallRockBasaltTitanium
+      WallRockChromite: WallRockChromiteTitanium
+      WallRockSand: WallRockSandTitanium
+      WallRockSnow: WallRockSnowTitanium
+  - type: OreVein
+    oreChance: 1.0
+    currentOre: OreTitanium
+  - type: Sprite
+    layers:
+    - state: rock
+    - map: [ "enum.EdgeLayer.South" ]
+      state: rock_south
+    - map: [ "enum.EdgeLayer.East" ]
+      state: rock_east
+    - map: [ "enum.EdgeLayer.North" ]
+      state: rock_north
+    - map: [ "enum.EdgeLayer.West" ]
+      state: rock_west
+    - state: rock_marble
+      map: [ "enum.MiningScannerVisualLayers.Overlay" ]

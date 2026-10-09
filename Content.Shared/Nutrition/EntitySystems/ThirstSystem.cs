@@ -24,6 +24,7 @@ public sealed partial class ThirstSystem : EntitySystem
     [Dependency] private AlertsSystem _alerts = default!;
     [Dependency] private MovementSpeedModifierSystem _movement = default!;
     [Dependency] private SharedJetpackSystem _jetpack = default!;
+    [Dependency] private SharedMapSystem _map = null!; // Mothlight
 
     private static readonly ProtoId<SatiationIconPrototype> ThirstIconOverhydratedId = "ThirstIconOverhydrated";
     private static readonly ProtoId<SatiationIconPrototype> ThirstIconThirstyId = "ThirstIconThirsty";
@@ -41,6 +42,10 @@ public sealed partial class ThirstSystem : EntitySystem
 
     private void OnCompInit(EntityUid uid, ThirstComponent component, ComponentStartup args)
     {
+        // Mothlight - only for loaded entities; fresh ones (and pre-init maps being mapped) are handled at MapInit
+        if (!_map.IsInitialized(Transform(uid).MapUid))
+            return;
+
         // Do not change behavior unless starting value is explicitly defined
         if (component.CurrentThirst < 0)
         {

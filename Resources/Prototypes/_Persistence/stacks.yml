@@ -1,0 +1,9 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: stack
+  parent: BaseLargeStack
+  id: TitaniumRod
+  name: stack-rod-titanium
+  icon: { sprite: "/Textures/_Persistence/Objects/Materials/titanium_rod.rsi", state: t_rods_5 }
+  spawn: PartRodTitanium1

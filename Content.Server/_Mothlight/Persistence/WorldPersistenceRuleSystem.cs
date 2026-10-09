@@ -19,10 +19,10 @@ namespace Content.Server._Mothlight.Persistence;
 /// </summary>
 public sealed partial class WorldPersistenceRuleSystem : GameRuleSystem<WorldPersistenceRuleComponent>
 {
-    [Dependency] private IResourceManager _res = default!;
-    [Dependency] private MapLoaderSystem _loader = default!;
-    [Dependency] private SharedMapSystem _map = default!;
-    [Dependency] private CharacterPersistenceSystem _characters = default!;
+    [Dependency] private IResourceManager _res = null!;
+    [Dependency] private MapLoaderSystem _loader = null!;
+    [Dependency] private SharedMapSystem _map = null!;
+    [Dependency] private CharacterPersistenceSystem _characters = null!;
 
     public override void Initialize()
     {
@@ -164,7 +164,13 @@ public sealed partial class WorldPersistenceRuleSystem : GameRuleSystem<WorldPer
         }
 
         var writer = new StringWriter();
-        if (!_loader.TrySaveMap(map.Value, writer))
+        bool saved;
+        using (_characters.AllowHumanoidSaving())
+        {
+            saved = _loader.TrySaveMap(map.Value, writer);
+        }
+
+        if (!saved)
         {
             Log.Error($"Failed to save the world {ToPrettyString(map)}, keeping the previous save.");
             return false;

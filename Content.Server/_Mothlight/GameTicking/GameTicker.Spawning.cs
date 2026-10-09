@@ -25,9 +25,9 @@ namespace Content.Server.GameTicking;
 
 public sealed partial class GameTicker
 {
-    [Dependency] private CharacterPersistenceSystem _charPersistence = default!;
-    [Dependency] private WorldPersistenceRuleSystem _worldPersistence = default!;
-    [Dependency] private StationSystem _stationSystem = default!;
+    [Dependency] private CharacterPersistenceSystem _charPersistence = null!;
+    [Dependency] private WorldPersistenceRuleSystem _worldPersistence = null!;
+    [Dependency] private StationSystem _stationSystem = null!;
 
     private void SpawnPlayerPersistentLoad(ICommonSession player,
         HumanoidCharacterProfile character,

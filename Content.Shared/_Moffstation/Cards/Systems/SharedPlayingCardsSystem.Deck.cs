@@ -22,7 +22,7 @@ public abstract partial class SharedPlayingCardsSystem
 
     private void InitDeck()
     {
-        SubscribeLocalEvent<PlayingCardDeckComponent, ComponentInit>(OnInit);
+        SubscribeLocalEvent<PlayingCardDeckComponent, MapInitEvent>(OnInit); // Mothlight - was ComponentInit
         SubscribeLocalEvent<PlayingCardDeckComponent, ComponentStartup>(OnStartup);
         SubscribeLocalEvent<PlayingCardDeckComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<PlayingCardDeckComponent, PlayingCardStackContentsChangedEvent>(DirtyVisuals);
@@ -71,7 +71,9 @@ public abstract partial class SharedPlayingCardsSystem
         return ent;
     }
 
-    private void OnInit(Entity<PlayingCardDeckComponent> entity, ref ComponentInit args)
+    // Mothlight - filled at MapInit rather than ComponentInit, so decks on maps being edited don't save the whole
+    // card list into the map. Loaded decks already have their (saved) cards.
+    private void OnInit(Entity<PlayingCardDeckComponent> entity, ref MapInitEvent args)
     {
         // Initialize the contents of the deck from the prototype.
         if (entity.Comp.Prototype is not { } proto ||
@@ -81,6 +83,7 @@ public abstract partial class SharedPlayingCardsSystem
 
         // Reverse the cards so that the first in the prototype's list is on the top.
         entity.Comp.Cards = GetCards(proto).ToList(); // Starlight-edit: Don't reverse order.
+        entity.Comp.DirtyVisuals = true; // Mothlight
         Dirty(entity);
     }
 

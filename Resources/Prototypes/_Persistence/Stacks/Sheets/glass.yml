@@ -1,0 +1,16 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: stack
+  parent: BaseSheetStack
+  id: PhoronGlass
+  name: stack-phoron-glass
+  icon: { sprite: /Textures/_Persistence/Objects/Materials/Sheets/glass.rsi, state: phoronglass }
+  spawn: SheetPhoronGlass1
+
+- type: stack
+  parent: BaseSheetStack
+  id: ReinforcedPhoronGlass
+  name: stack-reinforced-phoron-glass
+  icon: { sprite: /Textures/_Persistence/Objects/Materials/Sheets/glass.rsi, state: rphoronglass }
+  spawn: SheetRPhoronGlass1

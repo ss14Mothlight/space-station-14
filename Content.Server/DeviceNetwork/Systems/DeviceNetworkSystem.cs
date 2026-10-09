@@ -26,6 +26,7 @@ namespace Content.Server.DeviceNetwork.Systems
         [Dependency] private SharedTransformSystem _transformSystem = default!;
         [Dependency] private DeviceListSystem _deviceLists = default!;
         [Dependency] private NetworkConfiguratorSystem _configurator = default!;
+        [Dependency] private SharedMapSystem _map = null!; // Mothlight
 
         private readonly Dictionary<int, DeviceNet> _networks = new(4);
         private readonly Queue<DeviceNetworkPacketEvent> _queueA = new();
@@ -139,6 +140,11 @@ namespace Content.Server.DeviceNetwork.Systems
         // Mothlight - loaded entities don't get MapInit, so connect them here as well
         private void OnCompInit(EntityUid uid, DeviceNetworkComponent device, ComponentInit args)
         {
+            // Devices on a map that hasn't been initialized yet set up at MapInit like before. Doing it now would
+            // bake runtime state into map files, and make two copies of the same pre-init map fight over addresses.
+            if (!_map.IsInitialized(Transform(uid).MapUid))
+                return;
+
             if (device.ReceiveFrequency == null
                 && device.ReceiveFrequencyId != null
                 && _protoMan.TryIndex<DeviceFrequencyPrototype>(device.ReceiveFrequencyId, out var receive))
@@ -153,17 +159,10 @@ namespace Content.Server.DeviceNetwork.Systems
                 device.TransmitFrequency = xmit.Frequency;
             }
 
-            // Devices on a map that hasn't been initialized yet connect at MapInit like before. Connecting them now
-            // would make two copies of the same pre-init map fight over their saved addresses.
-            if (device.AutoConnect && IsOnInitializedMap(uid))
+            if (device.AutoConnect)
                 ConnectDevice(uid, device);
         }
 
-        private bool IsOnInitializedMap(EntityUid uid)
-        {
-            return Transform(uid).MapUid is not { } map
-                   || CompOrNull<MapComponent>(map)?.MapInitialized != false;
-        }
 
         private DeviceNet GetNetwork(int netId)
         {

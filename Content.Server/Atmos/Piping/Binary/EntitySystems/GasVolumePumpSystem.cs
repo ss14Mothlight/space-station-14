@@ -110,7 +110,7 @@ namespace Content.Server.Atmos.Piping.Binary.EntitySystems
 
         private void OnVolumePumpJoinAtmosphere(EntityUid uid, GasVolumePumpComponent pump, ref AtmosDeviceEnabledEvent args)
         {
-            pump.Enabled = pump.DesiredEnabled;
+            pump.Enabled = pump.DesiredEnabled ?? pump.Enabled;
             Dirty(uid, pump);
             UpdateAppearance(uid, pump);
         }

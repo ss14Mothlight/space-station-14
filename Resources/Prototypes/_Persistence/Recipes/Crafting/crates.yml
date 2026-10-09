@@ -1,0 +1,10 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: construction
+  id: PaperBin
+  graph: PaperBin
+  startNode: start
+  targetNode: paperbin
+  category: construction-category-storage
+  objectType: Structure

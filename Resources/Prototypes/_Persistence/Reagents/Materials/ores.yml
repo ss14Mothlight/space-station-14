@@ -1,0 +1,38 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: material
+  id: RawAluminum
+  stackEntity: AluminumOre1
+  name: materials-raw-aluminum
+  unit: materials-unit-chunk
+  icon: { sprite: _Persistence/Objects/Materials/ore.rsi, state: aluminum }
+  color: "#cfd8e3"
+  price: 0.08
+
+- type: material
+  id: RawCopper
+  stackEntity: CopperOre1
+  name: materials-raw-copper
+  unit: materials-unit-chunk
+  icon: { sprite: _Persistence/Objects/Materials/ore.rsi, state: copper }
+  color: "#b87333"
+  price: 0.09
+
+- type: material
+  id: RawTin
+  stackEntity: TinOre1
+  name: materials-raw-tin
+  unit: materials-unit-chunk
+  icon: { sprite: _Persistence/Objects/Materials/ore.rsi, state: tin }
+  color: "#b0b8c6"
+  price: 0.07
+
+- type: material
+  id: RawTitanium
+  stackEntity: TitaniumOre1
+  name: materials-raw-titanium
+  unit: materials-unit-chunk
+  icon: { sprite: _Persistence/Objects/Materials/ore.rsi, state: titanium }
+  color: "#9aa7b1"
+  price: 0.2

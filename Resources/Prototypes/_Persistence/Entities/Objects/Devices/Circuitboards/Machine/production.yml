@@ -1,0 +1,38 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: entity
+  id: RecyclerMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: recycler machine board
+  components:
+    - type: Sprite
+      state: supply
+    - type: MachineBoard
+      prototype: Recycler
+      stackRequirements:
+        Manipulator: 3
+        Steel: 6
+
+# Start Persistence: make atmos fans into machines
+- type: entity
+  id: AtmosDeviceFanTinyMachineCircuitBoard
+  parent: BaseMachineCircuitboard
+  name: tiny fan machine board
+  description: A machine printed circuit board for a tiny fan.
+  components:
+  - type: Sprite
+    state: engineering
+  - type: MachineBoard
+    prototype: AtmosDeviceFanTiny
+
+- type: entity
+  id: AtmosDeviceFanDirectionalMachineCircuitBoard
+  parent: BaseMachineCircuitboard
+  name: directional fan machine board
+  description: A machine printed circuit board for a directional fan.
+  components:
+  - type: Sprite
+    state: engineering
+  - type: MachineBoard
+    prototype: AtmosDeviceFanDirectional

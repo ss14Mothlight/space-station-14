@@ -1,0 +1,18 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: material
+  id: PhoronGlass
+  stackEntity: SheetPhoronGlass1
+  name: materials-phoron-glass
+  icon: { sprite: _Persistence/Objects/Materials/Sheets/glass.rsi, state: phoronglass }
+  color: "#c49a6b"
+  price: 0.75 # 1-1 mix of phoron and glass.
+
+- type: material
+  id: ReinforcedPhoronGlass
+  stackEntity: SheetRPhoronGlass1
+  name: materials-reinforced-phoron-glass
+  icon: { sprite: _Persistence/Objects/Materials/Sheets/glass.rsi, state: rphoronglass }
+  color: "#a34b83"
+  price: 0.85 # phoron glass reinforced with metal rods.

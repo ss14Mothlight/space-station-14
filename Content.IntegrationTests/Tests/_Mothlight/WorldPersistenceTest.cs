@@ -13,6 +13,8 @@ using Content.Shared.Chemistry;
 using Content.Shared.CriminalRecords;
 using Content.Shared.Preferences;
 using Content.Shared.StationRecords;
+using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.ContentPack;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Log;
@@ -33,7 +35,9 @@ public sealed class WorldPersistenceTest : GameTest
     private const string RecordName = "Rec Ord";
     private const string Smeller = "MobVulpkanin";
     private const string Bottle = "DrinkWaterBottleFull";
-    private static readonly ProtoId<GamePresetPrototype> Preset = "Persistence";
+    private const string Cartridge = "CartridgePistolPractice";
+    // A plain string: the YAML linter can't validate server-only prototype kinds referenced from tests.
+    private static readonly string Preset = "Persistence";
 
     // YAML indentation, not C#.
     // editorconfig-checker-disable
@@ -65,10 +69,10 @@ public sealed class WorldPersistenceTest : GameTest
         InLobby = true,
     };
 
-    [SidedDependency(Side.Server)] private readonly GameTicker _ticker = default!;
-    [SidedDependency(Side.Server)] private readonly StationSystem _station = default!;
-    [SidedDependency(Side.Server)] private readonly SharedMapSystem _map = default!;
-    [SidedDependency(Side.Server)] private readonly StationRecordsSystem _records = default!;
+    [SidedDependency(Side.Server)] private readonly GameTicker _ticker = null!;
+    [SidedDependency(Side.Server)] private readonly StationSystem _station = null!;
+    [SidedDependency(Side.Server)] private readonly SharedMapSystem _map = null!;
+    [SidedDependency(Side.Server)] private readonly StationRecordsSystem _records = null!;
 
     /// <summary>
     /// A round on the persistence preset saves its map at round end, and the next round loads it instead of a
@@ -78,7 +82,7 @@ public sealed class WorldPersistenceTest : GameTest
     public async Task WorldSurvivesRoundRestart()
     {
         Server.CfgMan.SetCVar(CCVars.GameMap, Map);
-        await Server.WaitPost(() => _ticker.SetGamePreset(SProtoMan.Index(Preset)));
+        await Server.WaitPost(() => _ticker.SetGamePreset(SProtoMan.Index<GamePresetPrototype>(Preset)));
 
         // First round: fresh map. Leave something behind on the station.
         await Server.WaitPost(() => _ticker.StartRound());
@@ -100,6 +104,10 @@ public sealed class WorldPersistenceTest : GameTest
             // Its liquid colour is appearance data, which isn't saved.
             var bottle = SEntMan.SpawnEntity(Bottle, new EntityCoordinates(grid.Value, 2.5f, 0.5f));
             Assert.That(SEntMan.HasComponent<SolutionContainerVisualsComponent>(bottle));
+
+            // Whether a cartridge is spent is saved, but how it looks isn't.
+            var cartridge = SEntMan.SpawnEntity(Cartridge, new EntityCoordinates(grid.Value, 3.5f, 0.5f));
+            SEntMan.GetComponent<CartridgeAmmoComponent>(cartridge).Spent = true;
 
             // Station records are keyed by type internally, which used to make the station unsaveable.
             var key = _records.AddRecordEntry(station, new GeneralStationRecord { Name = RecordName });
@@ -141,6 +149,13 @@ public sealed class WorldPersistenceTest : GameTest
             Assert.That(Server.System<SharedAppearanceSystem>()
                 .TryGetData<Color>(bottle, SolutionContainerVisuals.Color, out _),
                 "A loaded solution container should have its liquid colour set");
+
+            var cartridge = SEntMan.AllEntities<CartridgeAmmoComponent>()
+                .Single(e => SEntMan.GetComponent<TransformComponent>(e).MapID == _ticker.DefaultMap);
+            Assert.That(cartridge.Comp.Spent);
+            Assert.That(Server.System<SharedAppearanceSystem>()
+                    .TryGetData<bool>(cartridge, AmmoVisuals.Spent, out var spent) && spent,
+                "A loaded spent cartridge should look spent");
 
             var station = _station.GetStations().Single();
             var grid = _station.GetLargestGrid(station);
@@ -201,7 +216,7 @@ public sealed class WorldPersistenceTest : GameTest
                 file.Write(garbage);
             }
 
-            _ticker.SetGamePreset(SProtoMan.Index(Preset));
+            _ticker.SetGamePreset(SProtoMan.Index<GamePresetPrototype>(Preset));
             _ticker.StartRound();
         });
         await RunTicksSync(10);

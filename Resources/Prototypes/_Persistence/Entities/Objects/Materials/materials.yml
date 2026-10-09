@@ -1,0 +1,68 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: entity
+  parent: MaterialBase
+  id: MaterialPhoron
+  name: phoron alloy
+  description: A refined alloy of plasma, bananium, and titanium.
+  suffix: Full
+  components:
+  - type: Stack
+    stackType: Phoron
+    baseLayer: base
+    layerStates:
+    - phoron
+    - phoron_2
+    - phoron_3
+  - type: Sprite
+    sprite: _Persistence/Objects/Materials/Sheets/other.rsi
+    state: phoron_3
+    layers:
+    - state: phoron_3
+      map: ["base"]
+  - type: Appearance
+  - type: Item
+    heldPrefix: phoron
+  - type: Extractable
+    grindableSolutionName: phoronalloy
+  - type: SolutionContainerManager
+    solutions:
+      phoronalloy:
+        reagents:
+        - ReagentId: Plasma
+          Quantity: 18
+        - ReagentId: Bananium
+          Quantity: 18
+        - ReagentId: Titanium
+          Quantity: 9
+        - ReagentId: Phoron
+          Quantity: .5 # 1 phoron alloy to 1u Phoron reagent, with phoron-synthesis reaction you can get up to 2.3 per alloy
+        canReact: false
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      Phoron: 100
+  - type: Tag
+    tags:
+    - Sheet
+    - RawMaterial
+    - Phoron
+
+- type: entity
+  parent: MaterialPhoron
+  id: MaterialPhoron1
+  suffix: Single
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
+  parent: MaterialPhoron
+  id: MaterialPhoron10
+  suffix: 10
+  components:
+  - type: Sprite
+    state: phoron_2
+  - type: Stack
+    count: 10

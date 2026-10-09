@@ -1,0 +1,646 @@
+# Gives existing entities the construction/deconstruction they have on SS14-Persistence.
+# The graphs and recipes themselves live in _Persistence/Recipes; this only attaches them.
+# Partials on a parent cover every variant that inherits from it (listed above each one).
+
+- type: !PartialOnly entity
+  id: AirlockAssemblyMining
+  components:
+  - type: Construction
+    graph: AirlockMining
+    node: assembly
+
+- type: !PartialOnly entity
+  id: AirlockAssemblyMiningGlass
+  components:
+  - type: Construction
+    graph: AirlockMining
+    node: assembly
+
+# Covers: AirlockMining, AirlockMiningLocked, AirlockMiningMaints
+- type: !PartialOnly entity
+  id: AirlockMining
+  components:
+  - type: Construction
+    graph: AirlockMining
+    node: airlock
+
+# Covers: AirlockMiningGlass, AirlockMiningGlassLocked
+- type: !PartialOnly entity
+  id: AirlockMiningGlass
+  components:
+  - type: Construction
+    graph: AirlockMining
+    node: glassAirlock
+
+- type: !PartialOnly entity
+  id: AltarChaos
+  components:
+  - type: Construction
+    graph: AltarGraph
+    node: altarChaos
+
+- type: !PartialOnly entity
+  id: AltarConvert
+  components:
+  - type: Construction
+    graph: AltarGraph
+    node: altarBlack
+
+- type: !PartialOnly entity
+  id: AltarConvertBlue
+  components:
+  - type: Construction
+    graph: AltarGraph
+    node: altarBlue
+
+- type: !PartialOnly entity
+  id: AltarConvertFestival
+  components:
+  - type: Construction
+    graph: AltarGraph
+    node: altarFestival
+
+- type: !PartialOnly entity
+  id: AltarConvertOrange
+  components:
+  - type: Construction
+    graph: AltarGraph
+    node: altarOrange
+
+- type: !PartialOnly entity
+  id: AltarConvertRed
+  components:
+  - type: Construction
+    graph: AltarGraph
+    node: altarRed
+
+- type: !PartialOnly entity
+  id: AltarConvertWhite
+  components:
+  - type: Construction
+    graph: AltarGraph
+    node: altarWhite
+
+- type: !PartialOnly entity
+  id: AltarConvertYellow
+  components:
+  - type: Construction
+    graph: AltarGraph
+    node: altarYellow
+
+- type: !PartialOnly entity
+  id: AltarDruid
+  components:
+  - type: Construction
+    graph: AltarGraph
+    node: altarDruid
+
+- type: !PartialOnly entity
+  id: AltarFangs
+  components:
+  - type: Construction
+    graph: AltarGraph
+    node: altarFangs
+
+- type: !PartialOnly entity
+  id: AltarHeaven
+  components:
+  - type: Construction
+    graph: AltarGraph
+    node: altarHeaven
+
+- type: !PartialOnly entity
+  id: AltarNanotrasen
+  components:
+  - type: Construction
+    graph: AltarGraph
+    node: altarNT
+
+- type: !PartialOnly entity
+  id: AltarSatana
+  components:
+  - type: Construction
+    graph: AltarGraph
+    node: altarSatana
+
+- type: !PartialOnly entity
+  id: AltarSpaceChristian
+  components:
+  - type: Construction
+    graph: AltarGraph
+    node: altarChristian
+
+- type: !PartialOnly entity
+  id: AltarTechnology
+  components:
+  - type: Construction
+    graph: AltarGraph
+    node: altarTechnology
+
+- type: !PartialOnly entity
+  id: AltarToolbox
+  components:
+  - type: Construction
+    graph: AltarGraph
+    node: altarToolbox
+
+- type: !PartialOnly entity
+  id: BannerBlue
+  components:
+  - type: Construction
+    graph: BannerGraph
+    node: bannerBlue
+
+- type: !PartialOnly entity
+  id: BannerCargo
+  components:
+  - type: Construction
+    graph: BannerGraph
+    node: bannerCargo
+
+- type: !PartialOnly entity
+  id: BannerEngineering
+  components:
+  - type: Construction
+    graph: BannerGraph
+    node: bannerEngineering
+
+- type: !PartialOnly entity
+  id: BannerGreen
+  components:
+  - type: Construction
+    graph: BannerGraph
+    node: bannerGreen
+
+- type: !PartialOnly entity
+  id: BannerMedical
+  components:
+  - type: Construction
+    graph: BannerGraph
+    node: bannerMedical
+
+- type: !PartialOnly entity
+  id: BannerNanotrasen
+  components:
+  - type: Construction
+    graph: BannerGraph
+    node: bannerNT
+
+- type: !PartialOnly entity
+  id: BannerRed
+  components:
+  - type: Construction
+    graph: BannerGraph
+    node: bannerRed
+
+- type: !PartialOnly entity
+  id: BannerRevolution
+  components:
+  - type: Construction
+    graph: BannerGraph
+    node: bannerRevolution
+
+- type: !PartialOnly entity
+  id: BannerScience
+  components:
+  - type: Construction
+    graph: BannerGraph
+    node: bannerScience
+
+- type: !PartialOnly entity
+  id: BannerSecurity
+  components:
+  - type: Construction
+    graph: BannerGraph
+    node: bannerSecurity
+
+- type: !PartialOnly entity
+  id: BannerSyndicate
+  components:
+  - type: Construction
+    graph: BannerGraph
+    node: bannerSyndicate
+
+- type: !PartialOnly entity
+  id: BannerYellow
+  components:
+  - type: Construction
+    graph: BannerGraph
+    node: bannerYellow
+
+- type: !PartialOnly entity
+  id: ButtonFrameCaution
+  components:
+  - type: Construction
+    graph: ButtonFrameCautionGraph
+    node: caution
+
+- type: !PartialOnly entity
+  id: ButtonFrameCautionSecurity
+  components:
+  - type: Construction
+    graph: ButtonFrameDangerGraph
+    node: danger
+
+- type: !PartialOnly entity
+  id: ButtonFrameExit
+  components:
+  - type: Construction
+    graph: ButtonFrameExitGraph
+    node: exit
+
+- type: !PartialOnly entity
+  id: ButtonFrameGrey
+  components:
+  - type: Construction
+    graph: ButtonFrameGreyGraph
+    node: grey
+
+- type: !PartialOnly entity
+  id: ButtonFrameJanitor
+  components:
+  - type: Construction
+    graph: ButtonFrameJanitorGraph
+    node: janitor
+
+- type: !PartialOnly entity
+  id: Crematorium
+  components:
+  - type: Construction
+    graph: CrematoriumGraph
+    node: crematorium
+    containers:
+    - entity_storage
+
+# Covers: ExtinguisherCabinet, ExtinguisherCabinetFilled, ExtinguisherCabinetFilledOpen, ExtinguisherCabinetOpen
+- type: !PartialOnly entity
+  id: ExtinguisherCabinet
+  components:
+  - type: Construction
+    graph: ExtinguisherCabinetGraph
+    node: extinguisher_cabinet
+
+# Covers: FireAxeCabinet, FireAxeCabinetFilled, FireAxeCabinetFilledOpen, FireAxeCabinetOpen
+- type: !PartialOnly entity
+  id: FireAxeCabinet
+  components:
+  - type: Construction
+    graph: FireAxeCabinetGraph
+    node: fireaxe_cabinet
+
+- type: !PartialOnly entity
+  id: Fireplace
+  components:
+  - type: Construction
+    graph: Fireplace
+    node: fireplaceComplete
+
+- type: !PartialOnly entity
+  id: FloorDrain
+  components:
+  - type: Construction
+    graph: FloorDrain
+    node: drain
+
+# Covers: AirCanister, AmmoniaCanister, CarbonDioxideCanister, FrezonCanister, HydrogenCanister, LiquidCarbonDioxideCanister, LiquidNitrogenCanister, LiquidOxygenCanister, NitrogenCanister, NitrousOxideCanister, OxygenCanister, PlasmaCanister, StorageCanister, TritiumCanister, WaterVaporCanister
+- type: !PartialOnly entity
+  id: GasCanister
+  components:
+  - type: Construction
+    graph: StorageCanisterGraph
+    node: canister
+
+- type: !PartialOnly entity
+  id: GenericTank
+  components:
+  - type: Construction
+    graph: GenericTankGraph
+    node: generictank
+
+# Covers: LockableButton and every LockableButton<Department> variant
+- type: !PartialOnly entity
+  id: LockableButton
+  components:
+  - type: Construction
+    graph: LockableButtonDirectionalGraph
+    node: LockableButtonDirectionalNode
+
+# Covers: Memorial, Monolith
+- type: !PartialOnly entity
+  id: Memorial
+  components:
+  - type: Construction
+    graph: Memorial
+    node: memorial
+
+- type: !PartialOnly entity
+  id: MiningWindow
+  components:
+  - type: Construction
+    graph: Window
+    node: miningWindow
+
+- type: !PartialOnly entity
+  id: MiningWindowDiagonal
+  components:
+  - type: Construction
+    graph: WindowDiagonal
+    node: miningWindowDiagonal
+
+- type: !PartialOnly entity
+  id: Mirror
+  components:
+  - type: Construction
+    graph: MirrorGraph
+    node: done
+
+- type: !PartialOnly entity
+  id: MirrorModern
+  components:
+  - type: Construction
+    graph: MirrorModernGraph
+    node: done
+
+- type: !PartialOnly entity
+  id: Morgue
+  components:
+  - type: Construction
+    graph: MorgueGraph
+    node: morgue
+    containers:
+    - entity_storage
+
+- type: !PartialOnly entity
+  id: OreBox
+  components:
+  - type: Construction
+    graph: OreBoxGraph
+    node: ore_box
+
+# Covers: PaperBin, PaperBin10, PaperBin20, PaperBin5
+- type: !PartialOnly entity
+  id: PaperBin
+  components:
+  - type: Construction
+    graph: PaperBin
+    node: paperbin
+    containers: [ bin-container ]
+
+- type: !PartialOnly entity
+  id: SS13Memorial
+  components:
+  - type: Construction
+    graph: EmployeeMemorial
+    node: employeeMemorial
+
+# Covers: ShotGunCabinet, ShotGunCabinetFilled, ShotGunCabinetFilledOpen, ShotGunCabinetOpen
+- type: !PartialOnly entity
+  id: ShotGunCabinet
+  components:
+  - type: Construction
+    graph: ShotGunCabinetGraph
+    node: shotgun_cabinet
+
+- type: !PartialOnly entity
+  id: ShuttleWindowDiagonal
+  components:
+  - type: Construction
+    graph: WindowDiagonal
+    node: shuttleWindowDiagonal
+
+- type: !PartialOnly entity
+  id: StairDark
+  components:
+  - type: Construction
+    graph: StairsDark
+    node: done
+
+- type: !PartialOnly entity
+  id: StairStage
+  components:
+  - type: Construction
+    graph: StairStage
+    node: done
+
+- type: !PartialOnly entity
+  id: StairStageDark
+  components:
+  - type: Construction
+    graph: StairsDarkStage
+    node: done
+
+- type: !PartialOnly entity
+  id: StairStageWhite
+  components:
+  - type: Construction
+    graph: StairsWhiteStage
+    node: done
+
+- type: !PartialOnly entity
+  id: StairStageWood
+  components:
+  - type: Construction
+    graph: StairsWoodStage
+    node: done
+
+- type: !PartialOnly entity
+  id: StairWhite
+  components:
+  - type: Construction
+    graph: StairsWhite
+    node: done
+
+- type: !PartialOnly entity
+  id: StairWood
+  components:
+  - type: Construction
+    graph: StairsWood
+    node: done
+
+- type: !PartialOnly entity
+  id: Stairs
+  components:
+  - type: Construction
+    graph: StairsSteel
+    node: done
+
+- type: !PartialOnly entity
+  id: StatueVenusBlue
+  components:
+  - type: Construction
+    graph: StatueVenusBlue
+    node: venusstatueBlue
+
+- type: !PartialOnly entity
+  id: StatueVenusRed
+  components:
+  - type: Construction
+    graph: StatueVenusRed
+    node: venusstatueRed
+
+# Covers: SuitStorageAtmos, SuitStorageBase, SuitStorageCE, SuitStorageCMO, SuitStorageCaptain, SuitStorageEVA, SuitStorageEVAAlternate, SuitStorageEVAEmergency, SuitStorageEVAPirate, SuitStorageEVAPrisoner, SuitStorageEVASyndicate, SuitStorageEngi, SuitStorageHOS, SuitStorageNTSRA, SuitStoragePirateCap, SuitStorageRD, SuitStorageSalv, SuitStorageSec, SuitStorageSyndie, SuitStorageWarden, SuitStorageWizard
+- type: !PartialOnly entity
+  id: SuitStorageBase
+  components:
+  - type: Construction
+    graph: SuitStorageUnit
+    node: suitstorage
+    containers:
+    - entity_storage
+
+- type: !PartialOnly entity
+  id: WallMining
+  components:
+  - type: Construction
+    graph: Girder
+    node: miningWall
+
+- type: !PartialOnly entity
+  id: WallMiningDiagonal
+  components:
+  - type: Construction
+    graph: GirderDiagonal
+    node: miningWallDiagonal
+
+- type: !PartialOnly entity
+  id: WallReinforcedDiagonal
+  components:
+  - type: Construction
+    graph: GirderDiagonal
+    node: reinforcedWallDiagonal
+
+- type: !PartialOnly entity
+  id: WallSolidDiagonal
+  components:
+  - type: Construction
+    graph: GirderDiagonal
+    node: wallDiagonal
+
+- type: !PartialOnly entity
+  id: WarningAir
+  components:
+  - type: Construction
+    graph: WarningSign
+    node: air
+
+- type: !PartialOnly entity
+  id: WarningCO2
+  components:
+  - type: Construction
+    graph: WarningSign
+    node: co2
+
+- type: !PartialOnly entity
+  id: WarningN2
+  components:
+  - type: Construction
+    graph: WarningSign
+    node: n2
+
+- type: !PartialOnly entity
+  id: WarningN2O
+  components:
+  - type: Construction
+    graph: WarningSign
+    node: n2o
+
+- type: !PartialOnly entity
+  id: WarningO2
+  components:
+  - type: Construction
+    graph: WarningSign
+    node: o2
+
+- type: !PartialOnly entity
+  id: WarningPlasma
+  components:
+  - type: Construction
+    graph: WarningSign
+    node: plasma
+
+- type: !PartialOnly entity
+  id: WarningTritium
+  components:
+  - type: Construction
+    graph: WarningSign
+    node: tritium
+
+- type: !PartialOnly entity
+  id: WarningWaste
+  components:
+  - type: Construction
+    graph: WarningSign
+    node: waste
+
+- type: !PartialOnly entity
+  id: WaterCooler
+  components:
+  - type: Construction
+    graph: WaterCooler
+    node: water-cooler
+    deconstructionTarget: start
+
+# Covers: WaterTank, WaterTankFull, WaterTankHighCapacity
+- type: !PartialOnly entity
+  id: WaterTank
+  components:
+  - type: Construction
+    graph: GenericTankGraph
+    node: generictank
+
+# Covers: WeldingFuelTank, WeldingFuelTankFull, WeldingFuelTankHighCapacity
+- type: !PartialOnly entity
+  id: WeldingFuelTank
+  components:
+  - type: Construction
+    graph: GenericTankGraph
+    node: generictank
+# Machines: these also need a board so the machine graph can take them apart and put them back together.
+# Unlike Persistence, the fans stay unpowered, it only makes them buildable.
+- type: !PartialOnly entity
+  id: Recycler
+  components:
+  - type: Machine
+    board: RecyclerMachineCircuitboard
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: Construction
+    graph: Machine
+    node: machine
+    containers:
+    - machine_parts
+    - machine_board
+
+- type: !PartialOnly entity
+  id: AtmosDeviceFanTiny
+  components:
+  - type: Machine
+    board: AtmosDeviceFanTinyMachineCircuitBoard
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: Construction
+    graph: Machine
+    node: machine
+    containers:
+    - machine_parts
+    - machine_board
+
+- type: !PartialOnly entity
+  id: AtmosDeviceFanDirectional
+  components:
+  - type: Machine
+    board: AtmosDeviceFanDirectionalMachineCircuitBoard
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+  - type: Construction
+    graph: Machine
+    node: machine
+    containers:
+    - machine_parts
+    - machine_board

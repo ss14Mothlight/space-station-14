@@ -1,0 +1,33 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: entity
+  parent: BaseWallmountGlass
+  id: ShotGunCabinetAssembly
+  name: shotgun cabinet assembly
+  description: An unfinished shotgun cabinet. Some spacers place the finished products over their mantles.
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 200 #20ish crowbar hits
+      behaviors:
+      - !type:EmptyAllContainersBehaviour
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+  - type: Sprite
+    sprite: Structures/Wallmounts/shotgun_cabinet.rsi
+    state: cabinet
+  - type: Construction
+    graph: ShotGunCabinetGraph
+    node: glass

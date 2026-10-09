@@ -1,0 +1,39 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: entity
+  id: FireplaceUnfinished
+  parent: BaseStructure
+  name: unfinished fireplace
+  description: An unfinished, unlit fireplace. Still sort of cozy.
+  components:
+  - type: Sprite
+    sprite: _Persistence/Structures/Decoration/fireplace.rsi
+    state: fireplace
+  - type: Icon
+    sprite: _Persistence/Structures/Decoration/fireplace.rsi
+    state: "icon"
+  - type: Appearance
+  - type: HolidayVisuals
+    holidays:
+      festive:
+      - FestiveSeason
+  - type: GenericVisualizer
+    visuals:
+      enum.HolidayVisuals.Holiday:
+        christmas:
+          festive: { visible: true }
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 200
+        behaviors:
+          - !type:DoActsBehavior
+            acts: [ "Destruction" ]
+  - type: Construction
+    graph: Fireplace
+    node: fireplaceUnfinished

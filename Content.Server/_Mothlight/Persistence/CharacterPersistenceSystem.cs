@@ -30,18 +30,18 @@ namespace Content.Server._Mothlight.Persistence;
 /// </remarks>
 public sealed partial class CharacterPersistenceSystem : EntitySystem
 {
-    [Dependency] private IComponentFactory _factory = default!;
-    [Dependency] private IPrototypeManager _proto = default!;
-    [Dependency] private IResourceManager _res = default!;
-    [Dependency] private MapLoaderSystem _loader = default!;
-    [Dependency] private SharedHumanoidAppearanceSystem _humanoid = default!;
-    [Dependency] private InventorySystem _inventory = default!;
-    [Dependency] private MetaDataSystem _metaData = default!;
-    [Dependency] private SharedHandsSystem _hands = default!;
-    [Dependency] private SharedTransformSystem _transform = default!;
-    [Dependency] private StationSpawningSystem _spawning = default!;
-    [Dependency] private GameTicker _ticker = default!;
-    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private IComponentFactory _factory = null!;
+    [Dependency] private IPrototypeManager _proto = null!;
+    [Dependency] private IResourceManager _res = null!;
+    [Dependency] private MapLoaderSystem _loader = null!;
+    [Dependency] private SharedHumanoidAppearanceSystem _humanoid = null!;
+    [Dependency] private InventorySystem _inventory = null!;
+    [Dependency] private MetaDataSystem _metaData = null!;
+    [Dependency] private SharedHandsSystem _hands = null!;
+    [Dependency] private SharedTransformSystem _transform = null!;
+    [Dependency] private StationSpawningSystem _spawning = null!;
+    [Dependency] private GameTicker _ticker = null!;
+    [Dependency] private SharedMapSystem _map = null!;
 
     private static readonly ResPath SaveRoot = new("/Mothlight/Characters");
 
@@ -68,8 +68,6 @@ public sealed partial class CharacterPersistenceSystem : EntitySystem
         base.Initialize();
 
         _loader.OnIsSerializable += OnIsSerializable;
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
-        MarkHumanoidsSavable();
     }
 
     public override void Shutdown()
@@ -80,24 +78,36 @@ public sealed partial class CharacterPersistenceSystem : EntitySystem
 
     #region Savability
 
-    private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
-    {
-        if (args.WasModified<EntityPrototype>())
-            MarkHumanoidsSavable();
-    }
-
     /// <summary>
-    /// Upstream marks every species mob as <c>save: false</c>, which makes the map loader refuse to serialize
-    /// them at all. Flip that for humanoids here instead of editing every species prototype.
-    /// Player-controlled mobs still get excluded from regular map saves by <see cref="OnIsSerializable"/>.
+    /// Upstream marks every species mob as <c>save: false</c>, which makes the map loader refuse to serialize them
+    /// at all. Persistence saves (characters, the world) need them, so this makes humanoids savable until the
+    /// returned scope is disposed. Everything else, like the map editor, keeps Starlight's behaviour.
+    /// Player-controlled mobs still get excluded from map saves by <see cref="OnIsSerializable"/>.
     /// </summary>
-    private void MarkHumanoidsSavable()
+    public HumanoidSavingScope AllowHumanoidSaving()
     {
         var humanoidName = _factory.GetComponentName<HumanoidAppearanceComponent>();
+        var flipped = new List<EntityPrototype>();
         foreach (var proto in _proto.EnumeratePrototypes<EntityPrototype>())
         {
-            if (!proto.MapSavable && proto.Components.ContainsKey(humanoidName))
-                proto.MapSavable = true;
+            if (proto.MapSavable || !proto.Components.ContainsKey(humanoidName))
+                continue;
+
+            proto.MapSavable = true;
+            flipped.Add(proto);
+        }
+
+        return new HumanoidSavingScope(flipped);
+    }
+
+    public readonly struct HumanoidSavingScope(List<EntityPrototype> flipped) : IDisposable
+    {
+        public void Dispose()
+        {
+            foreach (var proto in flipped)
+            {
+                proto.MapSavable = false;
+            }
         }
     }
 
@@ -179,6 +189,7 @@ public sealed partial class CharacterPersistenceSystem : EntitySystem
         bool ok;
         FileCategory category;
         _savingCharacter = mob;
+        using var humanoids = AllowHumanoidSaving();
         try
         {
             ok = _loader.TrySaveGeneric(mob, writer, out category, opts);

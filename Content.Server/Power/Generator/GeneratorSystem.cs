@@ -35,7 +35,7 @@ public sealed partial class GeneratorSystem : SharedGeneratorSystem
         SubscribeLocalEvent<FuelGeneratorComponent, PortableGeneratorSetTargetPowerMessage>(OnTargetPowerSet);
         SubscribeLocalEvent<FuelGeneratorComponent, PortableGeneratorEjectFuelMessage>(OnEjectFuel);
         SubscribeLocalEvent<FuelGeneratorComponent, AnchorStateChangedEvent>(OnAnchorStateChanged);
-        SubscribeLocalEvent<FuelGeneratorComponent, ComponentInit>(OnInit);
+        SubscribeLocalEvent<FuelGeneratorComponent, ComponentStartup>(OnStartup); // Mothlight - persistence
         SubscribeLocalEvent<SolidFuelGeneratorAdapterComponent, GeneratorGetFuelEvent>(SolidGetFuel);
         SubscribeLocalEvent<SolidFuelGeneratorAdapterComponent, GeneratorUseFuel>(SolidUseFuel);
         SubscribeLocalEvent<SolidFuelGeneratorAdapterComponent, GeneratorEmpty>(SolidEmpty);
@@ -45,9 +45,12 @@ public sealed partial class GeneratorSystem : SharedGeneratorSystem
         SubscribeLocalEvent<ChemicalFuelGeneratorAdapterComponent, GeneratorEmpty>(ChemicalEmpty);
     }
 
-    private void OnInit(Entity<FuelGeneratorComponent> ent, ref ComponentInit args)
+    // Mothlight - loaded generators need their running state re-applied. Some entities have the generator
+    // component without a power supplier, so don't assume there is one.
+    private void OnStartup(Entity<FuelGeneratorComponent> ent, ref ComponentStartup args)
     {
-        UpdateState(ent, ent.Comp);
+        if (HasComp<PowerSupplierComponent>(ent))
+            UpdateState(ent, ent.Comp);
     }
 
     private void OnAnchorStateChanged(EntityUid uid, FuelGeneratorComponent component, ref AnchorStateChangedEvent args)

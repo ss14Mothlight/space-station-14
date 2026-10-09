@@ -1,0 +1,151 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: entity
+  parent: OreBase
+  id: AluminumOre
+  name: aluminum ore
+  suffix: Full
+  components:
+  - type: Stack
+    stackType: AluminumOre
+  - type: Sprite
+    sprite: _Persistence/Objects/Materials/ore.rsi # Mothlight: the inherited sheet lacks these states
+    state: aluminum
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      RawAluminum: 100
+  - type: Extractable
+    grindableSolutionName: aluminumore
+  - type: SolutionContainerManager
+    solutions:
+      aluminumore:
+        reagents:
+        - ReagentId: Aluminium
+          Quantity: 6.5
+  - type: Item
+    heldPrefix: aluminum
+  - type: Tag
+    tags:
+    - Ore
+
+- type: entity
+  parent: AluminumOre
+  id: AluminumOre1
+  suffix: Single
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
+  parent: OreBase
+  id: CopperOre
+  name: copper ore
+  suffix: Full
+  components:
+  - type: Stack
+    stackType: CopperOre
+  - type: Sprite
+    sprite: _Persistence/Objects/Materials/ore.rsi # Mothlight: the inherited sheet lacks these states
+    state: copper
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      RawCopper: 100
+  - type: Extractable
+    grindableSolutionName: copperore
+  - type: SolutionContainerManager
+    solutions:
+      copperore:
+        reagents:
+        - ReagentId: Copper
+          Quantity: 6.5
+  - type: Item
+    heldPrefix: copper
+  - type: Tag
+    tags:
+    - Ore
+
+- type: entity
+  parent: CopperOre
+  id: CopperOre1
+  suffix: Single
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
+  parent: OreBase
+  id: TinOre
+  name: tin ore
+  suffix: Full
+  components:
+  - type: Stack
+    stackType: TinOre
+  - type: Sprite
+    sprite: _Persistence/Objects/Materials/ore.rsi # Mothlight: the inherited sheet lacks these states
+    state: tin
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      RawTin: 100
+  - type: Extractable
+    grindableSolutionName: tinore
+  - type: SolutionContainerManager
+    solutions:
+      tinore:
+        reagents:
+        - ReagentId: Tin
+          Quantity: 10
+  - type: Item
+    heldPrefix: tin
+  - type: Tag
+    tags:
+    - Ore
+
+- type: entity
+  parent: TinOre
+  id: TinOre1
+  suffix: Single
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
+  parent: OreBase
+  id: TitaniumOre
+  name: titanium ore
+  suffix: Full
+  components:
+  - type: Stack
+    stackType: TitaniumOre
+  - type: Sprite
+    sprite: _Persistence/Objects/Materials/ore.rsi # Mothlight: the inherited sheet lacks these states
+    state: titanium
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      RawTitanium: 100
+  - type: Extractable
+    grindableSolutionName: titaniumore
+  - type: SolutionContainerManager
+    solutions:
+      titaniumore:
+        reagents:
+        - ReagentId: Titanium
+          Quantity: 6.5
+  - type: Item
+    heldPrefix: titanium
+  - type: Tag
+    tags:
+    - Ore
+    - OreTitanium
+
+- type: entity
+  parent: TitaniumOre
+  id: TitaniumOre1
+  suffix: Single
+  components:
+  - type: Stack
+    count: 1

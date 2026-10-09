@@ -1,0 +1,60 @@
+# Prices for things that can now be deconstructed (see construction.yml). Their deconstruction yields more than
+# their old price, which made building and then taking them apart a way to print money (MaterialArbitrageTest).
+
+# Same as a regular reinforced wall.
+- type: !PartialOnly entity
+  id: WallReinforcedDiagonal
+  components:
+  - type: StaticPrice
+    price: 250
+
+# Gas canisters keep their price, their deconstruction gives back a bit less steel instead (see gas_canisters.yml),
+# since cargo sells empty canisters for less than a higher price would be worth.
+
+- type: !PartialOnly entity
+  id: WarningAir
+  components:
+  - type: StaticPrice
+    price: 30
+
+- type: !PartialOnly entity
+  id: WarningCO2
+  components:
+  - type: StaticPrice
+    price: 30
+
+- type: !PartialOnly entity
+  id: WarningN2
+  components:
+  - type: StaticPrice
+    price: 30
+
+- type: !PartialOnly entity
+  id: WarningN2O
+  components:
+  - type: StaticPrice
+    price: 30
+
+- type: !PartialOnly entity
+  id: WarningO2
+  components:
+  - type: StaticPrice
+    price: 30
+
+- type: !PartialOnly entity
+  id: WarningPlasma
+  components:
+  - type: StaticPrice
+    price: 30
+
+- type: !PartialOnly entity
+  id: WarningTritium
+  components:
+  - type: StaticPrice
+    price: 30
+
+- type: !PartialOnly entity
+  id: WarningWaste
+  components:
+  - type: StaticPrice
+    price: 30

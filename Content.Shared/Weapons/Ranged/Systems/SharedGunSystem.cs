@@ -126,6 +126,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         SubscribeLocalEvent<GunComponent, HandSelectedEvent>(OnGunSelected);
         SubscribeLocalEvent<GunComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<GunComponent, ComponentStartup>(OnStartup); // Mothlight
+        SubscribeLocalEvent<CartridgeAmmoComponent, ComponentStartup>(OnCartridgeStartup); // Mothlight
     }
 
     // Mothlight begin - persistence
@@ -134,7 +135,20 @@ public abstract partial class SharedGunSystem : EntitySystem
     /// </summary>
     private void OnStartup(Entity<GunComponent> gun, ref ComponentStartup args)
     {
+        // Fresh guns (and pre-init maps being mapped) refresh at MapInit instead.
+        if (!MapManager.IsInitialized(Transform(gun).MapUid))
+            return;
+
         RefreshModifiers((gun, gun));
+    }
+
+    /// <summary>
+    /// Whether a cartridge is spent is saved, but its appearance isn't.
+    /// </summary>
+    private void OnCartridgeStartup(Entity<CartridgeAmmoComponent> ent, ref ComponentStartup args)
+    {
+        if (ent.Comp.Spent)
+            Appearance.SetData(ent, AmmoVisuals.Spent, true);
     }
     // Mothlight end
 

@@ -1,0 +1,59 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: Tag
+  id: Aluminum
+
+- type: Tag
+  id: Bananium
+
+- type: Tag
+  id: Bronze
+
+- type: Tag
+  id: Copper
+
+- type: Tag
+  id: CrematoriumElectronics # Blacklist on BountyFruit
+
+- type: Tag
+  id: DiceD20 # ConstructionGraph: AltarChaos
+
+- type: Tag
+  id: MorgueElectronics # MorgueElectronics
+
+- type: Tag
+  id: OreAluminum # CargoBounty: BountySalvageOreAluminum
+
+- type: Tag
+  id: OreBox # DumpWhitelist target: OreBag
+
+- type: Tag
+  id: OreCopper # CargoBounty: BountySalvageOreCopper
+
+- type: Tag
+  id: OreTin # CargoBounty: BountySalvageOreTin
+
+- type: Tag
+  id: OreTitanium # CargoBounty: BountySalvageOreTitanium
+
+- type: Tag
+  id: Phoron # Material tag for Phoron
+
+- type: Tag
+  id: Plasteel
+
+- type: Tag
+  id: PlushieSlime # ConstructionGraph: AltarConvertFestival
+
+- type: Tag
+  id: Tin
+
+- type: Tag
+  id: Titanium
+
+- type: Tag
+  id: TowelNanotrasen # ConstructionGraph: AltarNanotrasen
+
+- type: Tag
+  id: TowelYellow # ConstructionGraph: AltarConvertYellow

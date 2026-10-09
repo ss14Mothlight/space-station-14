@@ -1,0 +1,28 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: entity
+  parent: BaseElectronics
+  id: CrematoriumElectronics
+  name: crematorium electronics
+  description: An electronics board used in the creation of a cremator.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    state: door_electronics
+  - type: Tag
+    tags:
+      - CrematoriumElectronics
+
+- type: entity
+  parent: BaseElectronics
+  id: MorgueElectronics
+  name: morgue electronics
+  description: An electronics board used in the creation of a morgue.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/module.rsi
+    state: door_electronics
+  - type: Tag
+    tags:
+      - MorgueElectronics

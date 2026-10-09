@@ -1,0 +1,13 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: construction
+  id: WaterCooler
+  graph: WaterCooler
+  startNode: start
+  targetNode: water-cooler
+  category: construction-category-storage
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked

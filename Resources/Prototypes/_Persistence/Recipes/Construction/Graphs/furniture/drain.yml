@@ -1,0 +1,38 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: constructionGraph
+  id: FloorDrain
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: screwing
+          completed:
+            - !type:SnapToGrid { }
+          steps:
+            - material: Steel
+              amount: 25
+              doAfter: 1
+    - node: screwing
+      entity: UnfinishedFloorDrain
+      actions:
+        - !type:EmptyAllContainers
+      edges:
+        - to: drain
+          steps:
+            - tool: Screwing
+              doAfter: 2
+    - node: drain
+      entity: FloorDrain
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetSteel1
+              amount: 25
+            - !type:EmptyAllContainers {}
+            - !type:DestroyEntity {}
+          steps:
+            - tool: Welding
+              doAfter: 2

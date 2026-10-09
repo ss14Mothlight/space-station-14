@@ -1,0 +1,178 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+# Phoron glass (alloy variant)
+
+- type: entity
+  parent: SheetGlassBase
+  id: SheetPhoronGlass
+  name: phoron glass
+  description: A sheet of phoron alloy-infused glass.
+  suffix: Full
+  components:
+  - type: Tag
+    tags:
+    - Sheet
+    - ConstructionMaterial
+  - type: PhysicalComposition
+    materialComposition:
+      PhoronGlass: 100
+  - type: Stack
+    stackType: PhoronGlass
+    baseLayer: base
+    layerStates:
+    - phoronglass
+    - phoronglass_2
+    - phoronglass_3
+  - type: Sprite
+    sprite: _Persistence/Objects/Materials/Sheets/glass.rsi # Mothlight: the inherited sheet lacks these states
+    state: phoronglass_3
+    layers:
+    - state: phoronglass_3
+      map: ["base"]
+  - type: Item
+    heldPrefix: phoronglass
+  - type: Construction
+    graph: Glass
+    node: SheetPhoronGlass
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassPlasma:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Extractable
+    grindableSolutionName: phoronglass
+  - type: SolutionContainerManager
+    solutions:
+      phoronglass:
+        reagents:
+        - ReagentId: Silicon
+          Quantity: 10
+        - ReagentId: Plasma
+          Quantity: 6
+        - ReagentId: Bananium
+          Quantity: 6
+        - ReagentId: Titanium
+          Quantity: 3
+        - ReagentId: Phoron
+          Quantity: .5 # 1 phoron glass to 1 Phoron reagent, max expected yield with chem recipes of 1.1u
+        canReact: false
+
+- type: entity
+  parent: SheetPhoronGlass
+  id: SheetPhoronGlass1
+  name: phoron glass
+  suffix: Single
+  components:
+  - type: Sprite
+    sprite: _Persistence/Objects/Materials/Sheets/glass.rsi # Mothlight: the inherited sheet lacks these states
+    state: phoronglass
+  - type: Stack
+    stackType: PhoronGlass
+    count: 1
+
+- type: entity
+  parent: SheetPhoronGlass
+  id: SheetRPhoronGlass
+  name: reinforced phoron glass
+  description: A reinforced sheet of phoron alloy-infused glass.
+  suffix: Full
+  components:
+  - type: PhysicalComposition
+    materialComposition:
+      ReinforcedPhoronGlass: 100
+  - type: Stack
+    stackType: ReinforcedPhoronGlass
+    baseLayer: base
+    layerStates:
+    - rphoronglass
+    - rphoronglass_2
+    - rphoronglass_3
+  - type: Sprite
+    sprite: _Persistence/Objects/Materials/Sheets/glass.rsi # Mothlight: the inherited sheet lacks these states
+    state: rphoronglass_3
+    layers:
+    - state: rphoronglass_3
+      map: ["base"]
+  - type: Item
+    heldPrefix: rphoronglass
+  - type: Construction
+    graph: Glass
+    node: SheetRPhoronGlass
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassPlasma:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Extractable
+    grindableSolutionName: rphoronglass
+  - type: SolutionContainerManager
+    solutions:
+      rphoronglass:
+        reagents:
+        - ReagentId: Silicon
+          Quantity: 10
+        - ReagentId: Plasma
+          Quantity: 6
+        - ReagentId: Bananium
+          Quantity: 6
+        - ReagentId: Titanium
+          Quantity: 3
+        - ReagentId: Iron
+          Quantity: 4.5
+        - ReagentId: Carbon
+          Quantity: 0.5
+        - ReagentId: Phoron
+          Quantity: .5 # Max expected yield of 1.1
+        canReact: false
+
+- type: entity
+  parent: SheetRPhoronGlass
+  id: SheetRPhoronGlass1
+  name: reinforced phoron glass
+  suffix: Single
+  components:
+  - type: Sprite
+    sprite: _Persistence/Objects/Materials/Sheets/glass.rsi # Mothlight: the inherited sheet lacks these states
+    state: rphoronglass
+  - type: Stack
+    stackType: ReinforcedPhoronGlass
+    count: 1

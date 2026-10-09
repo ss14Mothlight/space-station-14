@@ -1,0 +1,46 @@
+# Wires the materials ported from SS14-Persistence (see _Persistence/) into existing prototypes, so they can
+# actually be found and smelted. Starlight's own entries are left alone; this only adds to them.
+
+# Veins that roll a random ore can now be copper, aluminium, tin or titanium. Weights are Persistence's.
+- type: !PartialOnly weightedRandomOre
+  id: RandomOreDistributionStandard
+  weights:
+    OreCopper: 6
+    OreAluminum: 5
+    OreTin: 7
+    OreTitanium: 1
+
+# The ore processor can smelt the new ores, and make the alloys.
+- type: !PartialOnly latheRecipePack
+  id: OreSmelting
+  recipes:
+  - SheetTitanium1
+  - SheetAluminium1
+  - IngotCopper1
+  - IngotTin1
+  - SheetBronze
+  - MaterialPhoron1
+
+# Asteroid debris can have the new rock types. Probabilities are Persistence's.
+# Starlight's "tin" rocks still drop iron (they're a main steel source), so tin only comes from random veins.
+- type: !PartialOnly entity
+  id: BaseAsteroidDebris
+  components:
+  - type: SimpleFloorPlanPopulator
+    entries:
+      FloorAsteroidSand:
+      - id: WallRockCopper
+        prob: 0.08
+        orGroup: rock
+      - id: WallRockAluminum
+        prob: 0.05
+        orGroup: rock
+      - id: WallRockTitanium
+        prob: 0.04
+        orGroup: rock
+
+# The recycler can be built, so its board needs to be printable (same pack as Persistence).
+- type: !PartialOnly latheRecipePack
+  id: CargoBoardsStatic
+  recipes:
+  - RecyclerMachineCircuitboard

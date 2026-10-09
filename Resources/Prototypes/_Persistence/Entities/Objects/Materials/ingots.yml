@@ -1,0 +1,102 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: entity
+  parent: IngotBase
+  id: IngotCopper
+  name: copper bar
+  suffix: Full
+  components:
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      Copper: 100
+  - type: Tag
+    tags:
+    - Ingot
+    - ConstructionMaterial
+    - Copper
+  - type: Stack
+    stackType: Copper
+    baseLayer: base
+    layerStates:
+    - copper
+    - copper_2
+    - copper_3
+  - type: Sprite
+    state: copper_3
+    layers:
+    - state: copper_3
+      map: ["base"]
+  - type: Item
+    heldPrefix: copper
+  - type: Appearance
+  - type: Extractable
+    grindableSolutionName: copper
+  - type: SolutionContainerManager
+    solutions:
+      copper:
+        reagents:
+        - ReagentId: Copper
+          Quantity: 10
+
+- type: entity
+  parent: IngotCopper
+  id: IngotCopper1
+  name: copper bar
+  suffix: Single
+  components:
+  - type: Sprite
+    state: copper
+  - type: Stack
+    count: 1
+
+- type: entity
+  parent: IngotBase
+  id: IngotTin
+  name: tin bar
+  suffix: Full
+  components:
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      Tin: 100
+  - type: Tag
+    tags:
+    - Ingot
+    - ConstructionMaterial
+    - Tin
+  - type: Stack
+    stackType: Tin
+    baseLayer: base
+    layerStates:
+    - alpha
+    - alpha_2
+    - alpha_3
+  - type: Sprite
+    state: alpha_3
+    layers:
+    - state: alpha_3
+      map: ["base"]
+  - type: Item
+    heldPrefix: alpha
+  - type: Appearance
+  - type: Extractable
+    grindableSolutionName: tin
+  - type: SolutionContainerManager
+    solutions:
+      tin:
+        reagents:
+        - ReagentId: Tin
+          Quantity: 10
+
+- type: entity
+  parent: IngotTin
+  id: IngotTin1
+  name: tin bar
+  suffix: Single
+  components:
+  - type: Sprite
+    state: alpha
+  - type: Stack
+    count: 1

@@ -17,7 +17,8 @@ namespace Content.Shared.Mobs.Components
     public sealed partial class MobStateComponent : Component
     {
         //default mobstate is always the lowest state level
-        [AutoNetworkedField, DataField] // Mothlight - persistence
+        // Not saved: loaded mobs work their state out from their (saved) damage when MobThresholds starts up.
+        [AutoNetworkedField, ViewVariables]
         public MobState CurrentState { get; set; } = MobState.Alive;
 
         [DataField]

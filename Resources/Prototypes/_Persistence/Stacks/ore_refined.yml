@@ -1,0 +1,30 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: stack
+  parent: BaseMediumStack
+  id: Aluminium
+  name: stack-aluminium
+  icon: { sprite: /Textures/_Persistence/Objects/Materials/Sheets/metal.rsi, state: titanium }
+  spawn: SheetAluminium1
+
+- type: stack
+  parent: BaseMediumStack
+  id: Copper
+  name: stack-copper
+  icon: { sprite: /Textures/Objects/Materials/ingots.rsi, state: copper }
+  spawn: IngotCopper1
+
+- type: stack
+  parent: BaseMediumStack
+  id: Phoron
+  name: stack-phoron
+  icon: { sprite: /Textures/_Persistence/Objects/Materials/Sheets/other.rsi, state: phoron }
+  spawn: MaterialPhoron1
+
+- type: stack
+  parent: BaseMediumStack
+  id: Tin
+  name: stack-tin
+  icon: { sprite: /Textures/Objects/Materials/ingots.rsi, state: alpha }
+  spawn: IngotTin1

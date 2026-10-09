@@ -1,0 +1,51 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: material
+  id: Aluminium
+  stackEntity: SheetAluminium1
+  name: materials-aluminium
+  icon: { sprite: _Persistence/Objects/Materials/Sheets/metal.rsi, state: titanium }
+  color: "#cfd8e3"
+  price: 0.25
+
+- type: material
+  id: Bronze
+  stackEntity: SheetBronze1
+  name: materials-bronze
+  icon: { sprite: _Persistence/Objects/Materials/Sheets/metal.rsi, state: bronze }
+  color: "#a57840"
+  price: 0.35
+
+- type: material
+  id: Copper
+  stackEntity: IngotCopper1
+  name: materials-copper
+  unit: materials-unit-bar
+  icon: { sprite: Objects/Materials/ingots.rsi, state: copper }
+  color: "#b87333"
+  price: 0.20
+
+- type: material
+  id: Phoron
+  stackEntity: MaterialPhoron1
+  name: materials-phoron
+  icon: { sprite: _Persistence/Objects/Materials/Sheets/other.rsi, state: phoron }
+  color: "#c45a9e"
+  price: 1.2 # plasma+bananium+titanium alloy
+
+- type: material
+  id: Tin
+  stackEntity: IngotTin1
+  name: materials-tin
+  icon: { sprite: Objects/Materials/ingots.rsi, state: alpha }
+  color: "#b0b8c6"
+  price: 0.10
+
+- type: material
+  id: Titanium
+  stackEntity: SheetTitanium1
+  name: materials-titanium
+  icon: { sprite: _Persistence/Objects/Materials/Sheets/metal.rsi, state: plastitanium }
+  color: "#bfc8c8"
+  price: 0.55

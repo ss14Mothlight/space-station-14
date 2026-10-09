@@ -12,8 +12,14 @@ public sealed partial class WorldPersistenceRuleComponent : Component
     /// <summary>
     /// Where the world is saved, in the server's user data.
     /// </summary>
-    [DataField]
-    public ResPath SavePath = new("/Mothlight/World/world.yml");
+    /// <remarks>
+    /// A string rather than a <see cref="ResPath"/> data field, which would be validated as a content file that has
+    /// to exist.
+    /// </remarks>
+    [DataField("savePath")]
+    public string SavePathString = "/Mothlight/World/world.yml";
+
+    public ResPath SavePath => new(SavePathString);
 
     /// <summary>
     /// How often to save the world while the round is running. Null disables autosaving.

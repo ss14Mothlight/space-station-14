@@ -1,0 +1,16 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: construction
+  id: StorageCanisterConstruction
+  name: construction-recipe-storagecanister
+  graph: StorageCanisterGraph
+  startNode: start
+  targetNode: canister
+  category: construction-category-utilities
+  placementMode: PlaceFree
+  objectType: Structure
+  canRotate: false
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked

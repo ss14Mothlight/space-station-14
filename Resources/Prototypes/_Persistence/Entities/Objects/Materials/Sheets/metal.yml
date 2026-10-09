@@ -1,0 +1,209 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: entity
+  parent: SheetMetalBase
+  id: SheetAluminium
+  name: aluminum
+  description: A sheet of aluminum, lightweight and versatile.
+  suffix: Full
+  components:
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      Aluminium: 100
+  - type: Tag
+    tags:
+    - Sheet
+    - Metal
+    - ConstructionMaterial
+    - Aluminum
+  - type: Stack
+    stackType: Aluminium
+    baseLayer: base
+    layerStates:
+    - titanium
+    - titanium_2
+    - titanium_3
+  - type: Sprite
+    sprite: _Persistence/Objects/Materials/Sheets/metal.rsi # Mothlight: the inherited sheet lacks these states
+    state: titanium_3
+    layers:
+    - state: titanium_3
+      map: ["base"]
+  - type: Item
+    heldPrefix: titanium
+  - type: Appearance
+  - type: Extractable
+    grindableSolutionName: aluminium
+  - type: SolutionContainerManager
+    solutions:
+      aluminium:
+        reagents:
+        - ReagentId: Aluminium
+          Quantity: 10
+        canReact: false
+
+- type: entity
+  parent: SheetAluminium
+  id: SheetAluminium1
+  name: aluminum
+  suffix: Single
+  components:
+  - type: Sprite
+    sprite: _Persistence/Objects/Materials/Sheets/metal.rsi # Mothlight: the inherited sheet lacks these states
+    state: titanium
+  - type: Stack
+    stackType: Aluminium
+    count: 1
+
+- type: entity
+  parent: SheetAluminium
+  id: SheetAluminium10
+  name: aluminum
+  suffix: 10
+  components:
+  - type: Sprite
+    sprite: _Persistence/Objects/Materials/Sheets/metal.rsi # Mothlight: the inherited sheet lacks these states
+    state: titanium
+  - type: Stack
+    stackType: Aluminium
+    count: 10
+
+- type: entity
+  parent: SheetMetalBase
+  id: SheetBronze
+  name: bronze
+  description: A sheet of bronze, a copper-tin alloy known for durability and versatility.
+  suffix: Full
+  components:
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      Bronze: 100
+  - type: Tag
+    tags:
+    - Sheet
+    - Metal
+    - ConstructionMaterial
+    - Bronze
+  - type: Stack
+    stackType: Bronze
+    baseLayer: base
+    layerStates:
+    - bronze
+    - bronze_2
+    - bronze_3
+  - type: Sprite
+    sprite: _Persistence/Objects/Materials/Sheets/metal.rsi # Mothlight: the inherited sheet lacks these states
+    state: bronze_3
+    layers:
+    - state: bronze_3
+      map: ["base"]
+  - type: Item
+    heldPrefix: bronze
+  - type: Appearance
+  - type: Extractable
+    grindableSolutionName: bronze
+  - type: SolutionContainerManager
+    solutions:
+      bronze:
+        reagents:
+        - ReagentId: Copper
+          Quantity: 6.7
+        - ReagentId: Tin
+          Quantity: 3.3
+
+- type: entity
+  parent: SheetBronze
+  id: SheetBronze1
+  name: bronze
+  suffix: Single
+  components:
+  - type: Sprite
+    sprite: _Persistence/Objects/Materials/Sheets/metal.rsi # Mothlight: the inherited sheet lacks these states
+    state: bronze
+  - type: Stack
+    stackType: Bronze
+    count: 1
+
+- type: entity
+  parent: SheetBronze
+  id: SheetBronze10
+  name: bronze
+  suffix: 10
+  components:
+  - type: Sprite
+    sprite: _Persistence/Objects/Materials/Sheets/metal.rsi # Mothlight: the inherited sheet lacks these states
+    state: bronze
+  - type: Stack
+    stackType: Bronze
+    count: 10
+
+- type: entity
+  parent: SheetMetalBase
+  id: SheetTitanium
+  name: titanium
+  description: A sheet of titanium, tough and lightweight.
+  suffix: Full
+  components:
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      Titanium: 100
+  - type: Tag
+    tags:
+    - Sheet
+    - Metal
+    - ConstructionMaterial
+    - Titanium
+  - type: Stack
+    stackType: Titanium
+    baseLayer: base
+    layerStates:
+    - plastitanium
+    - plastitanium_2
+    - plastitanium_3
+  - type: Sprite
+    sprite: _Persistence/Objects/Materials/Sheets/metal.rsi # Mothlight: the inherited sheet lacks these states
+    state: plastitanium_3
+    layers:
+    - state: plastitanium_3
+      map: ["base"]
+  - type: Item
+    heldPrefix: plastitanium
+  - type: Appearance
+  - type: Extractable
+    grindableSolutionName: titanium
+  - type: SolutionContainerManager
+    solutions:
+      titanium:
+        reagents:
+        - ReagentId: Titanium
+          Quantity: 10
+
+- type: entity
+  parent: SheetTitanium
+  id: SheetTitanium1
+  name: titanium
+  suffix: Single
+  components:
+  - type: Sprite
+    sprite: _Persistence/Objects/Materials/Sheets/metal.rsi # Mothlight: the inherited sheet lacks these states
+    state: plastitanium
+  - type: Stack
+    stackType: Titanium
+    count: 1
+
+- type: entity
+  parent: SheetTitanium
+  id: SheetTitanium10
+  name: titanium
+  suffix: 10
+  components:
+  - type: Sprite
+    sprite: _Persistence/Objects/Materials/Sheets/metal.rsi # Mothlight: the inherited sheet lacks these states
+    state: plastitanium
+  - type: Stack
+    stackType: Titanium
+    count: 10

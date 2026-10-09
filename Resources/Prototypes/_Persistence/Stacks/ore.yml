@@ -1,0 +1,30 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: stack
+  parent: BaseMediumStack
+  id: AluminumOre
+  name: stack-aluminum-ore
+  icon: { sprite: /Textures/_Persistence/Objects/Materials/ore.rsi, state: aluminum }
+  spawn: AluminumOre1
+
+- type: stack
+  parent: BaseMediumStack
+  id: CopperOre
+  name: stack-copper-ore
+  icon: { sprite: /Textures/_Persistence/Objects/Materials/ore.rsi, state: copper }
+  spawn: CopperOre1
+
+- type: stack
+  parent: BaseMediumStack
+  id: TinOre
+  name: stack-tin-ore
+  icon: { sprite: /Textures/_Persistence/Objects/Materials/ore.rsi, state: tin }
+  spawn: TinOre1
+
+- type: stack
+  parent: BaseMediumStack
+  id: TitaniumOre
+  name: stack-titanium-ore
+  icon: { sprite: /Textures/_Persistence/Objects/Materials/ore.rsi, state: titanium }
+  spawn: TitaniumOre1

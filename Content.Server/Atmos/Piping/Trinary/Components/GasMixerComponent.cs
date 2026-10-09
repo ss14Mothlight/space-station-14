@@ -13,7 +13,9 @@ namespace Content.Server.Atmos.Piping.Trinary.Components
 
         [ViewVariables(VVAccess.ReadWrite)]
         [DataField]
-        public bool DesiredEnabled = true;
+        // Mothlight - what a player last set it to, so it comes back on/off after a load. Null means it was never
+        // touched, and the prototype's state should be kept.
+        public bool? DesiredEnabled;
 
         [ViewVariables(VVAccess.ReadWrite)]
         [DataField("inletOne")]

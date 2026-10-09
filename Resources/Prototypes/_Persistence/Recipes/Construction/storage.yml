@@ -1,0 +1,52 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: construction
+  id: ExtinguisherCabinetOpen
+  graph: ExtinguisherCabinetGraph
+  startNode: start
+  targetNode: extinguisher_cabinet
+  category: construction-category-furniture
+  description: recipes-extinguisher-cabinet
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+  conditions:
+    - !type:WallmountCondition
+
+- type: construction
+  id: FireAxeCabinetOpen
+  graph: FireAxeCabinetGraph
+  startNode: start
+  targetNode: fireaxe_cabinet
+  category: construction-category-furniture
+  description: recipes-fireaxe-cabinet
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+  conditions:
+    - !type:WallmountCondition
+
+- type: construction
+  id: GenericTankConstruction
+  name: construction-recipe-generictank
+  graph: GenericTankGraph
+  startNode: start
+  targetNode: generictank
+  category: construction-category-storage
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+
+- type: construction
+  id: ShotGunCabinetOpen
+  graph: ShotGunCabinetGraph
+  startNode: start
+  targetNode: shotgun_cabinet
+  category: construction-category-furniture
+  description: recipes-shotgun-cabinet
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+  conditions:
+    - !type:WallmountCondition

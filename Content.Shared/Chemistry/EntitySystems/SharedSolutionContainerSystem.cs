@@ -76,6 +76,7 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
     [Dependency] protected SharedAppearanceSystem AppearanceSystem = default!;
     [Dependency] protected SharedContainerSystem ContainerSystem = default!;
     [Dependency] protected SharedHandsSystem Hands = default!;
+    [Dependency] private SharedMapSystem _map = null!; // Mothlight
 
     [Dependency] protected EntityQuery<ContainedSolutionComponent> ContainedQuery = default!;
     [Dependency] protected EntityQuery<SolutionComponent> SolutionQuery = default!;
@@ -1131,6 +1132,10 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
         foreach (var uid in _pendingVisualRefresh)
         {
             if (TerminatingOrDeleted(uid) || !SolutionQuery.TryComp(uid, out var solution))
+                continue;
+
+            // Solutions on a map that hasn't been initialized (map editing, tests) will get their MapInit later.
+            if (!_map.IsInitialized(Transform(uid).MapUid))
                 continue;
 
             // Same as what a real change does, minus reactions and overflow.

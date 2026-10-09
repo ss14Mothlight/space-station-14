@@ -141,7 +141,7 @@ namespace Content.Server.Atmos.Piping.Trinary.EntitySystems
         }
         private void OnFilterJoinAtmosphere(EntityUid uid, GasFilterComponent filter, ref AtmosDeviceEnabledEvent args)
         {
-            filter.Enabled = filter.DesiredEnabled;
+            filter.Enabled = filter.DesiredEnabled ?? filter.Enabled;
 
             UpdateAppearance(uid, filter);
             DirtyUI(uid, filter);

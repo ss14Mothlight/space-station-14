@@ -24,6 +24,7 @@ public sealed partial class HungerSystem : EntitySystem
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private MovementSpeedModifierSystem _movementSpeedModifier = default!;
     [Dependency] private SharedJetpackSystem _jetpack = default!;
+    [Dependency] private SharedMapSystem _map = null!; // Mothlight
 
     private static readonly ProtoId<SatiationIconPrototype> HungerIconOverfedId = "HungerIconOverfed";
     private static readonly ProtoId<SatiationIconPrototype> HungerIconPeckishId = "HungerIconPeckish";
@@ -42,6 +43,10 @@ public sealed partial class HungerSystem : EntitySystem
 
     private void OnCompInit(EntityUid uid, HungerComponent component, ComponentStartup args)
     {
+        // Mothlight - only for loaded entities; fresh ones (and pre-init maps being mapped) are handled at MapInit
+        if (!_map.IsInitialized(Transform(uid).MapUid))
+            return;
+
         DoHungerThresholdEffects(uid, component, true);
     }
     private void OnMapInit(EntityUid uid, HungerComponent component, MapInitEvent args)
