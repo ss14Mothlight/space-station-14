@@ -1,0 +1,22 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: cargoProduct
+  id: BusinessStartingKitCrate
+  icon:
+    sprite: Objects/Misc/bureaucracy.rsi
+    state: acquisition_form_words
+  product: BusinessStartingKit
+  cost: 7000
+  category: cargoproduct-category-name-cargo
+  group: market
+
+- type: cargoProduct
+  id: ComputerGridControlFlatpack
+  icon:
+    sprite: Objects/Devices/flatpack.rsi
+    state: base
+  product: ComputerGridControlFlatpack
+  cost: 1000
+  category: cargoproduct-category-name-shuttle
+  group: market

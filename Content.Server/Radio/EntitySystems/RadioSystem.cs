@@ -29,6 +29,7 @@ using Content.Shared._Starlight.Language.Components;
 using Content.Shared.Ghost;
 using Content.Server._Starlight.TextToSpeech;
 using Content.Shared._Starlight.Clothing;
+using Content.Server._Persistence.Radio; // Mothlight
 using Content.Shared.Popups;
 
 namespace Content.Server.Radio.EntitySystems;
@@ -46,6 +47,7 @@ public sealed partial class RadioSystem : EntitySystem
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private AccessReaderSystem _accessReader = default!;
+    [Dependency] private FactionRadioSystem _factionRadio = null!; // Mothlight
     [Dependency] private RadioChimeSystem _chime = default!; //🌟Starlight🌟
     [Dependency] private LanguageSystem _language = default!; // Starlight
 
@@ -216,12 +218,21 @@ public sealed partial class RadioSystem : EntitySystem
         }
         // Starlight - End
 
+        var factionId = _factionRadio.CurrentFaction; // Mothlight
         var radioQuery = EntityQueryEnumerator<ActiveRadioComponent, TransformComponent>();
         while (canSend && radioQuery.MoveNext(out var receiver, out var radio, out var transform))
         {
             if (HasComp<GhostComponent>(receiver) && language.Speech.RadioChannel is not null)
                 continue;
 
+            // Mothlight begin - faction radio goes to whoever is tuned in, not to whoever has the key
+            if (factionId != 0)
+            {
+                if (!_factionRadio.CanReceive(receiver, factionId, channel))
+                    continue;
+            }
+            else
+            // Mothlight end
             if (!radio.ReceiveAllChannels)
             {
                 if (!radio.Channels.Contains(channel.ID) || (TryComp<IntercomComponent>(receiver, out var intercom) &&

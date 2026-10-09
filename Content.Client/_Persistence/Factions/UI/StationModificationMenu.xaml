@@ -1,0 +1,213 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      SetSize="600 690"
+                      MinSize="600 690">
+    <BoxContainer Orientation="Vertical" Margin="15 5 15 10">
+        <Label Name="StationNameLabel" StyleClasses="LabelKeyText" />
+        <Label Name="NoFactionLabel" Text="{Loc 'station-modification-no-faction-hint'}" Visible="False" />
+        <Control MinHeight="10" />
+        <TabContainer Name="Tabs" VerticalExpand="True">
+            <!-- General -->
+            <ScrollContainer HScrollEnabled="False" VerticalExpand="True">
+                <BoxContainer Orientation="Vertical" Margin="15 5 15 10">
+                    <BoxContainer Orientation="Horizontal">
+                        <Label Text="{Loc 'station-modification-faction-name'}" StyleClasses="LabelKeyText" MinWidth="150" />
+                        <LineEdit Name="StationNameField" HorizontalExpand="True" />
+                        <Button Name="StationNameConfirm" Text="{Loc 'station-modification-save'}" />
+                    </BoxContainer>
+                    <Control MinHeight="10" />
+                    <BoxContainer Orientation="Horizontal">
+                        <Label Text="{Loc 'station-modification-faction-tag'}" StyleClasses="LabelKeyText" MinWidth="150" />
+                        <LineEdit Name="FactionTagField" MinWidth="64" />
+                        <Button Name="FactionTagConfirm" Text="{Loc 'station-modification-save'}" />
+                    </BoxContainer>
+                    <Control MinHeight="15" />
+                    <BoxContainer Orientation="Horizontal" MinHeight="80">
+                        <Label Text="{Loc 'station-modification-owners'}" StyleClasses="LabelKeyText" MinWidth="150" />
+                        <PanelContainer VerticalExpand="True" HorizontalExpand="True">
+                            <PanelContainer.PanelOverride>
+                                <gfx:StyleBoxFlat BackgroundColor="#000000" />
+                            </PanelContainer.PanelOverride>
+                            <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+                                <BoxContainer Name="OwnersList" Orientation="Vertical" Margin="5" />
+                            </ScrollContainer>
+                        </PanelContainer>
+                    </BoxContainer>
+                    <BoxContainer Orientation="Horizontal">
+                        <Control MinWidth="150" />
+                        <LineEdit Name="NewOwnerField" PlaceHolder="{Loc 'station-modification-new-owner'}" HorizontalExpand="True" />
+                        <Button Name="NewOwnerConfirm" Text="{Loc 'station-modification-save'}" />
+                    </BoxContainer>
+                    <Control MinHeight="15" />
+                    <BoxContainer Orientation="Horizontal">
+                        <Label Text="{Loc 'station-modification-create-access'}" StyleClasses="LabelKeyText" MinWidth="150" />
+                        <LineEdit Name="AccessCreateField" PlaceHolder="{Loc 'station-modification-access-name'}" HorizontalExpand="True" />
+                        <Button Name="AccessCreateConfirm" Text="{Loc 'station-modification-create'}" />
+                    </BoxContainer>
+                    <BoxContainer Orientation="Horizontal">
+                        <Control HorizontalExpand="True" />
+                        <Button Name="DefaultAccessCreate" Text="{Loc 'station-modification-default-accesses'}" />
+                    </BoxContainer>
+                    <Control MinHeight="15" />
+                    <BoxContainer Orientation="Horizontal">
+                        <Label Text="{Loc 'station-modification-delete-access'}" StyleClasses="LabelKeyText" MinWidth="150" />
+                        <Control HorizontalExpand="True" />
+                        <OptionButton Name="PossibleAccesses" />
+                        <Button Name="AccessDeleteConfirm" Text="{Loc 'station-modification-delete'}" />
+                    </BoxContainer>
+                    <Control MinHeight="30" />
+                    <BoxContainer Orientation="Horizontal">
+                        <Label Text="{Loc 'station-modification-jobnet'}" StyleClasses="LabelKeyText" />
+                        <Control HorizontalExpand="True" />
+                        <Button Name="JobNetOn" Text="{Loc 'station-modification-enabled'}" ToggleMode="True" />
+                        <Button Name="JobNetOff" Text="{Loc 'station-modification-disabled'}" ToggleMode="True" />
+                    </BoxContainer>
+                    <Control MinHeight="30" />
+                    <Label Name="ClaimTradeStationLabel" Text="{Loc 'station-modification-claim-trade-station'}" StyleClasses="LabelKeyText" />
+                    <BoxContainer Name="TaxOptions" Orientation="Vertical">
+                        <BoxContainer Orientation="Horizontal">
+                            <Label Text="{Loc 'station-modification-import-tax'}" StyleClasses="LabelKeyText" />
+                            <Control HorizontalExpand="True" />
+                            <SpinBox Name="ImportTaxSpinBox" MinWidth="100" />
+                            <Button Name="ImportTaxConfirm" Text="{Loc 'station-modification-save'}" />
+                        </BoxContainer>
+                        <BoxContainer Orientation="Horizontal">
+                            <Label Text="{Loc 'station-modification-export-tax'}" StyleClasses="LabelKeyText" />
+                            <Control HorizontalExpand="True" />
+                            <SpinBox Name="ExportTaxSpinBox" MinWidth="100" />
+                            <Button Name="ExportTaxConfirm" Text="{Loc 'station-modification-save'}" />
+                        </BoxContainer>
+                        <BoxContainer Orientation="Horizontal">
+                            <Label Text="{Loc 'station-modification-sales-tax'}" StyleClasses="LabelKeyText" />
+                            <Control HorizontalExpand="True" />
+                            <SpinBox Name="SalesTaxSpinBox" MinWidth="100" />
+                            <Button Name="SalesTaxConfirm" Text="{Loc 'station-modification-save'}" />
+                        </BoxContainer>
+                    </BoxContainer>
+                </BoxContainer>
+            </ScrollContainer>
+            <!-- Assignments -->
+            <BoxContainer Orientation="Vertical" Margin="15">
+                <BoxContainer Orientation="Horizontal">
+                    <Label Text="{Loc 'station-modification-selected-assignment'}" StyleClasses="LabelKeyText" />
+                    <Control HorizontalExpand="True" />
+                    <OptionButton Name="PossibleAssignments" />
+                </BoxContainer>
+                <Control MinHeight="20" />
+                <BoxContainer Name="AssignmentDetails" Orientation="Vertical" VerticalExpand="True">
+                    <BoxContainer Orientation="Horizontal">
+                        <Label Text="{Loc 'station-modification-assignment-name'}" StyleClasses="LabelKeyText" MinWidth="150" />
+                        <LineEdit Name="AssignmentNameField" HorizontalExpand="True" />
+                        <Button Name="AssignmentNameConfirm" Text="{Loc 'station-modification-save'}" />
+                    </BoxContainer>
+                    <Control MinHeight="10" />
+                    <BoxContainer Orientation="Horizontal">
+                        <Label Text="{Loc 'station-modification-wage'}" StyleClasses="LabelKeyText" />
+                        <Control HorizontalExpand="True" />
+                        <SpinBox Name="WageSpinBox" MinWidth="100" />
+                        <Button Name="WageConfirm" Text="{Loc 'station-modification-save'}" />
+                    </BoxContainer>
+                    <BoxContainer Orientation="Horizontal">
+                        <Label Text="{Loc 'station-modification-command-level'}" StyleClasses="LabelKeyText" />
+                        <Control HorizontalExpand="True" />
+                        <SpinBox Name="CommandLevelSpinBox" MinWidth="100" />
+                        <Button Name="CommandLevelConfirm" Text="{Loc 'station-modification-save'}" />
+                    </BoxContainer>
+                    <BoxContainer Orientation="Horizontal">
+                        <Label Text="{Loc 'station-modification-spending-limit'}" StyleClasses="LabelKeyText" />
+                        <Control HorizontalExpand="True" />
+                        <SpinBox Name="SpendingLimitSpinBox" MinWidth="100" />
+                        <Button Name="SpendingLimitConfirm" Text="{Loc 'station-modification-save'}" />
+                    </BoxContainer>
+                    <Control MinHeight="10" />
+                    <BoxContainer Orientation="Horizontal">
+                        <Label Text="{Loc 'station-modification-core-functions'}" StyleClasses="LabelKeyText" />
+                        <Control HorizontalExpand="True" />
+                        <Button Name="AssignFlagButton" Text="{Loc 'station-modification-flag-assign'}" ToolTip="{Loc 'station-modification-flag-assign-tooltip'}" ToggleMode="True" />
+                        <Button Name="ClaimFlagButton" Text="{Loc 'station-modification-flag-claim'}" ToolTip="{Loc 'station-modification-flag-claim-tooltip'}" ToggleMode="True" />
+                        <Button Name="RecordsFlagButton" Text="{Loc 'station-modification-flag-records'}" ToolTip="{Loc 'station-modification-flag-records-tooltip'}" ToggleMode="True" />
+                    </BoxContainer>
+                    <Control MinHeight="10" />
+                    <Label Text="{Loc 'station-modification-assignment-access'}" StyleClasses="LabelKeyText" />
+                    <PanelContainer VerticalExpand="True" HorizontalExpand="True" MinHeight="150">
+                        <PanelContainer.PanelOverride>
+                            <gfx:StyleBoxFlat BackgroundColor="#000000" />
+                        </PanelContainer.PanelOverride>
+                        <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+                            <GridContainer Name="AssignmentAccesses" Columns="4" Margin="5" />
+                        </ScrollContainer>
+                    </PanelContainer>
+                    <BoxContainer Orientation="Horizontal">
+                        <Control HorizontalExpand="True" />
+                        <Button Name="DeleteAssignmentButton" Text="{Loc 'station-modification-delete-assignment'}" />
+                    </BoxContainer>
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal">
+                    <LineEdit Name="NewAssignmentNameField" PlaceHolder="{Loc 'station-modification-new-assignment'}" HorizontalExpand="True" />
+                    <Button Name="CreateAssignmentButton" Text="{Loc 'station-modification-create-assignment'}" />
+                </BoxContainer>
+            </BoxContainer>
+            <!-- Radio -->
+            <BoxContainer Orientation="Vertical" Margin="15">
+                <BoxContainer Orientation="Horizontal">
+                    <Label Text="{Loc 'station-modification-selected-channel'}" StyleClasses="LabelKeyText" />
+                    <Control HorizontalExpand="True" />
+                    <OptionButton Name="PossibleChannels" />
+                </BoxContainer>
+                <Control MinHeight="20" />
+                <BoxContainer Orientation="Horizontal">
+                    <Label Text="{Loc 'station-modification-channel-status'}" StyleClasses="LabelKeyText" />
+                    <Control HorizontalExpand="True" />
+                    <Button Name="ChannelEnable" Text="{Loc 'station-modification-enabled'}" ToggleMode="True" />
+                    <Button Name="ChannelDisable" Text="{Loc 'station-modification-disabled'}" ToggleMode="True" />
+                </BoxContainer>
+                <Control MinHeight="10" />
+                <Label Text="{Loc 'station-modification-channel-access'}" StyleClasses="LabelKeyText" />
+                <PanelContainer VerticalExpand="True" HorizontalExpand="True" MinHeight="300">
+                    <PanelContainer.PanelOverride>
+                        <gfx:StyleBoxFlat BackgroundColor="#000000" />
+                    </PanelContainer.PanelOverride>
+                    <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+                        <GridContainer Name="ChannelAccesses" Columns="4" Margin="5" />
+                    </ScrollContainer>
+                </PanelContainer>
+            </BoxContainer>
+            <!-- Upgrade -->
+            <BoxContainer Orientation="Vertical" Margin="15">
+                <BoxContainer Orientation="Horizontal">
+                    <Label Text="{Loc 'station-modification-current-level'}" StyleClasses="LabelKeyText" />
+                    <Control MinWidth="20" />
+                    <Label Name="CurrentLevelLabel" />
+                </BoxContainer>
+                <PanelContainer HorizontalExpand="True" MinHeight="100">
+                    <PanelContainer.PanelOverride>
+                        <gfx:StyleBoxFlat BackgroundColor="#000000" />
+                    </PanelContainer.PanelOverride>
+                    <RichTextLabel Name="CurrentBenefitsLabel" Margin="5" />
+                </PanelContainer>
+                <Control MinHeight="20" />
+                <BoxContainer Orientation="Horizontal">
+                    <Label Text="{Loc 'station-modification-next-level'}" StyleClasses="LabelKeyText" />
+                    <Control MinWidth="20" />
+                    <Label Name="NextLevelLabel" />
+                </BoxContainer>
+                <PanelContainer HorizontalExpand="True" MinHeight="100">
+                    <PanelContainer.PanelOverride>
+                        <gfx:StyleBoxFlat BackgroundColor="#000000" />
+                    </PanelContainer.PanelOverride>
+                    <RichTextLabel Name="NextBenefitsLabel" Margin="5" />
+                </PanelContainer>
+                <Control MinHeight="10" />
+                <BoxContainer Orientation="Horizontal">
+                    <Label Text="{Loc 'station-modification-account'}" StyleClasses="LabelKeyText" />
+                    <Control MinWidth="8" />
+                    <Label Name="AccountBalanceLabel" />
+                    <Control HorizontalExpand="True" />
+                    <Label Name="PurchaseLabel" Text="{Loc 'station-modification-purchase'}" StyleClasses="LabelKeyText" />
+                    <Button Name="LevelPurchaseButton" />
+                </BoxContainer>
+            </BoxContainer>
+        </TabContainer>
+    </BoxContainer>
+</controls:FancyWindow>

@@ -1,3 +1,4 @@
+using Content.Shared._Persistence.Factions.Components; // Mothlight
 using Content.Client.Shuttles.UI;
 using Content.Shared.Shuttles.BUIStates;
 using Content.Shared.Shuttles.Events;
@@ -22,6 +23,10 @@ public sealed class IFFConsoleBoundUserInterface : BoundUserInterface
 
         _window = this.CreateWindowCenteredLeft<IFFConsoleWindow>();
         _window.ShowIFF += SendIFFMessage;
+        // Mothlight begin
+        _window.ShowFactionTag += show => SendMessage(new IFFShowFactionTagMessage(show));
+        _window.UpdateFactionTag(!EntMan.HasComponent<HiddenFactionTagComponent>(EntMan.GetComponent<TransformComponent>(Owner).GridUid));
+        // Mothlight end
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)

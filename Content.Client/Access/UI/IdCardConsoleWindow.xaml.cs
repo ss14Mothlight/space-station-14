@@ -62,6 +62,10 @@ namespace Content.Client.Access.UI
             RobustXamlLoader.Load(this);
             IoCManager.InjectDependencies(this);
             _logMill = _logManager.GetSawmill(SharedIdCardConsoleSystem.Sawmill);
+            // Mothlight begin
+            ModeTabs.SetTabTitle(0, Loc.GetString("faction-id-console-tab-faction"));
+            ModeTabs.SetTabTitle(1, Loc.GetString("faction-id-console-tab-id-config"));
+            // Mothlight end
             _spriteSystem = _entitySystem.GetEntitySystem<SpriteSystem>(); // Starlight-edit
 
             // Starlight _owner = owner; // Starlight edit
@@ -195,6 +199,8 @@ namespace Content.Client.Access.UI
 
         public void UpdateState(IdCardConsoleBoundUserInterfaceState state)
         {
+            FactionTab.UpdateState(state.Faction); // Mothlight
+
             PrivilegedIdButton.Text = state.IsPrivilegedIdPresent
                 ? Loc.GetString("id-card-console-window-eject-button")
                 : Loc.GetString("id-card-console-window-insert-button");

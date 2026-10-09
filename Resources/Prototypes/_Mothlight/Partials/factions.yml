@@ -1,0 +1,36 @@
+# Every station is a faction, as on SS14-Persistence. The components themselves are in Content.Shared/_Persistence.
+
+- type: !PartialOnly entity
+  id: BaseStation
+  components:
+  - type: FactionData
+  - type: CrewAssignments
+  - type: CrewRecords
+  - type: CrewAccesses
+
+# Factions build their own consoles, so the boards are printable from the start (same pack as Persistence).
+- type: !PartialOnly latheRecipePack
+  id: ServiceBoardsStatic
+  recipes:
+  - StationModComputerCircuitboard
+  - IDComputerCircuitboard
+  - IdPrinterCircuitboard
+
+- type: !PartialOnly latheRecipePack
+  id: ToolsStatic
+  recipes:
+  - GridConfigurator
+
+- type: !PartialOnly latheRecipePack
+  id: EngineeringBoardsStatic
+  recipes:
+  - GridControlComputerCircuitboard
+
+# Headsets can be tuned to a faction's radio, see FactionRadioSystem.
+- type: !PartialOnly entity
+  id: ClothingHeadset
+  components:
+  - type: UserInterface
+    interfaces:
+      enum.FactionHeadsetUiKey.Key:
+        type: FactionHeadsetBoundUserInterface

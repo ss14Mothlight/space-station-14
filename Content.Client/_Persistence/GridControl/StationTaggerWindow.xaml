@@ -1,0 +1,22 @@
+<DefaultWindow xmlns="https://spacestation14.io"
+               MinSize="500 220">
+    <BoxContainer Orientation="Vertical">
+        <BoxContainer Orientation="Horizontal">
+            <Label Text="{Loc 'grid-config-window-id'}" />
+            <Button Name="PrivilegedIdButton" Access="Public" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal">
+            <Label Text="{Loc 'station-tagger-window-target-faction'}" />
+            <Control MinWidth="5" />
+            <OptionButton Name="PossibleTargets" />
+        </BoxContainer>
+        <Label Name="TargetNameLabel" />
+        <Control VerticalExpand="True" />
+        <Label Name="ErrorLabel" FontColorOverride="#e05050" />
+        <Label Name="CurrentLabel" />
+        <BoxContainer Orientation="Horizontal">
+            <Button Name="LinkButton" Text="{Loc 'station-tagger-window-link'}" HorizontalExpand="True" />
+            <Button Name="UnlinkButton" Text="{Loc 'station-tagger-window-unlink'}" HorizontalExpand="True" />
+        </BoxContainer>
+    </BoxContainer>
+</DefaultWindow>

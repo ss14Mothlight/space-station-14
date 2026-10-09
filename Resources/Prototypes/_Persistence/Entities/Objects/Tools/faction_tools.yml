@@ -1,0 +1,147 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: entity
+  parent: BaseItem
+  id: StationGenesisDevice
+  name: faction genesis device
+  description: A one time use device which creates a new faction network which grids can be connected to.
+  components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/multitool_drop.ogg
+  - type: Sprite
+    sprite: _Persistence/Objects/Tools/faction-genesis-device.rsi
+    state: icon
+  - type: Item
+    size: Small
+  - type: Clothing
+    sprite: Objects/Tools/access_configurator.rsi
+    quickEquip: false
+    slots:
+    - Belt
+  - type: StationCreator
+    privilegedIdSlot:
+      name: id-card-console-privileged-id
+      ejectSound: /Audio/Machines/id_swipe.ogg
+      insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      ejectOnBreak: true
+      swap: false
+      whitelist:
+        components:
+        - IdCard
+  - type: UserInterface
+    interfaces:
+      enum.StationCreatorUiKey.Key:
+        type: StationCreatorBoundUserInterface
+  - type: ActivatableUI
+    key: enum.StationCreatorUiKey.Key
+    requiresComplex: true
+    requireActiveHand: false
+    singleUser: true
+    inHandsOnly: true
+  - type: ItemSlots
+  - type: ContainerContainer
+    containers:
+      StationCreator-privilegedId: !type:ContainerSlot
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 50
+      Steel: 100
+
+- type: entity
+  parent: BaseItem
+  id: GridConfigurator
+  name: grid configurator
+  description: Used to modify the name and station that a grid is associated with.
+  components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/multitool_drop.ogg
+  - type: Sprite
+    sprite: _Persistence/Objects/Tools/grid-configurator.rsi
+    state: icon
+  - type: Item
+    size: Small
+  - type: Clothing
+    sprite: Objects/Tools/access_configurator.rsi
+    quickEquip: false
+    slots:
+    - Belt
+  - type: GridConfig
+    privilegedIdSlot:
+      name: id-card-console-privileged-id
+      ejectSound: /Audio/Machines/id_swipe.ogg
+      insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      ejectOnBreak: true
+      swap: false
+      whitelist:
+        components:
+        - IdCard
+  - type: UserInterface
+    interfaces:
+      enum.GridConfigUiKey.Key:
+        type: GridConfigBoundUserInterface
+  - type: ActivatableUI
+    key: enum.GridConfigUiKey.Key
+    requiresComplex: true
+    requireActiveHand: false
+    singleUser: true
+    inHandsOnly: true
+  - type: ItemSlots
+  - type: ContainerContainer
+    containers:
+      GridConfig-privilegedId: !type:ContainerSlot
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 50
+      Steel: 100
+
+- type: entity
+  parent: BaseItem
+  id: StationTagger
+  name: faction tagger
+  description: Used to link specific machines and structures with a station.
+  components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/multitool_drop.ogg
+  - type: Sprite
+    sprite: _Persistence/Objects/Tools/faction-tagger.rsi
+    state: icon
+  - type: Item
+    size: Small
+  - type: Clothing
+    sprite: Objects/Tools/access_configurator.rsi
+    quickEquip: false
+    slots:
+    - Belt
+  - type: StationTagger
+    privilegedIdSlot:
+      name: id-card-console-privileged-id
+      ejectSound: /Audio/Machines/id_swipe.ogg
+      insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      ejectOnBreak: true
+      swap: false
+      whitelist:
+        components:
+        - IdCard
+    doAfter: 0.5
+  - type: UserInterface
+    interfaces:
+      enum.StationTaggerUiKey.Key:
+        type: StationTaggerBoundUserInterface
+  - type: ActivatableUI
+    key: enum.StationTaggerUiKey.Key
+    requiresComplex: true
+    requireActiveHand: false
+    singleUser: true
+    inHandsOnly: true
+  - type: ItemSlots
+  - type: ContainerContainer
+    containers:
+      StationTagger-privilegedId: !type:ContainerSlot
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 50
+      Steel: 100

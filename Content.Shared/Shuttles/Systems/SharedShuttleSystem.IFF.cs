@@ -1,10 +1,13 @@
 using Content.Shared.Shuttles.Components;
 using JetBrains.Annotations;
+using Content.Shared._Persistence.Factions; // Mothlight
 
 namespace Content.Shared.Shuttles.Systems;
 
 public abstract partial class SharedShuttleSystem
 {
+    [Dependency] private SharedFactionSystem _faction = null!; // Mothlight
+
     /*
      * Handles the label visibility on radar controls. This can be hiding the label or applying other effects.
      */
@@ -40,7 +43,10 @@ public abstract partial class SharedShuttleSystem
             return null;
         }
 
-        return string.IsNullOrEmpty(entName) ? Loc.GetString("shuttle-console-unknown") : entName;
+        // Mothlight begin - faction grids show their faction tag, like ID cards do
+        var label = string.IsNullOrEmpty(entName) ? Loc.GetString("shuttle-console-unknown") : entName;
+        return _faction.GetIffTag(gridUid) is { } tag ? $"[{tag}] {label}" : label;
+        // Mothlight end
     }
 
     /// <summary>

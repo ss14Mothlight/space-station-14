@@ -1,0 +1,57 @@
+<BoxContainer xmlns="https://spacestation14.io"
+              xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+              xmlns:faction="clr-namespace:Content.Client._Persistence.Factions.UI"
+              Orientation="Vertical"
+              VerticalExpand="True">
+    <Label Name="FactionLabel" StyleClasses="LabelKeyText" />
+    <Label Name="StatusLabel" />
+    <TabContainer Name="FactionTabs" VerticalExpand="True">
+        <!-- Selected person's account -->
+        <BoxContainer Name="RecordsTab" Orientation="Vertical" VerticalExpand="True">
+            <BoxContainer Orientation="Horizontal">
+                <Label Text="{Loc 'faction-id-console-selected-label'}" StyleClasses="LabelKeyText" />
+                <Control MinSize="8 0" />
+                <Label Name="SelectedLabel" />
+            </BoxContainer>
+            <TabContainer Name="RecordTabs" VerticalExpand="True">
+                <BoxContainer Name="AssignmentTab" Orientation="Vertical" VerticalExpand="True">
+                    <BoxContainer Orientation="Horizontal">
+                        <Label Text="{Loc 'faction-id-console-assignment-label'}" StyleClasses="LabelKeyText" />
+                        <Control MinSize="8 0" />
+                        <Label Name="AssignmentLabel" />
+                    </BoxContainer>
+                    <BoxContainer Orientation="Horizontal">
+                        <Label Text="{Loc 'faction-id-console-spending-label'}" StyleClasses="LabelKeyText" />
+                        <Control MinSize="8 0" />
+                        <Label Name="SpendingLabel" />
+                        <Control HorizontalExpand="True" />
+                        <Button Name="ResetSpendingButton" Text="{Loc 'faction-id-console-reset-spending'}" />
+                    </BoxContainer>
+                    <Control MinSize="0 8" />
+                    <PanelContainer VerticalExpand="True" HorizontalExpand="True">
+                        <PanelContainer.PanelOverride>
+                            <gfx:StyleBoxFlat BackgroundColor="#000000" />
+                        </PanelContainer.PanelOverride>
+                        <ScrollContainer HScrollEnabled="False">
+                            <GridContainer Name="AssignmentGrid" Columns="3" HorizontalExpand="True" />
+                        </ScrollContainer>
+                    </PanelContainer>
+                </BoxContainer>
+                <faction:FactionRecordEditor Name="GeneralRecord" />
+                <faction:FactionRecordEditor Name="CriminalRecord" />
+                <faction:FactionRecordEditor Name="MedicalRecord" />
+            </TabContainer>
+        </BoxContainer>
+        <!-- Everyone the faction has on file -->
+        <BoxContainer Name="CrewTab" Orientation="Vertical" VerticalExpand="True">
+            <BoxContainer Orientation="Horizontal">
+                <Label Text="{Loc 'faction-id-console-crew-name-header'}" StyleClasses="LabelKeyText" />
+                <Control HorizontalExpand="True" />
+                <Label Text="{Loc 'faction-id-console-crew-paid-header'}" StyleClasses="LabelKeyText" />
+            </BoxContainer>
+            <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
+                <BoxContainer Name="CrewList" Orientation="Vertical" />
+            </ScrollContainer>
+        </BoxContainer>
+    </TabContainer>
+</BoxContainer>

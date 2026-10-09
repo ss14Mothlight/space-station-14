@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Server.Popups;
+using Content.Server._Persistence.Factions; // Mothlight
 using Content.Shared.Access;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
@@ -27,6 +28,8 @@ public sealed partial class AccessOverriderSystem : SharedAccessOverriderSystem
     [Dependency] private SharedAudioSystem _audioSystem = default!;
     [Dependency] private SharedDoAfterSystem _doAfterSystem = default!;
     [Dependency] private IPrototypeManager _prototypeManager = default!; // Starlight-edit
+    [Dependency] private FactionAccessReaderUiSystem _factionUi = null!; // Mothlight
+    [Dependency] private FactionSystem _faction = null!; // Mothlight
 
     public override void Initialize()
     {
@@ -260,6 +263,15 @@ public sealed partial class AccessOverriderSystem : SharedAccessOverriderSystem
             groupsArray, // Starlight
             component.CurrentAccessGroup); // Starlight
 
+        // Mothlight begin - faction accesses on the target reader
+        if (component.TargetAccessReaderId is { Valid: true } factionTarget
+            && _accessReader.GetMainAccessReader(factionTarget, out var factionReader))
+        {
+            var editor = component.PrivilegedIdSlot.Item is { } editorId ? _faction.GetIdName(editorId) : null;
+            newState.Faction = _factionUi.BuildState(factionReader.Value.Owner, editor);
+        }
+        // Mothlight end
+
         _userInterface.SetUiState(uid, AccessOverriderUiKey.Key, newState);
     }
 
@@ -373,6 +385,18 @@ public sealed partial class AccessOverriderSystem : SharedAccessOverriderSystem
     /// <remarks>
     /// Other code relies on the fact this returns false if privileged Id is null. Don't break that invariant.
     /// </remarks>
+    // Mothlight begin
+    public bool IsPrivilegedIdAuthorized(Entity<AccessOverriderComponent> ent)
+    {
+        return PrivilegedIdIsAuthorized(ent, ent.Comp);
+    }
+
+    public void RefreshUserInterface(Entity<AccessOverriderComponent> ent)
+    {
+        UpdateUserInterface(ent, ent.Comp, null!); // The event isn't used.
+    }
+    // Mothlight end
+
     private bool PrivilegedIdIsAuthorized(EntityUid uid, AccessOverriderComponent? component = null)
     {
         if (!Resolve(uid, ref component))

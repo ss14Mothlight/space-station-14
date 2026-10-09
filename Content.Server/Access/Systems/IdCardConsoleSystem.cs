@@ -3,6 +3,7 @@ using System.Linq;
 using Content.Server.Chat.Systems;
 using Content.Server.Containers;
 using Content.Server.StationRecords.Systems;
+using Content.Server._Persistence.Factions; // Mothlight
 using Content.Shared.Access;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
@@ -44,6 +45,8 @@ public sealed partial class IdCardConsoleSystem : SharedIdCardConsoleSystem
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private EmagSystem _emag = default!; // Starlight-edit
+    [Dependency] private FactionIdCardConsoleSystem _factionConsole = null!; // Mothlight
+    [Dependency] private FactionIdCardSystem _factionIdCard = null!; // Mothlight
 
     public override void Initialize()
     {
@@ -110,6 +113,13 @@ public sealed partial class IdCardConsoleSystem : SharedIdCardConsoleSystem
 
     private void UpdateUserInterface(EntityUid uid, IdCardConsoleComponent component, EntityEventArgs args) =>
         UpdateUserInterface(uid, component);
+
+    // Mothlight begin
+    public void RefreshUserInterface(Entity<IdCardConsoleComponent> ent)
+    {
+        UpdateUserInterface(ent, ent.Comp);
+    }
+    // Mothlight end
 
     private void UpdateUserInterface(EntityUid uid, IdCardConsoleComponent component, bool? allIconsUnlockedOverride = null)
     {
@@ -244,6 +254,7 @@ public sealed partial class IdCardConsoleSystem : SharedIdCardConsoleSystem
                 // Starlight-edit: End
         }
 
+        newState.Faction = _factionConsole.BuildState((uid, component)); // Mothlight
         _userInterface.SetUiState(uid, IdCardConsoleUiKey.Key, newState);
     }
 
@@ -277,6 +288,10 @@ public sealed partial class IdCardConsoleSystem : SharedIdCardConsoleSystem
             newJobTitle = newJobTitle[..maxIdJobLength];
 
         _idCard.TryChangeFullName(targetId, newFullName, player: player);
+        // Mothlight begin - a title written here wins over the card's faction title
+        if (Comp<IdCardComponent>(targetId).LocalizedJobTitle != newJobTitle)
+            _factionIdCard.MarkManualTitle(targetId);
+        // Mothlight end
         _idCard.TryChangeJobTitle(targetId, newJobTitle, player: player);
 
         _prototype.Resolve(newJobProto, out var job);

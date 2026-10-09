@@ -1,0 +1,17 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: entity
+  parent: BaseAction
+  id: ActionOpenJobNetImplant
+  name: Open Job Network
+  description: Opens the job network so you can clock in and out.
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    priority: -20
+    icon:
+      sprite: Objects/Storage/Briefcases/briefcase_brown.rsi
+      state: icon
+  - type: InstantAction
+    event: !type:OpenJobNetImplantEvent

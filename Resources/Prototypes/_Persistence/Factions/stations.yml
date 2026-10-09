@@ -1,0 +1,17 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Player-founded factions are made from this. Unlike the round's main station it isn't tied to Nanotrasen,
+# station events or Central Command.
+
+- type: entity
+  id: StandardPersistStation
+  parent:
+  - BaseStation
+  - BaseStationNews
+  - BaseStationCargo
+  - BaseStationRecords
+  - BaseStationAlertLevels
+  - BaseStationMagnet
+  - BaseStationSalvageJobs
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform

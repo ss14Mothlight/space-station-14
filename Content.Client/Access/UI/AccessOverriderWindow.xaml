@@ -1,5 +1,6 @@
 <DefaultWindow xmlns="https://spacestation14.io"
             xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+            xmlns:faction="clr-namespace:Content.Client._Persistence.Factions.UI"
             MinSize="650 290">
     <BoxContainer Orientation="Vertical">
         <GridContainer Columns="2">
@@ -22,5 +23,7 @@
         <Label Name="MissingPrivilegesLabel" />
         <Control MinSize="0 4"/>
         <Label Name="MissingPrivilegesText" />
+        <!-- Mothlight -->
+        <faction:FactionAccessReaderControl Name="FactionAccess" Access="Public" />
     </BoxContainer>
 </DefaultWindow>

@@ -1,5 +1,6 @@
 using Content.Shared.Access;
 using Content.Shared.Doors.Electronics;
+using Content.Shared._Persistence.Factions.BUI; // Mothlight
 using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
 
@@ -20,6 +21,12 @@ public sealed partial class DoorElectronicsBoundUserInterface : BoundUserInterfa
         base.Open();
         _window = this.CreateWindow<DoorElectronicsConfigurationMenu>();
         _window.OnAccessChanged += UpdateConfiguration;
+        // Mothlight begin
+        _window.FactionAccess.OnToggleAccess += access => SendMessage(new FactionAccessReaderToggleMessage(access));
+        _window.FactionAccess.OnPersonalMode += enabled => SendMessage(new FactionAccessReaderPersonalModeMessage(enabled));
+        _window.FactionAccess.OnPersonalAdd += name => SendMessage(new FactionAccessReaderPersonalAddMessage(name));
+        _window.FactionAccess.OnPersonalRemove += name => SendMessage(new FactionAccessReaderPersonalRemoveMessage(name));
+        // Mothlight end
         // Starlight edit Start
         if (EntMan.TryGetComponent<MetaDataComponent>(Owner, out var meta))
             _window.Title = meta.EntityName;
@@ -48,6 +55,7 @@ public sealed partial class DoorElectronicsBoundUserInterface : BoundUserInterfa
             return;
         // Starlight End
         _window?.UpdateState(cast.AccessList, cast.AccessGroups, cast.PressedAccessList); // Starlight edit
+        _window?.FactionAccess.UpdateState(cast.Faction); // Mothlight
     }
 
     public void UpdateConfiguration(List<ProtoId<AccessLevelPrototype>> newAccessList)

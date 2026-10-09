@@ -1,0 +1,18 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Keycodes changed from Persistence's 'q' and 'a', which Starlight channels already use.
+
+# Each faction's own private channel, see the station modification console.
+- type: radioChannel
+  id: Faction
+  name: chat-radio-faction
+  keycode: 'h'
+  frequency: 1423
+  color: "#009C65"
+
+# Space traffic control.
+- type: radioChannel
+  id: STC
+  name: chat-radio-spacetraffic
+  keycode: '2'
+  frequency: 1222
+  color: "#A580D9"

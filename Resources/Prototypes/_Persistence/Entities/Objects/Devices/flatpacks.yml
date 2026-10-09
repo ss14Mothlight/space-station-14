@@ -1,0 +1,20 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: entity
+  parent: BaseFlatpack
+  id: ComputerStationModificationFlatpack
+  name: faction modification computer flatpack
+  description: A flatpack used for constructing a faction modification computer.
+  components:
+  - type: Flatpack
+    entity: ComputerStationModification
+
+- type: entity
+  parent: BaseFlatpack
+  id: ComputerGridControlFlatpack
+  name: grid control computer flatpack
+  description: A flatpack used for constructing a grid control computer.
+  components:
+  - type: Flatpack
+    entity: ComputerGridControl

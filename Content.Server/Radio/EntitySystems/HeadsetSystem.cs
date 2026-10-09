@@ -8,6 +8,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Content.Server._Starlight.Language;
 using Content.Shared._Starlight.Clothing;
+using Content.Server._Persistence.Radio; // Mothlight
 
 namespace Content.Server.Radio.EntitySystems;
 
@@ -16,6 +17,7 @@ public sealed partial class HeadsetSystem : SharedHeadsetSystem
     [Dependency] private INetManager _netMan = default!;
     [Dependency] private RadioSystem _radio = default!;
     [Dependency] private LanguageSystem _language = default!; // Starlight
+    [Dependency] private FactionRadioSystem _factionRadio = null!; // Mothlight
 
     public override void Initialize()
     {
@@ -62,6 +64,15 @@ public sealed partial class HeadsetSystem : SharedHeadsetSystem
             loudComp = comp;
         }
         // Starlight-end
+        // Mothlight begin - headsets tuned to a faction talk over its radio
+        if (args.Channel != null
+            && _factionRadio.TrySendFactionMessage(uid, component.Headset, args.Message, args.Channel, args.Language, loudComp))
+        {
+            args.Channel = null;
+            return;
+        }
+        // Mothlight end
+
         if (args.Channel != null
             && TryComp(component.Headset, out EncryptionKeyHolderComponent? keys)
             && keys.Channels.Contains(args.Channel.ID))

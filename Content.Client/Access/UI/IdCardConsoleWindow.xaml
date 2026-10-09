@@ -1,6 +1,7 @@
 <DefaultWindow xmlns="https://spacestation14.io"
             xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
-            MinSize="650 340">
+            xmlns:faction="clr-namespace:Content.Client._Persistence.Factions.UI"
+            MinSize="700 500"> <!-- Mothlight: was 650 340 -->
     <BoxContainer Orientation="Vertical">
         <!-- Privileged and target IDs, crew manifest button. -->
         <GridContainer Columns="2">
@@ -18,6 +19,11 @@
             </BoxContainer>
         </GridContainer>
         <Control MinSize="0 8" />
+        <!-- Mothlight begin: faction tab, with the usual card editing moved to the ID config tab -->
+        <TabContainer Name="ModeTabs" VerticalExpand="True">
+        <faction:FactionIdCardConsoleControl Name="FactionTab" Access="Public" />
+        <BoxContainer Name="IdConfigTab" Orientation="Vertical">
+        <!-- Mothlight end -->
         <!-- Full name and job title editing. -->
         <GridContainer Columns="3" HSeparationOverride="4">
             <Label Name="FullNameLabel" Text="{Loc 'id-card-console-window-full-name-label'}" />
@@ -58,5 +64,9 @@
             <Control Name="AccessLevelControlContainer" /> <!-- Access Level Buttons -->
         </BoxContainer>
         <!-- Starlight-end: Access Groups -->
+        <!-- Mothlight begin -->
+        </BoxContainer>
+        </TabContainer>
+        <!-- Mothlight end -->
     </BoxContainer>
 </DefaultWindow>

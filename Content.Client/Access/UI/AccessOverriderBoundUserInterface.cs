@@ -2,6 +2,7 @@ using Content.Shared.Access;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared._Persistence.Factions.BUI; // Mothlight
 using Robust.Client.UserInterface;
 using Robust.Shared.Prototypes;
 using static Content.Shared.Access.Components.AccessOverriderComponent;
@@ -31,6 +32,12 @@ namespace Content.Client.Access.UI
             _window.OnGroupSelected += group => SendMessage(new AccessGroupSelectedMessage(group)); // Starlight-edit
 
             _window.PrivilegedIdButton.OnPressed += _ => SendMessage(new ItemSlotButtonPressedEvent(PrivilegedIdCardSlotId));
+            // Mothlight begin
+            _window.FactionAccess.OnToggleAccess += access => SendMessage(new FactionAccessReaderToggleMessage(access));
+            _window.FactionAccess.OnPersonalMode += enabled => SendMessage(new FactionAccessReaderPersonalModeMessage(enabled));
+            _window.FactionAccess.OnPersonalAdd += name => SendMessage(new FactionAccessReaderPersonalAddMessage(name));
+            _window.FactionAccess.OnPersonalRemove += name => SendMessage(new FactionAccessReaderPersonalRemoveMessage(name));
+            // Mothlight end
         }
 
         public override void OnProtoReload(PrototypesReloadedEventArgs args)
@@ -80,6 +87,7 @@ namespace Content.Client.Access.UI
             base.UpdateState(state);
             var castState = (AccessOverriderBoundUserInterfaceState) state;
             _window?.UpdateState(_prototypeManager, castState);
+            _window?.FactionAccess.UpdateState(castState.Faction); // Mothlight
         }
 
         public void SubmitData(List<ProtoId<AccessLevelPrototype>> newAccessList)

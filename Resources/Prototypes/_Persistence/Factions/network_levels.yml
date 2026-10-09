@@ -1,0 +1,29 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: networkLevel
+  id: NetworkLevel1
+  name: network-level-new-arrival
+  cost: 0
+  tileLimit: 0
+  next: NetworkLevel2
+
+- type: networkLevel
+  id: NetworkLevel2
+  name: network-level-stakeholder
+  cost: 5000
+  tileLimit: 1000
+  next: NetworkLevel3
+
+- type: networkLevel
+  id: NetworkLevel3
+  name: network-level-big-shot
+  cost: 25000
+  tileLimit: 2500
+  next: NetworkLevel4
+
+- type: networkLevel
+  id: NetworkLevel4
+  name: network-level-magnate
+  cost: 100000
+  tileLimit: 8000

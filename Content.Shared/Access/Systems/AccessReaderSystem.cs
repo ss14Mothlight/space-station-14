@@ -22,6 +22,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Content.Shared._Starlight.Access;
 using Content.Shared._Starlight.Access.Systems;
+using Content.Shared._Persistence.Factions; // Mothlight
 
 namespace Content.Shared.Access.Systems;
 
@@ -36,6 +37,7 @@ public sealed partial class AccessReaderSystem : EntitySystem
     [Dependency] private SharedHandsSystem _handsSystem = default!;
     [Dependency] private SharedContainerSystem _containerSystem = default!;
     [Dependency] private SharedStationRecordsSystem _recordsSystem = default!;
+    [Dependency] private FactionAccessSystem _factionAccess = null!; // Mothlight
 
     private static readonly ProtoId<TagPrototype> PreventAccessLoggingTag = "PreventAccessLogging";
 
@@ -220,7 +222,8 @@ public sealed partial class AccessReaderSystem : EntitySystem
         var access = FindAccessTags(user, accessSources);
         FindStationRecordKeys(user, out var stationKeys, accessSources);
 
-        if (!IsAllowed(access, stationKeys, target, reader))
+        if (!IsAllowed(access, stationKeys, target, reader)
+            && !_factionAccess.IsAllowed(accessSources, access, target, reader)) // Mothlight - faction membership
             return false;
 
         if (!_tag.HasTag(user, PreventAccessLoggingTag))
@@ -342,7 +345,7 @@ public sealed partial class AccessReaderSystem : EntitySystem
         // Starlight-end
 
         if (accessLists.Count == 0) // Starlight-edit
-            return true;
+            return !_factionAccess.HasFactionRequirements(reader); // Mothlight - faction requirements still apply
 
         foreach (var set in accessLists) // Starlight-edit
         {

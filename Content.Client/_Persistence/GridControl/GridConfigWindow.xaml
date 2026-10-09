@@ -1,0 +1,37 @@
+<DefaultWindow xmlns="https://spacestation14.io"
+               MinSize="600 260">
+    <BoxContainer Orientation="Vertical">
+        <BoxContainer Orientation="Horizontal">
+            <Label Text="{Loc 'grid-config-window-id'}" />
+            <Button Name="PrivilegedIdButton" Access="Public" />
+            <Control HorizontalExpand="True" />
+            <Label Text="{Loc 'grid-config-window-mode'}" />
+            <Button Name="FactionModeButton" Text="{Loc 'grid-config-window-mode-faction'}" ToggleMode="True" />
+            <Button Name="PersonalModeButton" Text="{Loc 'grid-config-window-mode-personal'}" ToggleMode="True" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal">
+            <Label Name="TargetNameLabel" />
+            <Control MinWidth="5" />
+            <OptionButton Name="PossibleTargets" />
+        </BoxContainer>
+        <Control VerticalExpand="True" />
+        <Label Name="ErrorLabel" FontColorOverride="#e05050" />
+        <BoxContainer Orientation="Horizontal">
+            <Label Name="GridSizeLabel" />
+            <Control MinWidth="5" />
+            <Label Name="AvailableLabel" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal">
+            <Label Name="GridOwnerLabel" />
+            <Control HorizontalExpand="True" />
+            <Button Name="ClaimButton" Text="{Loc 'grid-config-window-claim'}" />
+            <Button Name="UnclaimButton" Text="{Loc 'grid-config-window-unclaim'}" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal">
+            <Label Name="GridNameLabel" />
+            <Control MinWidth="10" />
+            <LineEdit Name="GridNameLineEdit" HorizontalExpand="True" PlaceHolder="{Loc 'grid-config-window-new-name'}" />
+            <Button Name="GridNameButton" Text="{Loc 'grid-config-window-save'}" />
+        </BoxContainer>
+    </BoxContainer>
+</DefaultWindow>

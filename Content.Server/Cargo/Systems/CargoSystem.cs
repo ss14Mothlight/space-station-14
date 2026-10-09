@@ -17,6 +17,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 #region Starlight
 using Content.Server._Starlight.Cargo.Components;
+using Content.Server._Persistence.Factions; // Mothlight
 #endregion
 
 namespace Content.Server.Cargo.Systems;
@@ -41,6 +42,7 @@ public sealed partial class CargoSystem : SharedCargoSystem
     [Dependency] private UserInterfaceSystem _uiSystem = default!;
     [Dependency] private MetaDataSystem _metaSystem = default!;
     [Dependency] private RadioSystem _radio = default!;
+    [Dependency] private FactionSystem _faction = null!; // Mothlight
 
     private EntityQuery<TransformComponent> _xformQuery;
     private EntityQuery<CargoSellBlacklistComponent> _blacklistQuery;

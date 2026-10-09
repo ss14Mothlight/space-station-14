@@ -1,0 +1,106 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: entity
+  id: ComputerStationModification
+  parent: BaseComputerAiAccess
+  name: faction modification computer
+  description: Used to run the faction whose grid it's on, from its assignments and accesses to its radio channels.
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: explosive
+    - map: ["computerLayerKeys"]
+      state: generic_keys
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: StationModificationConsole
+  - type: ActivatableUI
+    key: enum.StationModUiKey.StationMod
+  - type: UserInterface
+    interfaces:
+      enum.StationModUiKey.StationMod:
+        type: StationModificationBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: Computer
+    board: StationModComputerCircuitboard
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#00FF00"
+
+- type: entity
+  id: ComputerGridControl
+  parent: BaseComputerAiAccess
+  name: grid control computer
+  description: Used to prevent a grid from being unclaimed.
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: comm_syndie
+    - map: ["computerLayerKeys"]
+      state: syndie_key
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: Computer
+    board: GridControlComputerCircuitboard
+  - type: PointLight
+    radius: 1.5
+    energy: 4.0
+    color: "#f71713"
+  - type: AccessReader
+    access: []
+  - type: GridControlConsole
+  - type: ActivatableUI
+    key: enum.GridControlConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.GridControlConsoleUiKey.Key:
+        type: GridControlConsoleBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+
+- type: entity
+  id: ComputerIdPrinter
+  parent: BaseComputerAiAccess
+  name: ID printer computer
+  description: Prints out replacement IDs.
+  components:
+  - type: Sprite
+    layers:
+    - map: ["computerLayerBody"]
+      state: computer
+    - map: ["computerLayerKeyboard"]
+      state: generic_keyboard
+    - map: ["computerLayerScreen"]
+      state: comm_logs
+    - map: ["computerLayerKeys"]
+      state: generic_keys
+    - map: [ "enum.WiresVisualLayers.MaintenancePanel" ]
+      state: generic_panel_open
+  - type: IdPrinterConsole
+  - type: ActivatableUI
+    key: enum.IdPrinterConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.IdPrinterConsoleUiKey.Key:
+        type: IdPrinterConsoleBoundUserInterface
+      enum.WiresUiKey.Key:
+        type: WiresBoundUserInterface
+  - type: Computer
+    board: IdPrinterCircuitboard
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#00FF00"

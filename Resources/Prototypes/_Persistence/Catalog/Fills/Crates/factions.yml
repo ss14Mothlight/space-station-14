@@ -1,0 +1,20 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: entity
+  id: BusinessStartingKit
+  parent: CrateGenericSteel
+  name: faction starter crate
+  description: Contains the goods relevant to creating a faction.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: StationTagger
+        - id: StationGenesisDevice
+        - id: GridConfigurator
+        - id: ComputerStationModificationFlatpack
+        - id: Multitool
+        - id: Wrench
+        - id: ComputerGridControlFlatpack

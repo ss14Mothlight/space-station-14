@@ -221,6 +221,15 @@ namespace Content.Server.Cargo.Systems
                 return;
             }
 
+            // Mothlight begin - faction spending limits
+            if (!_faction.CanSpendAt(uid, player, cost))
+            {
+                ConsolePopup(args.Actor, Loc.GetString("faction-spending-limit-reached"));
+                PlayDenySound(uid, component);
+                return;
+            }
+            // Mothlight end
+
             var ev = new FulfillCargoOrderEvent((station.Value, stationData), order, (uid, component));
             RaiseLocalEvent(ref ev);
             ev.FulfillmentEntity ??= station.Value;
@@ -238,6 +247,7 @@ namespace Content.Server.Cargo.Systems
             }
 
             order.Approved = true;
+            _faction.RecordSpending(uid, player, cost); // Mothlight
             _audio.PlayPvs(ApproveSound, uid);
 
             if (!_emag.CheckFlag(uid, EmagType.Interaction))

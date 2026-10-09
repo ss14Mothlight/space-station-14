@@ -1,0 +1,19 @@
+<BoxContainer xmlns="https://spacestation14.io"
+              xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+              Orientation="Vertical"
+              Margin="0 8 0 0">
+    <cc:HSeparator Color="#a88b5e" Margin="0 0 0 4" />
+    <Label Name="FactionLabel" StyleClasses="LabelKeyText" />
+    <GridContainer Name="FactionAccessGrid" Columns="4" HorizontalAlignment="Center" />
+    <Label Name="NoFactionAccessesLabel" Text="{Loc 'faction-access-reader-no-accesses'}" Visible="False" />
+    <Control MinSize="0 4" />
+    <CheckBox Name="PersonalModeCheckBox" Text="{Loc 'faction-access-reader-personal-mode'}" />
+    <BoxContainer Name="PersonalSection" Orientation="Vertical" Visible="False">
+        <BoxContainer Name="PersonalNamesContainer" Orientation="Vertical" />
+        <BoxContainer Orientation="Horizontal">
+            <LineEdit Name="PersonalNameLineEdit" HorizontalExpand="True"
+                      PlaceHolder="{Loc 'faction-access-reader-personal-name-placeholder'}" />
+            <Button Name="PersonalAddButton" Text="{Loc 'faction-access-reader-personal-add'}" />
+        </BoxContainer>
+    </BoxContainer>
+</BoxContainer>

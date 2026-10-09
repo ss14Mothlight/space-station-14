@@ -45,6 +45,17 @@ public sealed partial class CargoSystem
             return;
         }
 
+        // Mothlight begin - faction spending limits
+        if (!_faction.CanSpendAt(ent, args.Actor, args.Amount))
+        {
+            ConsolePopup(args.Actor, Loc.GetString("faction-spending-limit-reached"));
+            PlayDenySound(ent, ent.Comp);
+            return;
+        }
+
+        _faction.RecordSpending(ent, args.Actor, args.Amount);
+        // Mothlight end
+
         ent.Comp.NextAccountActionTime = Timing.CurTime + ent.Comp.AccountActionDelay;
         UpdateBankAccount((station, bank), -args.Amount,  ent.Comp.Account, dirty: false);
         _audio.PlayPvs(ApproveSound, ent);

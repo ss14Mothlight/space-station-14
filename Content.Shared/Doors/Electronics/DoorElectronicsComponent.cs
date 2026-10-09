@@ -2,6 +2,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 using Robust.Shared.Prototypes;
 using Content.Shared.Access;
+using Content.Shared._Persistence.Factions.BUI; // Mothlight
 
 namespace Content.Shared.Doors.Electronics;
 
@@ -36,6 +37,7 @@ public sealed class DoorElectronicsConfigurationState : BoundUserInterfaceState
     public List<ProtoId<AccessGroupPrototype>> AccessGroups;
     public List<ProtoId<AccessLevelPrototype>> PressedAccessList;
     // Starlight End
+    public FactionAccessReaderState? Faction; // Mothlight
     public DoorElectronicsConfigurationState(List<ProtoId<AccessLevelPrototype>> accessList, List<ProtoId<AccessGroupPrototype>> accessGroups, List<ProtoId<AccessLevelPrototype>> pressedAccessList) // Starlight edit
     {
         AccessList = accessList;

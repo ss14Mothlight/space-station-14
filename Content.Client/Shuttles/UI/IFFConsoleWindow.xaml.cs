@@ -14,6 +14,8 @@ public sealed partial class IFFConsoleWindow : FancyWindow,
 {
     private readonly ButtonGroup _showIFFButtonGroup = new();
     public event Action<bool>? ShowIFF;
+    public event Action<bool>? ShowFactionTag; // Mothlight
+    private readonly ButtonGroup _showFactionTagButtonGroup = new(); // Mothlight
 
     public IFFConsoleWindow()
     {
@@ -22,12 +24,26 @@ public sealed partial class IFFConsoleWindow : FancyWindow,
         ShowIFFOnButton.Group = _showIFFButtonGroup;
         ShowIFFOnButton.OnPressed += args => ShowIFFPressed(true);
         ShowIFFOffButton.OnPressed += args => ShowIFFPressed(false);
+        // Mothlight begin
+        ShowFactionTagOnButton.Group = _showFactionTagButtonGroup;
+        ShowFactionTagOffButton.Group = _showFactionTagButtonGroup;
+        ShowFactionTagOnButton.OnPressed += _ => ShowFactionTag?.Invoke(true);
+        ShowFactionTagOffButton.OnPressed += _ => ShowFactionTag?.Invoke(false);
+        // Mothlight end
     }
 
     private void ShowIFFPressed(bool pressed)
     {
         ShowIFF?.Invoke(pressed);
     }
+
+    // Mothlight begin
+    public void UpdateFactionTag(bool shown)
+    {
+        ShowFactionTagOnButton.Pressed = shown;
+        ShowFactionTagOffButton.Pressed = !shown;
+    }
+    // Mothlight end
 
     public void UpdateState(IFFConsoleBoundUserInterfaceState state)
     {

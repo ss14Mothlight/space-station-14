@@ -1,5 +1,6 @@
 using Content.Shared.Access.Systems;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared._Persistence.Factions.BUI; // Mothlight
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -91,6 +92,7 @@ public sealed partial class AccessOverriderComponent : Component
         public readonly ProtoId<AccessGroupPrototype>[]? AccessGroups;
         public readonly ProtoId<AccessGroupPrototype>? CurrentAccessGroup;
         // Starlight-edit: End
+        public FactionAccessReaderState? Faction; // Mothlight
 
         public AccessOverriderBoundUserInterfaceState(
             bool isPrivilegedIdPresent,

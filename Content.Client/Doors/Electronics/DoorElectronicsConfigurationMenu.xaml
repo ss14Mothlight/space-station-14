@@ -1,6 +1,7 @@
 <!-- Starlight edit Start: Access Groups for Door electronics -->
 <DefaultWindow xmlns="https://spacestation14.io"
             xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+            xmlns:faction="clr-namespace:Content.Client._Persistence.Factions.UI"
             MinSize="500 200">
     <BoxContainer Orientation="Vertical">
         <BoxContainer Orientation="Horizontal">
@@ -8,6 +9,8 @@
             <cc:VSeparator Color="#a88b5e" Margin="5 0 5 0" />
             <Control Name="AccessLevelControlContainer" />
         </BoxContainer>
+        <!-- Mothlight -->
+        <faction:FactionAccessReaderControl Name="FactionAccess" Access="Public" />
     </BoxContainer>
 </DefaultWindow>
 <!-- Starlight edit End -->

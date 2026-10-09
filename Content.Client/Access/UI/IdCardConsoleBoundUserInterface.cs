@@ -3,6 +3,7 @@ using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.CrewManifest;
+using Content.Shared._Persistence.Factions.BUI; // Mothlight
 using Content.Shared.Roles;
 using Content.Shared.StatusIcon;
 using Robust.Shared.Prototypes;
@@ -36,6 +37,12 @@ namespace Content.Client.Access.UI
             _window.CrewManifestButton.OnPressed += _ => SendMessage(new CrewManifestOpenUiMessage());
             _window.PrivilegedIdButton.OnPressed += _ => SendMessage(new ItemSlotButtonPressedEvent(PrivilegedIdCardSlotId));
             _window.TargetIdButton.OnPressed += _ => SendMessage(new ItemSlotButtonPressedEvent(TargetIdCardSlotId));
+            // Mothlight begin
+            _window.FactionTab.OnAssign += id => SendMessage(new FactionIdConsoleAssignMessage(id));
+            _window.FactionTab.OnResetSpending += () => SendMessage(new FactionIdConsoleResetSpendingMessage());
+            _window.FactionTab.OnSaveRecord += (type, text) => SendMessage(new FactionIdConsoleSaveRecordMessage(type, text));
+            _window.FactionTab.OnPrintRecord += type => SendMessage(new FactionIdConsolePrintRecordMessage(type));
+            // Mothlight end
 
             _window.OnClose += Close;
             _window.OpenCentered();

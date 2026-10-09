@@ -202,7 +202,9 @@ public sealed partial class ActionComponent : Component
     public SoundSpecifier? Sound;
 }
 
-[DataRecord, Serializable, NetSerializable]
+// Mothlight: DataDefinition rather than DataRecord, records ignore the TimeOffsetSerializer below, which saved
+// cooldowns as absolute times and left loaded actions stuck on cooldown.
+[DataDefinition, Serializable, NetSerializable]
 public partial record struct ActionCooldown
 {
     [DataField(required: true, customTypeSerializer: typeof(TimeOffsetSerializer))]

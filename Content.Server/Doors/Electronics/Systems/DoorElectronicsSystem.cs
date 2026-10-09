@@ -6,6 +6,7 @@ using Content.Shared.Doors.Electronics;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 using Content.Shared.Emag.Systems; // Starlight
+using Content.Server._Persistence.Factions; // Mothlight
 
 namespace Content.Server.Doors.Electronics;
 
@@ -14,6 +15,7 @@ public sealed partial class DoorElectronicsSystem : EntitySystem
     [Dependency] private UserInterfaceSystem _uiSystem = default!;
     [Dependency] private AccessReaderSystem _accessReader = default!;
     [Dependency] private EmagSystem _emag = default!; // Starlight
+    [Dependency] private FactionAccessReaderUiSystem _factionUi = null!; // Mothlight
 
     public override void Initialize()
     {
@@ -45,8 +47,18 @@ public sealed partial class DoorElectronicsSystem : EntitySystem
                 pressedAccesses.AddRange(accessList);
         }
         var state = new DoorElectronicsConfigurationState(possibleAccesses, component.AccessGroups, pressedAccesses);
-        _uiSystem.SetUiState(uid, DoorElectronicsConfigurationUiKey.Key, state);
         // Starlight edit End
+        // Mothlight begin - faction accesses, editable by whoever has it open
+        string? editor = null;
+        foreach (var actor in _uiSystem.GetActors(uid, DoorElectronicsConfigurationUiKey.Key))
+        {
+            editor = _factionUi.GetActorName(actor);
+            break;
+        }
+
+        state.Faction = _factionUi.BuildState(uid, editor);
+        // Mothlight end
+        _uiSystem.SetUiState(uid, DoorElectronicsConfigurationUiKey.Key, state); // Starlight edit
     }
 
     private void OnChangeConfiguration(

@@ -3,6 +3,7 @@ using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Roles;
 using Content.Shared.StatusIcon;
 using Content.Shared.Tag;
+using Content.Shared._Persistence.Factions.BUI; // Mothlight
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -92,6 +93,7 @@ public sealed partial class IdCardConsoleComponent : Component
         // because "IdCardConsoleComponent.AllIconsUnlocked" is set or the console has been emagged.
         public readonly bool AllIconsUnlocked;
         // Starlight-edit: End
+        public FactionIdCardConsoleState? Faction; // Mothlight - the faction tabs
 
         public IdCardConsoleBoundUserInterfaceState(bool isPrivilegedIdPresent,
             bool isPrivilegedIdAuthorized,

@@ -1,0 +1,32 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+# Prototypes in this file are kept as close to upstream as possible.
+
+- type: latheRecipe
+  parent: [ BaseCircuitboardRecipe, BaseGeneralComputerRecipeCategory ]
+  id: StationModComputerCircuitboard
+  result: StationModComputerCircuitboard
+
+- type: latheRecipe
+  parent: [ BaseCircuitboardRecipe, BaseGeneralComputerRecipeCategory ]
+  id: IDComputerCircuitboard
+  result: IDComputerCircuitboard
+
+- type: latheRecipe
+  parent: [ BaseGoldCircuitboardRecipe, BaseEngineeringComputerRecipeCategory ]
+  id: GridControlComputerCircuitboard
+  result: GridControlComputerCircuitboard
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: GridConfigurator
+  result: GridConfigurator
+  completetime: 2
+  materials:
+    Steel: 600
+    Plastic: 800
+    Glass: 400
+
+- type: latheRecipe
+  parent: [ BaseCircuitboardRecipe, BaseGeneralComputerRecipeCategory ]
+  id: IdPrinterCircuitboard
+  result: IdPrinterCircuitboard
