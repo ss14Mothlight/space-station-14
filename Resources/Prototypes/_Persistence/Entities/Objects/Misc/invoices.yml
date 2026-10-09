@@ -1,0 +1,46 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+
+- type: entity
+  parent: BaseItem
+  id: Invoice
+  name: digital invoice
+  description: A digital invoice which processes payments.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Persistence/Objects/Misc/invoice.rsi
+    layers:
+    - state: unpaid
+      map: [ "enum.InvoiceVisuals.Paid" ]
+  - type: Item
+    size: Tiny
+  - type: Invoice
+  - type: UserInterface
+    interfaces:
+      enum.InvoiceUiKey.Key:
+        type: InvoiceBoundUserInterface
+  - type: ActivatableUI
+    key: enum.InvoiceUiKey.Key
+    requiresComplex: true
+    requireActiveHand: false
+    singleUser: true
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.InvoiceVisuals.Paid:
+        enum.InvoiceVisuals.Paid:
+          True: { state: paid }
+          False: { state: unpaid }
+  - type: Tag
+    tags:
+    - Document
+  - type: PhysicalComposition
+    materialComposition:
+      Paper: 100
+
+- type: entity
+  parent: Invoice
+  id: Payslip
+  name: digital payslip
+  description: A digital payslip, already paid for, which pays out to whoever redeems it.
+  categories: [ HideSpawnMenu ]

@@ -1,5 +1,5 @@
 # Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
-# Prototypes in this file are kept as close to upstream as possible.
+# Costs are 10x Persistence's, money is a lot easier to come by here.
 
 - type: factionLevel
   id: FactionLevel1
@@ -12,7 +12,7 @@
 - type: factionLevel
   id: FactionLevel2
   name: faction-level-standard
-  cost: 5000
+  cost: 50000
   tileLimit: 2000
   tradestationClaim: false
   next: FactionLevel3
@@ -20,7 +20,7 @@
 - type: factionLevel
   id: FactionLevel3
   name: faction-level-major
-  cost: 25000
+  cost: 250000
   tileLimit: 5000
   tradestationClaim: true
   next: FactionLevel4
@@ -28,6 +28,6 @@
 - type: factionLevel
   id: FactionLevel4
   name: faction-level-grand
-  cost: 100000
+  cost: 1000000
   tileLimit: 20000
   tradestationClaim: true

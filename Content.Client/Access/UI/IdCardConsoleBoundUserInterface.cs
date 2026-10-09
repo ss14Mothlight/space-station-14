@@ -38,6 +38,7 @@ namespace Content.Client.Access.UI
             _window.PrivilegedIdButton.OnPressed += _ => SendMessage(new ItemSlotButtonPressedEvent(PrivilegedIdCardSlotId));
             _window.TargetIdButton.OnPressed += _ => SendMessage(new ItemSlotButtonPressedEvent(TargetIdCardSlotId));
             // Mothlight begin
+            _window.FactionTab.OnSelect += name => SendMessage(new FactionIdConsoleSelectMessage(name));
             _window.FactionTab.OnAssign += id => SendMessage(new FactionIdConsoleAssignMessage(id));
             _window.FactionTab.OnResetSpending += () => SendMessage(new FactionIdConsoleResetSpendingMessage());
             _window.FactionTab.OnSaveRecord += (type, text) => SendMessage(new FactionIdConsoleSaveRecordMessage(type, text));

@@ -39,3 +39,16 @@
     prototype: ComputerIdPrinter
   - type: StaticPrice
     price: 90
+
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: InvoicePrinterCircuitboard
+  name: invoice printer computer board
+  description: A computer printed circuit board for an invoice printer computer.
+  components:
+  - type: Sprite
+    state: cpu_supply
+  - type: ComputerBoard
+    prototype: ComputerInvoicePrinter
+  - type: StaticPrice
+    price: 90

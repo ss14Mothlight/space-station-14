@@ -30,6 +30,7 @@ public sealed partial class FactionIdCardConsoleSystem : EntitySystem
     {
         base.Initialize();
 
+        SubscribeLocalEvent<IdCardConsoleComponent, FactionIdConsoleSelectMessage>(OnSelect);
         SubscribeLocalEvent<IdCardConsoleComponent, FactionIdConsoleAssignMessage>(OnAssign);
         SubscribeLocalEvent<IdCardConsoleComponent, FactionIdConsoleResetSpendingMessage>(OnResetSpending);
         SubscribeLocalEvent<IdCardConsoleComponent, FactionIdConsoleSaveRecordMessage>(OnSaveRecord);
@@ -44,6 +45,16 @@ public sealed partial class FactionIdCardConsoleSystem : EntitySystem
     public FactionIdCardConsoleState BuildState(Entity<IdCardConsoleComponent> console)
     {
         var state = new FactionIdCardConsoleState();
+        var selection = EnsureComp<FactionIdCardConsoleComponent>(console);
+
+        // A newly inserted target ID selects whoever it belongs to.
+        var targetName = GetTargetName(console);
+        if (targetName != selection.LastTargetName)
+        {
+            selection.LastTargetName = targetName;
+            if (targetName != null)
+                selection.SelectedName = targetName;
+        }
 
         if (_faction.GetOwningFaction(console) is not { } station)
             return state;
@@ -72,8 +83,7 @@ public sealed partial class FactionIdCardConsoleSystem : EntitySystem
 
         state.CanEditRecords = _faction.CanEditGeneralRecord(privileged, station);
 
-        // Like the ID config tab, this works on whoever the target ID belongs to, with the privileged ID's permissions.
-        if (GetTargetName(console) is not { } selected)
+        if (selection.SelectedName is not { } selected)
             return state;
 
         state.SelectedName = selected;
@@ -152,7 +162,7 @@ public sealed partial class FactionIdCardConsoleSystem : EntitySystem
         if (_faction.GetOwningFaction(console) is not { } faction
             || GetPrivilegedName(console) is not { } privilegedName
             || !_faction.HasRecord(privilegedName, faction)
-            || GetTargetName(console) is not { } selectedName)
+            || CompOrNull<FactionIdCardConsoleComponent>(console)?.SelectedName is not { } selectedName)
         {
             return false;
         }
@@ -161,6 +171,13 @@ public sealed partial class FactionIdCardConsoleSystem : EntitySystem
         privileged = privilegedName;
         selected = selectedName;
         return true;
+    }
+
+    private void OnSelect(Entity<IdCardConsoleComponent> ent, ref FactionIdConsoleSelectMessage args)
+    {
+        var name = args.Name.Trim();
+        EnsureComp<FactionIdCardConsoleComponent>(ent).SelectedName = name.Length == 0 ? null : name;
+        _console.RefreshUserInterface(ent);
     }
 
     private void OnAssign(Entity<IdCardConsoleComponent> ent, ref FactionIdConsoleAssignMessage args)

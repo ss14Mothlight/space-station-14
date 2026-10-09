@@ -9,6 +9,11 @@
         <!-- Selected person's account -->
         <BoxContainer Name="RecordsTab" Orientation="Vertical" VerticalExpand="True">
             <BoxContainer Orientation="Horizontal">
+                <Label Text="{Loc 'faction-id-console-search-label'}" />
+                <LineEdit Name="SearchLineEdit" HorizontalExpand="True" />
+                <Button Name="SearchButton" Text="{Loc 'faction-id-console-search-button'}" />
+            </BoxContainer>
+            <BoxContainer Orientation="Horizontal">
                 <Label Text="{Loc 'faction-id-console-selected-label'}" StyleClasses="LabelKeyText" />
                 <Control MinSize="8 0" />
                 <Label Name="SelectedLabel" />

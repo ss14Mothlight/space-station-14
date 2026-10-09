@@ -12,10 +12,15 @@ public sealed partial class NullLinkPlayerManager : INullLinkPlayerManager
         if (!_resourcesEnabled
             || !_playerById.TryGetValue(ev.Player, out var playerData))
             return ValueTask.CompletedTask;
+        // Mothlight begin - credits belong to the character, not the account, so keep the character's
+        playerData.Resources.TryGetValue("credits", out var credits);
         playerData.Resources.Clear();
 
         foreach (var resource in ev.Resources)
             playerData.Resources[resource.Key] = resource.Value;
+
+        playerData.Resources["credits"] = credits;
+        // Mothlight end
 
         SendPlayerResources(playerData.Session, playerData.Resources);
         _playerResourcesManager.TrySetResources(playerData.Session, playerData.Resources);
@@ -25,7 +30,8 @@ public sealed partial class NullLinkPlayerManager : INullLinkPlayerManager
     public ValueTask UpdateResource(ResourceChangedEvent ev)
     {
         if (!_resourcesEnabled
-            || !_playerById.TryGetValue(ev.Player, out var playerData))
+            || !_playerById.TryGetValue(ev.Player, out var playerData)
+            || ev.Resource == "credits") // Mothlight - credits belong to the character, not the account
             return ValueTask.CompletedTask;
         playerData.Resources[ev.Resource] = ev.NewAmount;
 

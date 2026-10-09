@@ -34,7 +34,7 @@ public sealed class FactionIdCardConsoleState
     public List<FactionCrewListEntry> Crew = new();
 
     /// <summary>
-    /// Whoever the target ID belongs to, who the faction tab is editing.
+    /// The person selected for editing. Defaults to whoever the target ID belongs to.
     /// </summary>
     public string? SelectedName;
 
@@ -67,6 +67,12 @@ public enum FactionRecordType : byte
     General,
     Criminal,
     Medical,
+}
+
+[Serializable, NetSerializable]
+public sealed class FactionIdConsoleSelectMessage(string name) : BoundUserInterfaceMessage
+{
+    public readonly string Name = name;
 }
 
 [Serializable, NetSerializable]

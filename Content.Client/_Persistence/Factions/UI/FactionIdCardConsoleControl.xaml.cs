@@ -12,6 +12,7 @@ namespace Content.Client._Persistence.Factions.UI;
 [GenerateTypedNameReferences]
 public sealed partial class FactionIdCardConsoleControl : BoxContainer
 {
+    public event Action<string>? OnSelect;
     public event Action<int>? OnAssign;
     public event Action? OnResetSpending;
     public event Action<FactionRecordType, string>? OnSaveRecord;
@@ -28,6 +29,8 @@ public sealed partial class FactionIdCardConsoleControl : BoxContainer
         RecordTabs.SetTabTitle(2, Loc.GetString("faction-id-console-tab-criminal"));
         RecordTabs.SetTabTitle(3, Loc.GetString("faction-id-console-tab-medical"));
 
+        SearchButton.OnPressed += _ => OnSelect?.Invoke(SearchLineEdit.Text);
+        SearchLineEdit.OnTextEntered += _ => OnSelect?.Invoke(SearchLineEdit.Text);
         ResetSpendingButton.OnPressed += _ => OnResetSpending?.Invoke();
 
         GeneralRecord.OnSave += text => OnSaveRecord?.Invoke(FactionRecordType.General, text);
@@ -65,12 +68,19 @@ public sealed partial class FactionIdCardConsoleControl : BoxContainer
         foreach (var entry in state.Crew)
         {
             var row = new BoxContainer { Orientation = LayoutOrientation.Horizontal };
-            row.AddChild(new Label
+            var button = new Button
             {
                 Text = Loc.GetString("faction-id-console-crew-entry",
                     ("name", entry.Name),
                     ("assignment", entry.Assignment ?? Loc.GetString("faction-id-console-unassigned"))),
-            });
+            };
+            var name = entry.Name;
+            button.OnPressed += _ =>
+            {
+                FactionTabs.CurrentTab = 0;
+                OnSelect?.Invoke(name);
+            };
+            row.AddChild(button);
             row.AddChild(new Control { HorizontalExpand = true });
             row.AddChild(new Label { Text = entry.LastPaid == DateTime.MinValue ? "-" : entry.LastPaid.ToString("g") });
             CrewList.AddChild(row);

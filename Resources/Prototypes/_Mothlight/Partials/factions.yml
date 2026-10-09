@@ -15,6 +15,7 @@
   - StationModComputerCircuitboard
   - IDComputerCircuitboard
   - IdPrinterCircuitboard
+  - InvoicePrinterCircuitboard
 
 - type: !PartialOnly latheRecipePack
   id: ToolsStatic

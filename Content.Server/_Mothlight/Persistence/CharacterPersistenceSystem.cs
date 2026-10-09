@@ -55,6 +55,7 @@ public sealed partial class CharacterPersistenceSystem : EntitySystem
         "Damageable",
         "Hunger",
         "Thirst",
+        "CharacterCredits",
     ];
 
     /// <summary>

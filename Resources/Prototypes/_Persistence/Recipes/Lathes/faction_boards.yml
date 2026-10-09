@@ -30,3 +30,8 @@
   parent: [ BaseCircuitboardRecipe, BaseGeneralComputerRecipeCategory ]
   id: IdPrinterCircuitboard
   result: IdPrinterCircuitboard
+
+- type: latheRecipe
+  parent: [ BaseCircuitboardRecipe, BaseGeneralComputerRecipeCategory ]
+  id: InvoicePrinterCircuitboard
+  result: InvoicePrinterCircuitboard

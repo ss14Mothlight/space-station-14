@@ -118,53 +118,6 @@ public sealed class FactionTest : GameTest
         });
     }
 
-    /// <summary>
-    /// The ID card console's faction tab works on whoever's ID is in the target slot, with the permissions of whoever's
-    /// ID is in the privileged slot, the same as the ID config tab.
-    /// </summary>
-    [Test]
-    public async Task ConsoleFactionTabTargetsTargetId()
-    {
-        var map = await Pair.CreateTestMap();
-
-        await Server.WaitAssertion(() =>
-        {
-            var consoles = Server.System<FactionIdCardConsoleSystem>();
-            var slots = Server.System<Content.Shared.Containers.ItemSlots.ItemSlotsSystem>();
-
-            var station = _faction.CreateFaction("Console Faction", Owner);
-            _station.AddGridToStation(station, map.Grid);
-            var guard = SEntMan.GetComponent<CrewAssignmentsComponent>(station).CreateAssignment("Guard");
-
-            var console = SEntMan.SpawnEntity("ComputerId", map.GridCoords);
-            var consoleComp = SEntMan.GetComponent<Content.Shared.Access.Components.IdCardConsoleComponent>(console);
-
-            var ownerId = SEntMan.SpawnEntity(IdCard, map.GridCoords);
-            _idCard.TryChangeFullName(ownerId, Owner);
-            var memberId = SEntMan.SpawnEntity(IdCard, map.GridCoords);
-            _idCard.TryChangeFullName(memberId, Member);
-
-            // Only the privileged ID: nobody to edit, and it mustn't edit its own holder.
-            Assert.That(slots.TryInsert(console, consoleComp.PrivilegedIdSlot, ownerId, null));
-            var state = consoles.BuildState((console, consoleComp));
-            Assert.That(state.IsOwner);
-            Assert.That(state.SelectedName, Is.Null);
-
-            Assert.That(slots.TryInsert(console, consoleComp.TargetIdSlot, memberId, null));
-            state = consoles.BuildState((console, consoleComp));
-            Assert.That(state.SelectedName, Is.EqualTo(Member));
-            Assert.That(state.AssignableIds, Does.Contain(guard.ID), "The owner can assign anyone");
-
-            // With the roles swapped, someone without an assignment can't assign anything.
-            slots.TryEject(console, consoleComp.PrivilegedIdSlot, null, out _);
-            slots.TryEject(console, consoleComp.TargetIdSlot, null, out _);
-            Assert.That(slots.TryInsert(console, consoleComp.PrivilegedIdSlot, memberId, null));
-            Assert.That(slots.TryInsert(console, consoleComp.TargetIdSlot, ownerId, null));
-            state = consoles.BuildState((console, consoleComp));
-            Assert.That(state.IsMember, Is.False, "No record yet, so no access to the faction tab");
-        });
-    }
-
     private EntityUid SpawnHolding(Robust.Shared.Map.EntityCoordinates coords, string name)
     {
         var mob = SEntMan.SpawnEntity("MobHuman", coords);

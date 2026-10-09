@@ -1,5 +1,5 @@
 # Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
-# Prototypes in this file are kept as close to upstream as possible.
+# Costs are 10x Persistence's, money is a lot easier to come by here.
 
 - type: cargoProduct
   id: BusinessStartingKitCrate
@@ -7,7 +7,7 @@
     sprite: Objects/Misc/bureaucracy.rsi
     state: acquisition_form_words
   product: BusinessStartingKit
-  cost: 7000
+  cost: 70000
   category: cargoproduct-category-name-cargo
   group: market
 
@@ -17,6 +17,6 @@
     sprite: Objects/Devices/flatpack.rsi
     state: base
   product: ComputerGridControlFlatpack
-  cost: 1000
+  cost: 10000
   category: cargoproduct-category-name-shuttle
   group: market
