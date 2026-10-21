@@ -17,6 +17,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Content.Server._Starlight.SecureTerminal;
 using Content.Shared._Starlight.Economy;
+using Content.Shared._Starlight.Traits.Antags;
 
 namespace Content.Server._Starlight.Economy;
 
@@ -100,7 +101,9 @@ public sealed partial class SalarySystem : SharedSalarySystem
         var sourceModifier = GetStationSalaryModifier("Everyone") + GetStationSalaryModifier(source);
         var multiplier = Math.Max(0.2f, 1f + sourceModifier); // Minimum income is 20% of the base salary
         bonusMultiplier = Math.Max(0f, bonusMultiplier); // Bonus has to be positive
-        return (int)Math.Ceiling(baseSalary * bonusMultiplier * multiplier);
+        var credits = (int)Math.Ceiling(baseSalary * bonusMultiplier * multiplier);
+        return HasComp<MarkedForDeathComponent>(session.AttachedEntity)
+            ? AntagTraitCreditBonus.Apply(credits) : credits;
     }
 
     private float GetStationSalaryModifier(string source)
@@ -153,6 +156,9 @@ public sealed partial class SalarySystem : SharedSalarySystem
         // Mothlight begin - paid to the character they're playing
         if (session.AttachedEntity is not { } character || !_bank.TryBankDeposit(character, amount))
             return;
+
+        if (HasComp<MarkedForDeathComponent>(session.AttachedEntity))
+            amount = AntagTraitCreditBonus.Apply(amount);
         // Mothlight end
 
         // We need to make a prototype

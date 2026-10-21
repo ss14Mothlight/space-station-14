@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Content.Shared._Blimpuf.Contraband;
 using Content.Shared._Starlight.Chemistry.Components;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
@@ -81,6 +82,7 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
     [Dependency] protected EntityQuery<ContainedSolutionComponent> ContainedQuery = default!;
     [Dependency] protected EntityQuery<SolutionComponent> SolutionQuery = default!;
     [Dependency] protected EntityQuery<SolutionManagerComponent> SolutionManagerQuery = default!;
+    [Dependency] private ContrabandSystem _contraband = default!; // Blimpuf
 
     public override void Initialize()
     {
@@ -157,7 +159,7 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
         if (entity is not null)
         {
             DebugTools.Assert(TryGetSolution(container, name, out var debugEnt)
-                              && debugEnt.Value.Owner == entity.Value.Owner);
+                && debugEnt.Value.Owner == entity.Value.Owner);
             return true;
         }
 
@@ -1053,6 +1055,7 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
                 , ("type", proto.LocalizedName)
                 , ("color", proto.SubstanceColor.ToHexNoAlpha())
                 , ("amount", quantity)));
+            _contraband.AppendReagentDescription(msg, proto); // Blimpuf
         }
 
         msg.PushNewline();
@@ -1215,7 +1218,8 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
     /// If you're running this when your entity is created, it is HIGHLY recommended to run on <see cref="MapInitEvent"/>
     /// Deviance from these instructions may prevent your game from building. YOU HAVE BEEN WARNED.
     /// </remarks>
-    [Obsolete("Solution string matching will be removed in the future in favor of relations and enumerators.")]
+    //[Obsolete("Solution string matching will be removed in the future in favor of relations and enumerators.")]
+    // Starlight-edit: un-obsolete because relations don't exist
     public bool EnsureSolution(
         Entity<SolutionManagerComponent?> entity,
         string name,

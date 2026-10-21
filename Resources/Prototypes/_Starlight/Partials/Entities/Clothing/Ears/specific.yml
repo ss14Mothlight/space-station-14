@@ -1,0 +1,6 @@
+- type: !PartialOnly entity
+  id: ClothingHeadsetChameleon
+  name: passenger headset
+  components:
+  - type: ChameleonClothing
+    default: ClothingHeadsetPassenger

@@ -62,3 +62,17 @@ Resources/Maps/**.yml merge=mapping-merge-driver
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
+
+###############################################################################
+# Mothlight: auto-resolve renames we keep on top of upstream (Assistant -> Passenger,
+# NTCredit -> Speso; rules in Tools/_Mothlight/upstream_renames.py).
+# Register the driver once per clone with Tools/_Mothlight/setup_merge_drivers.sh
+# (unregistered, git falls back to its normal merge). Maps chain into
+# mapping-merge-driver when that one is configured.
+###############################################################################
+*.yml     merge=mothlight-rename
+*.ftl     merge=mothlight-rename
+*.xml     merge=mothlight-rename
+*.xaml    merge=mothlight-rename
+*.cs      merge=mothlight-rename
+Resources/Changelog/** !merge
