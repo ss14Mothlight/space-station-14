@@ -1,6 +1,5 @@
 using System.Linq;
 using Content.Server._Persistence.Factions;
-using Content.Server.Cargo.Components;
 using Content.Server.Popups;
 using Content.Server.Station.Systems;
 using Content.Shared._Persistence.Factions.Components;
@@ -8,6 +7,7 @@ using Content.Shared._Persistence.GridControl;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Cargo.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;

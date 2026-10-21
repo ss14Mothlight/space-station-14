@@ -73,4 +73,11 @@ public static class SharedCommandHelpers
 
         return input[starts.Peek()..commandStart].Trim();
     }
+
+    #region Mothlight
+
+    // Literally just sick and tired of checking for this manually ngl.
+    public static bool NoSession(ICommonSession? session) => session is null;
+
+    #endregion
 }

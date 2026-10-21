@@ -45,7 +45,7 @@ public sealed partial class JoinGameCommand : ToolshedCommand
         EntityUid stationUid,
         bool load)
     {
-        if (CommandHelpers.NoSession(ctx)) return;
+        if (SharedCommandHelpers.NoSession(ctx)) return;
 
         _ticker ??= GetSys<GameTicker>();
         _jobs ??= GetSys<StationJobsSystem>();

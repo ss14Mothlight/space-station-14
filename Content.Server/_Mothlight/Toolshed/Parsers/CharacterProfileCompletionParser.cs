@@ -14,7 +14,7 @@ public sealed partial class CharacterProfileCompletionParser : CustomCompletionP
 
     public override CompletionResult? TryAutocomplete(ParserContext ctx, CommandArgument? arg)
     {
-        if (CommandHelpers.NoSession(ctx.Session)) return null;
+        if (SharedCommandHelpers.NoSession(ctx.Session)) return null;
         var prefs = _prefs.GetPreferences(ctx.Session!.UserId).Characters
             .Select(c => new CompletionOption(c.Key.ToString(), c.Value.Name));
         return CompletionResult.FromOptions(prefs);
