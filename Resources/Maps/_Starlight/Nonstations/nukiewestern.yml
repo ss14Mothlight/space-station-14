@@ -20449,7 +20449,7 @@ entities:
     - type: Transform
       pos: 22.612003,33.355247
       parent: 2
-- proto: ToyFigurineAssistant
+- proto: ToyFigurinePassenger
   entities:
   - uid: 3274
     components:

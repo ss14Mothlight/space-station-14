@@ -73,6 +73,16 @@ public sealed partial class StationJobsSystem : EntitySystem
         if (!TryComp<StationJobsComponent>(msg.Station, out var stationJobs))
             return;
 
+        // Mothlight begin - a station loaded from a save already has its job slots, keep them
+        if (stationJobs.JobListInitialized)
+        {
+            UpdateJobsAvailable();
+            return;
+        }
+
+        stationJobs.JobListInitialized = true;
+        // Mothlight end
+
         stationJobs.JobList = stationJobs.SetupAvailableJobs.ToDictionary(
             x => x.Key,
             x=> (int?)(x.Value[1] < 0 ? null : x.Value[1]));

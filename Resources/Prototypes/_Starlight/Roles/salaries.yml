@@ -50,7 +50,7 @@
     ServiceWorker: 23
     Performer: 23
     Reporter: 46
-    Assistant: 15
+    Passenger: 15 # Mothlight
     Boxer: 23
 
     Scientist: 65
@@ -118,7 +118,7 @@
     ServiceWorker: "Central Domestic Division"
     Performer: "Central Domestic Division"
     Reporter: "Central Domestic Division"
-    Assistant: "Central Domestic Division"
+    Passenger: "Central Domestic Division"
     Boxer: "Central Domestic Division"
 
     Scientist: "Central Research Division"

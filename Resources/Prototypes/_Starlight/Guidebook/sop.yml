@@ -219,7 +219,7 @@
     - nano-trasen-employee-sop-intro
     - service-sop-intro
     - medical-sop-intro
-    - assistant-sop-intro
+    - passenger-sop-intro
 
 
 - type: guideEntry
@@ -941,22 +941,22 @@
   priority: 3
 
 - type: guideEntry
-  id: assistant-sop-intro
-  name: guide-entry-sl-assistant-sop-staff-intro
+  id: passenger-sop-intro
+  name: guide-entry-sl-passenger-sop-staff-intro
   text: "/ServerInfo/Guidebook/StarlightSOP/AssistantSOP/assistant-sop-intro.xml"
   priority: 8
   children:
-      - assistant-sop-assistantmanager
-      - assistant-sop-assistant
+      - passenger-sop-assistantmanager
+      - passenger-sop-passenger
 
 - type: guideEntry
-  id: assistant-sop-assistantmanager
-  name: guide-entry-sl-assistant-sop-assistantmanager
+  id: passenger-sop-assistantmanager
+  name: guide-entry-sl-passenger-sop-assistantmanager
   text: "/ServerInfo/Guidebook/StarlightSOP/AssistantSOP/AssistantManager.xml"
   priority: 1
 
 - type: guideEntry
-  id: assistant-sop-assistant
-  name: guide-entry-sl-assistant
+  id: passenger-sop-passenger
+  name: guide-entry-sl-passenger
   text: "/ServerInfo/Guidebook/StarlightSOP/AssistantSOP/Assistant.xml"
   priority: 2

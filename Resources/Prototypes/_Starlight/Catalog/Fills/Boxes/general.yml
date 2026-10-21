@@ -98,7 +98,7 @@
 # Expedition Encryption Keys
 - type: entity
   name: expedition encryption key box
-  parent: BoxEncryptionKeyAssistant
+  parent: BoxEncryptionKeyPassenger
   id: BoxEncryptionKeyExpedition
   components:
     - type: EntityTableContainerFill
@@ -110,7 +110,7 @@
 
 - type: entity
   name: salvage encryption key box
-  parent: BoxEncryptionKeyAssistant
+  parent: BoxEncryptionKeyPassenger
   id: BoxEncryptionKeySalvage
   suffix: DO NOT MAP, Steal Objective
   components:

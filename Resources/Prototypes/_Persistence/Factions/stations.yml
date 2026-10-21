@@ -12,6 +12,7 @@
   - BaseStationAlertLevels
   - BaseStationMagnet
   - BaseStationSalvageJobs
+  - BaseStationJobsSpawning # Mothlight - job slots, empty until someone opens some
   categories: [ HideSpawnMenu ]
   components:
   - type: Transform

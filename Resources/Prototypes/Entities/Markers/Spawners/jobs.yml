@@ -100,12 +100,12 @@
 # Civilian
 
 - type: entity
-  id: SpawnPointAssistant
+  id: SpawnPointPassenger
   parent: SpawnPointJobBase
-  name: assistant
+  name: passenger
   components:
   - type: SpawnPoint
-    job_id: Assistant
+    job_id: Passenger # Mothlight
   - type: Sprite
     layers:
       - state: green

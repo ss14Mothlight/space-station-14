@@ -99,7 +99,7 @@ public sealed class JobRequirementsTest : GameTest
                 - type: StationJobs
                   availableJobs:
                     SeniorCitizen: [ -1, -1 ]
-                    Assistant: [ -1, -1 ]
+                    Passenger: [ -1, -1 ]
                     Twenties: [ -1, -1 ]
                     Wehngineer: [ -1, -1 ]
                     FreezerHead: [ -1, -1 ]
@@ -138,7 +138,7 @@ public sealed class JobRequirementsTest : GameTest
         var priorities = new Dictionary<ProtoId<JobPrototype>, JobPriority>
         {
             { wantedJob, JobPriority.High },
-            { "Assistant", JobPriority.Low },
+            { "Passenger", JobPriority.Low },
         };
 
         await pair.Client.WaitAssertion(() =>
@@ -163,7 +163,7 @@ public sealed class JobRequirementsTest : GameTest
         await pair.Server.WaitPost(() => ticker.StartRound());
         await pair.RunTicksSync(10);
 
-        pair.AssertJob(expectedJob ? wantedJob : "Assistant");
+        pair.AssertJob(expectedJob ? wantedJob : "Passenger");
 
         await pair.Server.WaitPost(() => ticker.RestartRound());
         await pair.RunTicksSync(10);
@@ -261,7 +261,7 @@ public sealed class JobRequirementsTest : GameTest
         var priorities = new Dictionary<ProtoId<JobPrototype>, JobPriority>
         {
             { wantedJob, JobPriority.High },
-            { "Assistant", JobPriority.Low },
+            { "Passenger", JobPriority.Low },
         };
 
         await pair.Client.WaitAssertion(() =>
@@ -282,7 +282,7 @@ public sealed class JobRequirementsTest : GameTest
         await pair.Server.WaitPost(() => ticker.StartRound());
         await pair.RunTicksSync(10);
 
-        pair.AssertJob(expectedJob ? wantedJob : "Assistant");
+        pair.AssertJob(expectedJob ? wantedJob : "Passenger");
 
         await pair.Server.WaitPost(() => ticker.RestartRound());
         await pair.RunTicksSync(10);

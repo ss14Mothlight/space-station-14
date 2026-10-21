@@ -1,0 +1,56 @@
+# Ported from SS14-Persistence (https://github.com/michaelchessall/SS14-Persistence).
+
+- type: entity
+  parent: BaseItem
+  id: BSPAnchorKey
+  name: anchor key
+  description: Parks the grid it's on in bluespace, and brings it back near where it was parked. Needs an ID allowed to claim the grid.
+  components:
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/multitool_drop.ogg
+  - type: Sprite
+    sprite: _Persistence/Objects/Devices/anchor_key.rsi
+    layers:
+    - state: noid_unstored
+      map: ["enum.BSPAnchorKeyVisualLayers.Base"]
+  - type: Item
+    size: Small
+    sprite: _Persistence/Objects/Devices/anchor_key.rsi
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.BSPAnchorKeyVisuals.State:
+        enum.BSPAnchorKeyVisualLayers.Base:
+          NoIdUnstored: { state: noid_unstored }
+          NoIdStored: { state: noid_stored }
+          IdUnstored: { state: id_unstored }
+          IdStored: { state: id_stored }
+  - type: BSPAnchorKey
+    privilegedIdSlot:
+      name: id-card-console-privileged-id
+      ejectSound: /Audio/Machines/id_swipe.ogg
+      insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+      ejectOnBreak: true
+      swap: false
+      whitelist:
+        components:
+        - IdCard
+  - type: UserInterface
+    interfaces:
+      enum.BSPAnchorKeyUiKey.Key:
+        type: BSPAnchorKeyBoundUserInterface
+  - type: ActivatableUI
+    key: enum.BSPAnchorKeyUiKey.Key
+    requiresComplex: true
+    requireActiveHand: false
+    singleUser: true
+    inHandsOnly: true
+  - type: ItemSlots
+  - type: ContainerContainer
+    containers:
+      BSPAnchorKey-privilegedId: !type:ContainerSlot
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 50
+      Steel: 100

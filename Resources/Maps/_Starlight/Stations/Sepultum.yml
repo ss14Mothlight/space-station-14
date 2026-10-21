@@ -85154,7 +85154,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -18.432669,-1.3768783
-- proto: ClothingEyesGlassesNoirAssistant
+- proto: ClothingEyesGlassesNoirPassenger
   entities:
   - uid: 14296
     components:
@@ -151557,7 +151557,7 @@ entities:
     - type: Transform
       parent: 2
       pos: 5.522767,26.618942
-- proto: PlushieLizardJobAssistant
+- proto: PlushieLizardJobPassenger
   entities:
   - uid: 22922
     components:
@@ -171114,7 +171114,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -38.5,-1.5
-- proto: SpawnPointAssistant
+- proto: SpawnPointPassenger
   entities:
   - uid: 26111
     components:

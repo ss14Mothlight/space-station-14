@@ -68,7 +68,7 @@ public sealed partial class StationSpawningSystem : SharedStationSpawningSystem
     [Dependency] private RoundStatisticsSystem _roundStatistics = default!;
     [Dependency] private TransformSystem _xform = default!;
     private static readonly ProtoId<SpeciesPrototype> FallbackSpecies = "Human";
-    private static readonly ProtoId<JobPrototype> FallbackJob = "Assistant";
+    private static readonly ProtoId<JobPrototype> FallbackJob = "Passenger"; // Mothlight
     #endregion
 
     // Starlight

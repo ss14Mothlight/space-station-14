@@ -17,8 +17,8 @@
     Biomass: 400
 
 - type: latheRecipe
-  id: AssistantPDA
-  result: AssistantPDA
+  id: PassengerPDA
+  result: PassengerPDA
   categories:
   - General
   completetime: 3

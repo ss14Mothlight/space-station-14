@@ -33,7 +33,7 @@
       prob: 0.5
     - id: ClothingOuterCoatBomber
       prob: 0.3
-    - id: PlushieLizardJobAssistant # Starlight, no Passengers
+    - id: PlushieLizardJobPassenger # Starlight, no Passengers
       prob: 0.02
 
 - type: entity

@@ -30,7 +30,7 @@ public sealed partial class CrewManifestCommand : ToolshedCommand
     private MindSystem? _mind;
     private ContainerSystem? _container;
     private InventorySystem? _inventory;
-    private static readonly ProtoId<JobPrototype> _assistantPrototypeId = "Assistant";
+    private static readonly ProtoId<JobPrototype> _passengerPrototypeId = "Passenger"; // Mothlight
 
     [CommandImplementation("addto")]
     public EntityUid AddToManifest([PipedArgument] EntityUid uid, EntityUid station, bool useIdJob, bool addRole)
@@ -78,12 +78,12 @@ public sealed partial class CrewManifestCommand : ToolshedCommand
 
     private ProtoId<JobPrototype> GetJobOrDefault(EntityUid player)
     {
-        // Attempt to fetch job from current ID for convenience. Otherwise, this will forcefully set the player's job role to Assistant.
+        // Attempt to fetch job from current ID for convenience. Otherwise, this will forcefully set the player's job role to Passenger.
         _job ??= EntitySystemManager.GetEntitySystem<JobSystem>();
         _container ??= EntitySystemManager.GetEntitySystem<ContainerSystem>();
         _inventory ??= EntitySystemManager.GetEntitySystem<InventorySystem>();
 
-        if (!_inventory.TryGetSlotEntity(player, "id", out var target)) return _assistantPrototypeId;
+        if (!_inventory.TryGetSlotEntity(player, "id", out var target)) return _passengerPrototypeId;
         if (TryComp<PdaComponent>(target, out var pda) && pda.ContainedId is { } id &&
             TryComp<IdCardComponent>(id, out var card))
         {
@@ -94,7 +94,7 @@ public sealed partial class CrewManifestCommand : ToolshedCommand
             if (_proto.HasIndex<JobPrototype>(parsed)) return parsed; // pray.
         }
 
-        return _assistantPrototypeId;
+        return _passengerPrototypeId;
     }
 
     private void AddRecord(EntityUid station, EntityUid player, bool useIdJob, bool addRole)

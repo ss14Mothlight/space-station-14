@@ -1,5 +1,5 @@
 ﻿using Content.Shared._Afterlight.Silicons.Borgs;
-using Content.Shared._NullLink;
+using Content.Shared._Persistence.Bank; // Mothlight
 using Content.Shared._Starlight.Silicons.Borgs;
 using Content.Shared.Silicons.Borgs.Components;
 using Robust.Shared.Prototypes;
@@ -9,7 +9,7 @@ namespace Content.Shared.Silicons.Borgs;
 
 public abstract partial class SharedBorgSwitchableTypeSystem
 {
-    [Dependency] private ISharedNullLinkPlayerResourcesManager _playerResources = default!;
+    [Dependency] private SharedBankSystem _bank = default!; // Mothlight - pay from the bank, in spesos
     [Dependency] private IComponentFactory _componentFactory = default!;
 
     /// <summary>
@@ -31,10 +31,8 @@ public abstract partial class SharedBorgSwitchableTypeSystem
             if (subtypePrototype.TryComp<BorgSubtypeDefinitionComponent>(out var subtype, _componentFactory)
                 && subtype.Price is not null and > 0)
             {
-                if (!_playerResources.TryGetResource(ent.Owner, "credits", out var balance) || balance < subtype.Price)
+                if (!_bank.TryBankWithdraw(ent.Owner, subtype.Price.Value)) // Mothlight - bank
                     return false;
-
-                _playerResources.TryUpdateResource(ent.Owner, "credits", -subtype.Price.Value);
             }
         }
 

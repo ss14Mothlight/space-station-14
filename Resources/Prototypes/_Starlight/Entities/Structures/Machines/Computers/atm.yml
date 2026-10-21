@@ -3,13 +3,24 @@
   id: ATM
   categories: [ ShouldMapStation ]
   name: atm
-  description: A regular ATM, it eats money, spits out money, and transfers money.
+  description: A regular ATM, it eats spesos and spits them back out. # Mothlight - Persistence bank ATM
   placement:
     mode: SnapgridCenter
     snap:
     - Wallmount
   components:
-  - type: ATM
+  # Mothlight begin - Persistence bank ATM, in spesos
+  - type: BankATM
+    cashSlot:
+      name: bank-ATM-cashSlot
+      insertSound: /Audio/Machines/scanning.ogg
+      ejectSound: /Audio/Machines/tray_eject.ogg
+      ejectOnBreak: true
+      swap: false
+      whitelist:
+        components:
+        - Cash
+  # Mothlight end
   - type: WallMount
     arc: 360
   - type: Sprite
@@ -25,12 +36,15 @@
         computerLayerScreen:
           True: { visible: true, shader: unshaded }
           False: { visible: false }
+  # Mothlight begin - Persistence bank ATM
   - type: ActivatableUI
-    key: enum.ATMUIKey.Key
+    key: enum.BankATMMenuUiKey.ATM
+    singleUser: true
   - type: UserInterface
     interfaces:
-     enum.ATMUIKey.Key:
-        type: ATMBui
+      enum.BankATMMenuUiKey.ATM:
+        type: BankATMBoundUserInterface
+  # Mothlight end
   - type: PointLight
     enabled: true
     radius: 1.5

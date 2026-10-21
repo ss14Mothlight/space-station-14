@@ -63,7 +63,7 @@
             MailTech: [ 1, 2 ]
             SalvageLead: [ 1, 1 ]
             #civilian
-            Assistant: [ -1, -1 ]
+            Passenger: [ -1, -1 ]
             Clown: [ 1, 1 ]
             Mime: [ 1, 1 ]
             Musician: [ 1, 2 ]

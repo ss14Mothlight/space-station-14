@@ -3,7 +3,7 @@
   id: VendorPlushieBarfo
   productEntity: PlushieBarfo
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
     - SLCrew
   conditions:
@@ -14,7 +14,7 @@
   id: VendorPlushieBrightheart
   productEntity: PlushieBrightheart
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
     - SLCrew
   conditions:
@@ -25,7 +25,7 @@
   id: VendorPlushieDoxes
   productEntity: PlushieDoxes
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
     - SLCrew
   conditions:
@@ -36,7 +36,7 @@
   id: VendorPlushieEinalia
   productEntity: PlushieEinalia
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
     - SLCrew
   conditions:
@@ -47,7 +47,7 @@
   id: VendorPlushieGalio
   productEntity: PlushieGalio
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLCrew
   conditions:
@@ -58,7 +58,7 @@
   id: VendorPlushieHrek
   productEntity: PlushieHrek
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLCrew
   conditions:
@@ -69,7 +69,7 @@
   id: VendorPlushieKoni
   productEntity: PlushieKoni
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
     - SLCrew
   conditions:
@@ -80,7 +80,7 @@
   id: VendorPlushieLance
   productEntity: PlushieLance
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLCrew
   conditions:
@@ -91,7 +91,7 @@
   id: VendorPlushieMozan
   productEntity: PlushieMozan
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLCrew
   conditions:
@@ -102,7 +102,7 @@
   id: VendorPlushieNebula
   productEntity: PlushieNebula
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
     - SLCrew
   conditions:
@@ -113,7 +113,7 @@
   id: VendorPlushieOp
   productEntity: PlushieOp
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLCrew
   conditions:
@@ -124,7 +124,7 @@
   id: VendorPlushieVictor
   productEntity: PlushieVictor
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLCrew
   conditions:
@@ -135,7 +135,7 @@
   id: VendorPlushieChemmi
   productEntity: PlushieChemmi
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLCrew
   conditions:
@@ -147,7 +147,7 @@
   id: VendorPlushieArachind
   productEntity: PlushieArachind
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLSpecies
   conditions:
@@ -158,7 +158,7 @@
   id: VendorPlushieBorg
   productEntity: PlushieBorg
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
     - SLSpecies
   conditions:
@@ -169,7 +169,7 @@
   id: VendorPlushieDiona
   productEntity: PlushieDiona
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLSpecies
   conditions:
@@ -180,7 +180,7 @@
   id: VendorPlushieHuman
   productEntity: PlushieHuman
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLSpecies
   conditions:
@@ -191,7 +191,7 @@
   id: VendorPlushieMoth
   productEntity: PlushieMoth
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLSpecies
   conditions:
@@ -202,7 +202,7 @@
   id: VendorPlushieVulp
   productEntity: PlushieVulp
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLSpecies
   conditions:
@@ -213,7 +213,7 @@
   id: VendorPlushieVox
   productEntity: PlushieVox
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLSpecies
   conditions:
@@ -225,7 +225,7 @@
   id: VendorPlushieAbductor
   productEntity: PlushieAbductor
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLPlushies
   conditions:
@@ -236,7 +236,7 @@
   id: VendorPlushieAxolotl
   productEntity: PlushieAxolotl
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLPlushies
   conditions:
@@ -247,7 +247,7 @@
   id: VendorPlushieBorb
   productEntity: PlushieBorb
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLPlushies
   conditions:
@@ -258,7 +258,7 @@
   id: VendorPlushieCarp
   productEntity: PlushieCarp
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLPlushies
   conditions:
@@ -269,7 +269,7 @@
   id: VendorPlushieCowSquishims
   productEntity: PlushieCowSquishims
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLPlushies
   conditions:
@@ -280,7 +280,7 @@
   id: VendorPlushieCreature
   productEntity: PlushieCreature
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLPlushies
   conditions:
@@ -291,7 +291,7 @@
   id: VendorPlushieDumboOctopus
   productEntity: PlushieDumboOctopus
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLPlushies
   conditions:
@@ -302,7 +302,7 @@
   id: VendorPlushieExperiment
   productEntity: PlushieExperiment
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLPlushies
   conditions:
@@ -313,7 +313,7 @@
   id: VendorPlushieFrog
   productEntity: PlushieFrogSquishims
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLPlushies
   conditions:
@@ -324,7 +324,7 @@
   id: VendorPlushieGoat
   productEntity: PlushieGoat
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLPlushies
   conditions:
@@ -335,7 +335,7 @@
   id: VendorPlushieGnome
   productEntity: PlushieGnome
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLPlushies
   conditions:
@@ -346,7 +346,7 @@
   id: VendorPlushieHampter
   productEntity: PlushieHampter
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLPlushies
   conditions:
@@ -357,7 +357,7 @@
   id: VendorPlushieKiki
   productEntity: PlushieKiki
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLPlushies
   conditions:
@@ -368,7 +368,7 @@
   id: VendorPlushieKitten
   productEntity: PlushieKitten
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLPlushies
   conditions:
@@ -379,7 +379,7 @@
   id: VendorPlushiePanda
   productEntity: PlushiePanda
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLPlushies
   conditions:
@@ -390,7 +390,7 @@
   id: VendorPlushiePig
   productEntity: PlushiePig
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLPlushies
   conditions:
@@ -401,7 +401,7 @@
   id: VendorPlushieRenault
   productEntity: PlushieRenault
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLPlushies
   conditions:
@@ -412,7 +412,7 @@
   id: VendorPlushieSeaBunny
   productEntity: PlushieSeaBunny
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
     - SLPlushies
   conditions:
@@ -423,7 +423,7 @@
   id: VendorPlushieSeaPancake
   productEntity: PlushieSeaPancake
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
     - SLPlushies
   conditions:
@@ -434,7 +434,7 @@
   id: VendorPlushieSeaSheep
   productEntity: PlushieSeaSheep
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
     - SLPlushies
   conditions:
@@ -445,7 +445,7 @@
   id: VendorPlushieSeal
   productEntity: PlushieSeal
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
     - SLPlushies
   conditions:
@@ -456,7 +456,7 @@
   id: VendorPlushieShadekin
   productEntity: PlushieShadekin
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLSpecies
   conditions:
@@ -467,7 +467,7 @@
   id: VendorPlushieSharkGrey
   productEntity: PlushieSharkGrey
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLPlushies
   conditions:
@@ -478,7 +478,7 @@
   id: VendorPlushieSharkPink
   productEntity: PlushieSharkPink
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLPlushies
   conditions:
@@ -489,7 +489,7 @@
   id: VendorPlushieSnail
   productEntity: PlushieSnail
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLPlushies
   conditions:
@@ -500,7 +500,7 @@
   id: VendorPlushieStingRay
   productEntity: PlushieStingRay
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLPlushies
   conditions:
@@ -511,7 +511,7 @@
   id: VendorPlushieSus
   productEntity: PlushieSus
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLPlushies
   conditions:
@@ -522,7 +522,7 @@
   id: VendorPlushieXeno
   productEntity: PlushieXeno
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLPlushies
   conditions:
@@ -534,7 +534,7 @@
   id: VendorClothingHeadHatWhiteCatEars
   productEntity: ClothingHeadHatWhiteCatEars
   cost:
-    NTCredit: 1666
+    Speso: 1666
   categories:
   - SLToys
   conditions:
@@ -545,7 +545,7 @@
   id: VendorClothingShoesSkates
   productEntity: ClothingShoesSkates
   cost:
-    NTCredit: 40
+    Speso: 40
   categories:
   - SLToys
   conditions:
@@ -556,7 +556,7 @@
   id: VendorClothingShoesSkatesCool
   productEntity: ClothingShoesSkatesCool
   cost:
-    NTCredit: 800
+    Speso: 800
   categories:
   - SLToys
   conditions:
@@ -567,7 +567,7 @@
   id: VendorToyRubberDuck
   productEntity: ToyRubberDuck
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLToys
   conditions:
@@ -578,7 +578,7 @@
   id: VendorToyIan
   productEntity: ToyIan
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLToys
   conditions:
@@ -589,7 +589,7 @@
   id: VendorMagic9Ball
   productEntity: Magic9Ball
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLToys
   conditions:
@@ -600,7 +600,7 @@
   id: VendorToyMouse
   productEntity: ToyMouse
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLToys
   conditions:
@@ -611,7 +611,7 @@
   id: VendorToyHammer
   productEntity: ToyHammer
   cost:
-    NTCredit: 20
+    Speso: 20
   categories:
   - SLToys
   conditions:
@@ -622,7 +622,7 @@
   id: VendorSingularityToy
   productEntity: SingularityToy
   cost:
-    NTCredit: 1000
+    Speso: 1000
   categories:
   - SLToys
   conditions:

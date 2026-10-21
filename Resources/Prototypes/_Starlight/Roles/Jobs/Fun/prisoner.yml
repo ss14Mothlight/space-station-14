@@ -31,7 +31,7 @@
   equipment:
     shoes: ClothingShoesColorBlack
     id: PrisonerPDA
-    ears: ClothingHeadsetAssistant
+    ears: ClothingHeadsetPassenger
     jumpsuit: ClothingUniformJumpsuitPrisoner
     head: ClothingHeadHatBeretPrison
 
@@ -41,6 +41,6 @@
   equipment:
     shoes: ClothingShoesColorBlack
     jumpsuit: ClothingUniformJumpsuitPrisoner
-    ears: ClothingHeadsetAssistant
+    ears: ClothingHeadsetPassenger
     gloves: ClothingHandsGlovesColorBlack
     head: ClothingHeadHatBeretPrison

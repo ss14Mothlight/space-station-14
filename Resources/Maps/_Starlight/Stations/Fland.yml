@@ -203229,7 +203229,7 @@ entities:
     - type: Transform
       parent: 2
       pos: 20.5,36.5
-- proto: SpawnPointAssistant
+- proto: SpawnPointPassenger
   entities:
   - uid: 30730
     components:

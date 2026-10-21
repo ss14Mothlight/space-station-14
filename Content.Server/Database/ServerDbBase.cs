@@ -43,6 +43,13 @@ namespace Content.Server.Database
         }
 
         #region Preferences
+        // Mothlight begin - Starlight renamed passengers to assistants, which no longer exist
+        private static string MigrateJobName(string job)
+        {
+            return job == "Assistant" ? "Passenger" : job;
+        }
+        // Mothlight end
+
         public async Task<PlayerPreferences?> GetPlayerPreferencesAsync(
             NetUserId userId,
             CancellationToken cancel = default)
@@ -91,7 +98,9 @@ namespace Content.Server.Database
             foreach (var favorite in prefs.ConstructionFavorites)
                 constructionFavorites.Add(new ProtoId<ConstructionPrototype>(favorite));
 
-            var jobPriorities = prefs.JobPriorities.ToDictionary(j => new ProtoId<JobPrototype>(j.JobName), j => (JobPriority)j.Priority);
+            var jobPriorities = prefs.JobPriorities
+                .GroupBy(j => MigrateJobName(j.JobName)) // Mothlight - Starlight's assistants are passengers again
+                .ToDictionary(g => new ProtoId<JobPrototype>(g.Key), g => (JobPriority) g.Max(j => j.Priority));
 
             return new PlayerPreferences(profiles, Color.FromHex(prefs.AdminOOCColor), constructionFavorites, jobPriorities);
         }
@@ -240,7 +249,7 @@ namespace Content.Server.Database
 
         private static HumanoidCharacterProfile ConvertProfiles(Profile profile)
         {
-            var jobs = profile.Jobs.Select(j => new ProtoId<JobPrototype>(j.JobName)).ToHashSet();
+            var jobs = profile.Jobs.Select(j => new ProtoId<JobPrototype>(MigrateJobName(j.JobName))).ToHashSet(); // Mothlight - Starlight's assistants are passengers again
             var antags = profile.Antags.Select(a => new ProtoId<AntagPrototype>(a.AntagName));
             var traits = profile.Traits.Select(t => new ProtoId<TraitPrototype>(t.TraitName));
 

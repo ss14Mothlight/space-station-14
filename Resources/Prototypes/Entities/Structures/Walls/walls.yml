@@ -3,7 +3,7 @@
   parent: [ BaseStructure, BaseStructureDissolvable ] # Starlight-edit
   id: BaseStructureWall
   name: basewall
-  description: Keeps the air in and the assistants out.
+  description: Keeps the air in and the passengers out.
   placement:
     mode: SnapgridCenter
     snap:
@@ -1332,7 +1332,7 @@
   parent: BaseWall
   id: WallWood
   name: wood wall
-  description: The traditional assistant defense.
+  description: The traditional passenger defense.
   components:
   - type: Ricochetable
     chance: 0
@@ -1373,7 +1373,7 @@
   parent: BaseWall
   id: WallWeb
   name: web wall
-  description: Keeps the spiders in and the assistants out.
+  description: Keeps the spiders in and the passengers out.
   components:
   - type: Ricochetable
     chance: 0

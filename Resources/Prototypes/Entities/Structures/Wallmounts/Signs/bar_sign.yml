@@ -180,7 +180,7 @@
   parent: BaseBarSign
   id: BarSignTheHarmbaton
   name: The Harmbaton
-  description: A great dining experience for both security members and assistants.
+  description: A great dining experience for both security members and passengers.
   components:
   - type: BarSign
     current: Harmbaton

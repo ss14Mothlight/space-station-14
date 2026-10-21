@@ -260,7 +260,7 @@
     - id: PlushieLizardJobLibrarian
     - id: PlushieLizardJobMime
     - id: PlushieLizardJobMusician
-    - id: PlushieLizardJobAssistant # Starlight, no Passengers
+    - id: PlushieLizardJobPassenger # Starlight, no Passengers
     - id: PlushieLizardJobReporter
     - id: PlushieLizardJobZookeeper
 

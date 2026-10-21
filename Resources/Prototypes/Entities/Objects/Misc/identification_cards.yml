@@ -31,17 +31,17 @@
 
 - type: entity
   parent: IDCardStandard
-  id: AssistantIDCard
-  name: assistant ID card
+  id: PassengerIDCard
+  name: passenger ID card # Mothlight
   components:
   - type: Sprite
     layers:
     - state: default
     - sprite: &icon-rsi Interface/Misc/job_icons.rsi
       offset: &icon-offset -0.09375, 0.0625 #3 pixels left, 2 pixels up
-      state: Assistant
+      state: Passenger # Mothlight - passenger icon
   - type: PresetIdCard
-    job: Assistant
+    job: Passenger # Mothlight
 
 #Command
 
@@ -933,13 +933,13 @@
 #Antags
 
 - type: entity
-  name: assistant ID card #Starlight de-gretidification
+  name: passenger ID card #Starlight de-gretidification
   parent: [IDCardStandard, BaseChameleon]
   id: AgentIDCard
   suffix: Agent
   components:
   - type: PresetIdCard
-    job: Assistant
+    job: Passenger # Mothlight
   - type: Access
     tags:
     - Maintenance
@@ -949,7 +949,7 @@
     - state: default
     - sprite: *icon-rsi
       offset: *icon-offset
-      state: Assistant
+      state: Passenger # Mothlight - passenger icon
   - type: AgentIDCard
   - type: UIRequiresLock
   - type: ActivatableUI
@@ -960,7 +960,7 @@
     - DoorBumpOpener
   - type: ChameleonClothing
     slot: [idcard]
-    default: AssistantIDCard
+    default: PassengerIDCard
     requireTag: WhitelistChameleonIdCard
   - type: UserInterface
     interfaces:
@@ -972,7 +972,7 @@
     listNumber: false
 
 - type: entity
-  name: assistant ID card
+  name: passenger ID card # Mothlight
   parent: AgentIDCard
   id: NukieAgentIDCard
   suffix: Nukie

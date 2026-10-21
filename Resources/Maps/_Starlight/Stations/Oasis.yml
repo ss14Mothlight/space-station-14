@@ -96463,7 +96463,7 @@ entities:
       inSlot: eyes
     - type: Physics
       canCollide: False
-- proto: ClothingEyesGlassesNoirAssistant
+- proto: ClothingEyesGlassesNoirPassenger
   entities:
   - uid: 10741
     components:
@@ -203775,7 +203775,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -14.5,-38.5
-- proto: SpawnPointAssistant
+- proto: SpawnPointPassenger
   entities:
   - uid: 23950
     components:
@@ -213029,7 +213029,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -59.523293,34.62538
-- proto: ToyFigurineAssistant
+- proto: ToyFigurinePassenger
   entities:
   - uid: 25229
     components:

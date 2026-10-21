@@ -59663,7 +59663,7 @@ entities:
     - type: Transform
       parent: 2
       pos: 0.5,8.5
-- proto: SpawnPointAssistant
+- proto: SpawnPointPassenger
   entities:
   - uid: 6997
     components:

@@ -327,8 +327,8 @@
     state: icon
 
 - type: stealTargetGroup
-  id: AssistantHeadsetsCollection
-  name: steal-target-groups-assistant-headsets
+  id: PassengerHeadsetsCollection
+  name: steal-target-groups-passenger-headsets
   sprite:
     sprite: Clothing/Ears/Headsets/service.rsi
     state: icon

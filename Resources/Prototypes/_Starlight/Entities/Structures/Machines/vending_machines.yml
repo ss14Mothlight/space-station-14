@@ -88,7 +88,7 @@
     name: store-preset-name-spellbook
     categories: []
     currencyWhitelist:
-    - NTCredit
+    - Speso # Mothlight - spesos, not credits
 
 - type: entity
   parent: SLVendingMachine

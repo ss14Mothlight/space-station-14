@@ -10,7 +10,7 @@ public sealed class RemoveEncryptionKeys : InteractionTest
     [Test]
     public async Task HeadsetKeys()
     {
-        await SpawnTarget("ClothingHeadsetAssistant");
+        await SpawnTarget("ClothingHeadsetPassenger");
         var comp = Comp<EncryptionKeyHolderComponent>();
 
         Assert.Multiple(() =>

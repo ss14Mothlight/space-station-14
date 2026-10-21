@@ -38,14 +38,14 @@
 
 - type: entity
   parent: ClothingHeadset
-  id: ClothingHeadsetAssistant
-  name: assistant headset
-  description: A headset used by assistants. # Starlight
+  id: ClothingHeadsetPassenger
+  name: passenger headset # Mothlight
+  description: A headset used by passengers. # Mothlight
   components:
   - type: Sprite
     sprite: Clothing/Ears/Headsets/service.rsi
   - type: StealTarget # Starlight
-    stealGroup: AssistantHeadsetsCollection # Starlight. Cursed. Incredibly cursed.
+    stealGroup: PassengerHeadsetsCollection # Starlight. Cursed. Incredibly cursed.
 
 - type: entity
   parent: ClothingHeadset

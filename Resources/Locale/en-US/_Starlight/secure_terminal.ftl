@@ -229,5 +229,5 @@ secure-terminal-unlock-escape-pods-desc = Escape pods will be unlocked and crew 
 secure-terminal-unlock-escape-pods-announcement = Command has authorized escape pods to be used for evacuation
 
 secure-terminal-ui-veto = Veto
-secure-terminal-insufficient-funds = Insufficient funds. Required: { $fee }₡
-secure-terminal-fee-held = Held { $fee }₡ pending authorization.
+secure-terminal-insufficient-funds = Insufficient funds. Required: ${ $fee }
+secure-terminal-fee-held = Held ${ $fee } pending authorization.

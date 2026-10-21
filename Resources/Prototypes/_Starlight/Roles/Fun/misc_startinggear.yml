@@ -14,7 +14,7 @@
 - type: startingGear
   id: MobStirStirGear
   equipment:
-    ears: ClothingHeadsetAssistant
+    ears: ClothingHeadsetPassenger
     jumpsuit: ClothingUniformJumpsuitPrisoner
     id: StirStirPDA
     head: ClothingHeadHatBeretPrison

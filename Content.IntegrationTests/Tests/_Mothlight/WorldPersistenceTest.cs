@@ -11,6 +11,7 @@ using Content.Shared.CCVar;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry;
 using Content.Shared.CriminalRecords;
+using Content.Shared.Mind;
 using Content.Shared.Preferences;
 using Content.Shared.StationRecords;
 using Content.Shared.Weapons.Ranged.Components;
@@ -22,6 +23,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Maths;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 using Robust.UnitTesting;
 
 namespace Content.IntegrationTests.Tests._Mothlight;
@@ -113,6 +115,9 @@ public sealed class WorldPersistenceTest : GameTest
             var key = _records.AddRecordEntry(station, new GeneralStationRecord { Name = RecordName });
             _records.AddRecordEntry(key, new CriminalRecord());
 
+            // Job slots changed during the round should stick, not go back to the map's defaults.
+            Assert.That(Server.System<StationJobsSystem>().TrySetJobSlot(station, "Passenger", 7, true));
+
             // Ending the round saves the world.
             _ticker.EndRound();
         });
@@ -161,6 +166,8 @@ public sealed class WorldPersistenceTest : GameTest
             var grid = _station.GetLargestGrid(station);
             Assert.That(grid, Is.Not.Null, "The loaded station should still own its grid");
             Assert.That(SEntMan.GetComponent<TransformComponent>(grid!.Value).MapID, Is.EqualTo(_ticker.DefaultMap));
+            Assert.That(Server.System<StationJobsSystem>().TryGetJobSlot(station, "Passenger", out var slots) ? slots : -1,
+                Is.EqualTo(7), "Job slots set last round should still be there");
 
             // On a persistent world, characters come back where they were saved rather than at a spawn point.
             var characters = Server.System<CharacterPersistenceSystem>();
@@ -195,6 +202,76 @@ public sealed class WorldPersistenceTest : GameTest
     }
 
     /// <summary>
+    /// A character who logged out (rather than going into cryo) is still in the world after it's saved and loaded,
+    /// and their player gets the same body back when they join as them. Wiping the saves starts everything over.
+    /// </summary>
+    [Test]
+    public async Task CharactersStayInTheWorldUntilWiped()
+    {
+        var user = new NetUserId(Guid.NewGuid());
+        HumanoidCharacterProfile profile = default!;
+        await Server.WaitPost(() => profile = HumanoidCharacterProfile.DefaultWithSpecies("Human").WithName("Loggedout Lou"));
+        var characters = Server.System<CharacterPersistenceSystem>();
+        var world = Server.System<WorldPersistenceRuleSystem>();
+
+        Server.CfgMan.SetCVar(CCVars.GameMap, Map);
+        await Server.WaitPost(() => _ticker.SetGamePreset(SProtoMan.Index<GamePresetPrototype>(Preset)));
+        await Server.WaitPost(() => _ticker.StartRound());
+        await RunTicksSync(10);
+
+        await Server.WaitAssertion(() =>
+        {
+            var grid = _station.GetLargestGrid(_station.GetStations().Single());
+            var mob = Server.System<StationSpawningSystem>().SpawnPlayerMob(new EntityCoordinates(grid!.Value, -0.5f, -0.5f), null, profile, null);
+            characters.MarkPersistent(mob, user, profile.Name);
+
+            // Played, then their player left without going into cryo, so the mind's still there.
+            var mind = Server.System<SharedMindSystem>().CreateMind(null, profile.Name);
+            Server.System<SharedMindSystem>().TransferTo(mind, mob);
+
+            _ticker.EndRound();
+        });
+        await RunTicksSync(10);
+        await Server.WaitPost(() => _ticker.RestartRound());
+        await RunTicksSync(10);
+        await Server.WaitPost(() => _ticker.StartRound());
+        await RunTicksSync(10);
+
+        await Server.WaitAssertion(() =>
+        {
+            Assert.That(GetRule().LoadedFromSave);
+            var body = characters.FindWorldBody(user, profile.Name);
+            Assert.That(body, Is.Not.Null, "The logged out character should still be in the world");
+            Assert.That(SEntMan.GetComponent<TransformComponent>(body!.Value).MapID, Is.EqualTo(_ticker.DefaultMap));
+            Assert.That(Server.System<SharedMindSystem>().TryGetMind(body.Value, out _, out _), Is.False,
+                "Nobody should be playing them until their player joins");
+            Assert.That(SEntMan.AllEntities<MindComponent>().Any(m => m.Comp.CharacterName == profile.Name), Is.False,
+                "Minds shouldn't come back with the world");
+
+            Assert.That(characters.TryReclaimCharacter(user, profile, null, out var reclaimed));
+            Assert.That(reclaimed, Is.EqualTo(body), "Joining as them should give back the same body");
+
+            world.WipeSaves();
+            Assert.That(characters.HasSave(user, profile.Name), Is.False);
+            Assert.That(Server.ResolveDependency<IResourceManager>().UserData.Exists(GetRule().SavePath), Is.False);
+        });
+
+        // Wiping stops this round being saved over the wipe.
+        await Server.WaitPost(() => _ticker.RestartRound());
+        await RunTicksSync(10);
+        await Server.WaitPost(() => _ticker.StartRound());
+        await RunTicksSync(10);
+
+        await Server.WaitAssertion(() =>
+        {
+            Assert.That(GetRule().LoadedFromSave, Is.False, "The next round should start from a fresh map");
+            Assert.That(characters.FindWorldBody(user, profile.Name), Is.Null);
+        });
+
+        await Server.WaitPost(() => _ticker.RestartRound());
+    }
+
+    /// <summary>
     /// A save that fails to load must not take the round down, or get overwritten by the fresh map.
     /// </summary>
     [Test]
@@ -202,7 +279,7 @@ public sealed class WorldPersistenceTest : GameTest
     {
         const string garbage = "this is: [not a valid map";
         var res = Server.ResolveDependency<IResourceManager>();
-        var path = new WorldPersistenceRuleComponent().SavePath;
+        var path = new ResPath(WorldPersistenceRuleComponent.DefaultSavePath);
 
         // The load failure is logged as an error on purpose.
         await OverrideCVar(Side.Server, RTCVars.FailureLogLevel, LogLevel.Fatal);

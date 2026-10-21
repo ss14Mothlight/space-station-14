@@ -1,12 +1,12 @@
 - type: chameleonOutfit
   id: SusChameleonOutfit
   loadoutName: chameleon-outfit-sus-name
-  name: job-name-assistant
-  icon: "JobIconAssistant"
+  name: job-name-passenger # Mothlight
+  icon: "JobIconPassenger"
   equipment:
     head: ClothingHeadHatBeret
     eyes: ClothingEyesGlassesSunglasses
-    ears: ClothingHeadsetAssistant
+    ears: ClothingHeadsetPassenger
     mask: ClothingMaskGas
     outerClothing: ClothingOuterVest
     jumpsuit: ClothingUniformJumpsuitColorBlack
@@ -14,4 +14,4 @@
     back: ClothingBackpack
     gloves: ClothingHandsGlovesColorBlack
     shoes: ClothingShoesColorBlack
-    id: AssistantPDA
+    id: PassengerPDA

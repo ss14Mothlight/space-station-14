@@ -85,7 +85,7 @@
 
             # Civilian
             AssistantManager: [ 2, 2 ]
-            Assistant: [ -1, -1 ]
+            Passenger: [ -1, -1 ]
 
             # Silicon
             Borg: [ 5, 5 ]

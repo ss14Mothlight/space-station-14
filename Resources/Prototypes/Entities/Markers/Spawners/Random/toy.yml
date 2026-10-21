@@ -115,7 +115,7 @@
       - id: PlushieLizardJobMime #
       - id: PlushieLizardJobMusician
       - id: PlushieLizardJobParamedic
-      - id: PlushieLizardJobAssistant # Starlight-edit - Passenger -> Assistant
+      - id: PlushieLizardJobPassenger # Starlight-edit - Passenger -> Passenger
       - id: PlushieLizardJobPsychologist
       - id: PlushieLizardJobQuartermaster
       - id: PlushieLizardJobReporter
@@ -163,7 +163,7 @@
     - id: ToyFigurineSecurity
     # Service
     - id: ToyFigurineHeadOfPersonnel
-    - id: ToyFigurineAssistant # Starlight-edit - Passenger -> Assistant
+    - id: ToyFigurinePassenger # Starlight-edit - Passenger -> Passenger
     #- id: ToyFigurineGreytider # Starlight-edit - disable
     - id: ToyFigurineClown # :o)
     - id: ToyFigurineMime #

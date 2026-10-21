@@ -300,8 +300,8 @@
 
 # Civilian
 - type: loadoutGroup
-  id: AssistantJumpsuit
-  name: loadout-group-assistant-jumpsuit
+  id: PassengerJumpsuit
+  name: loadout-group-passenger-jumpsuit
   loadouts:
   - BasicJumpsuit
   - BasicJumpskirt
@@ -354,20 +354,20 @@
 
 
 - type: loadoutGroup
-  id: AssistantFace
-  name: loadout-group-assistant-mask
+  id: PassengerFace
+  name: loadout-group-passenger-mask
   minLimit: 0
   loadouts:
-  - AssistantFace
+  - PassengerFace
   - NeckGaiter #starlight
 
 - type: loadoutGroup
-  id: AssistantGloves
-  name: loadout-group-assistant-gloves
+  id: PassengerGloves
+  name: loadout-group-passenger-gloves
   minLimit: 0
   loadouts:
-  - AssistantGloves
-  - AssistantMittens # Starlight
+  - PassengerGloves
+  - PassengerMittens # Starlight
   - GreyGloves # starlight
 
 - type: loadoutGroup
@@ -380,27 +380,27 @@
   - LeatherSatchel # starlight
 
 - type: loadoutGroup
-  id: AssistantNeck
-  name: loadout-group-assistant-neck
+  id: PassengerNeck
+  name: loadout-group-passenger-neck
   minLimit: 0
   loadouts:
   - Mantle
   - OldMantle
 
 - type: loadoutGroup
-  id: AssistantOuterClothing
-  name: loadout-group-assistant-outerclothing
+  id: PassengerOuterClothing
+  name: loadout-group-passenger-outerclothing
   minLimit: 0
   loadouts:
-  - AssistantWintercoat
+  - PassengerWintercoat
   - GreyHoodieA # starlight start
   - GreyTrenchcoatA
   - SpaceAssholeCoat
   - RedLeatherJacker # starlight end
 
 - type: loadoutGroup
-  id: AssistantShoes
-  name: loadout-group-assistant-shoes
+  id: PassengerShoes
+  name: loadout-group-passenger-shoes
   minLimit: 0 # Starlight Start
   defaultSelected: 1 # Starlight End
   loadouts:
@@ -412,12 +412,12 @@
 
 # Starlight-start
 - type: loadoutGroup
-  id: AssistantJobTrinkets
+  id: PassengerJobTrinkets
   name: loadout-group-jobtrinkets
   minLimit: 0
   loadouts:
   - Soap
-  - RubberStampAssistant
+  - RubberStampPassenger
 # Starlight-end
 
 - type: loadoutGroup

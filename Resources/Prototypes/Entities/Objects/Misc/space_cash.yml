@@ -58,6 +58,11 @@
         mask:
         - ItemMask
   - type: Appearance
+  # Mothlight begin - spesos pay for cash stores, now that NT credits are gone
+  - type: Currency
+    price:
+      Speso: 1
+  # Mothlight end
 
 - type: material
   id: Credit

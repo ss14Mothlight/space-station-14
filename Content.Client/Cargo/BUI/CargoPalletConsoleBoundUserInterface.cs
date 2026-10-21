@@ -1,4 +1,5 @@
 using Content.Client.Cargo.UI;
+using Content.Shared._Persistence.Cargo; // Mothlight
 using Content.Shared.Cargo.BUI;
 using Content.Shared.Cargo.Events;
 using Robust.Client.UserInterface;
@@ -21,6 +22,8 @@ public sealed class CargoPalletConsoleBoundUserInterface : BoundUserInterface
         _menu = this.CreateWindow<CargoPalletMenu>();
         _menu.AppraiseRequested += OnAppraisal;
         _menu.SellRequested += OnSell;
+        _menu.ModeSelected += mode => SendMessage(new CargoPalletSetModeMessage(mode)); // Mothlight
+        _menu.StationSelected += station => SendMessage(new CargoPalletSelectStationMessage(station)); // Mothlight
     }
 
     private void OnAppraisal()
@@ -43,5 +46,6 @@ public sealed class CargoPalletConsoleBoundUserInterface : BoundUserInterface
         _menu?.SetEnabled(palletState.Enabled);
         _menu?.SetAppraisal(palletState.Appraisal);
         _menu?.SetCount(palletState.Count);
+        _menu?.SetSale(palletState.Sale); // Mothlight
     }
 }

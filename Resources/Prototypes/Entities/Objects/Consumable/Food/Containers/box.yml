@@ -691,7 +691,7 @@
     - id: ToyMouse
     - id: ToyAi
     - id: ToyNuke
-    - id: ToyFigurineAssistant #Starlight assistant
+    - id: ToyFigurinePassenger #Starlight passenger
     - id: ToyFigurineGriffin
     - id: ToyIan
     - id: ToyFigurineOwlman

@@ -1,5 +1,6 @@
 using Content.Server._Mothlight.Persistence;
 using Content.Server.Administration;
+using Content.Server.GameTicking;
 using Content.Shared.Administration;
 using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Map;
@@ -19,6 +20,7 @@ public sealed class PersistenceCommand : ToolshedCommand
     private CharacterPersistenceSystem? _characters;
     private MapLoaderSystem? _loader;
     private SharedTransformSystem? _transform;
+    private GameTicker? _ticker;
 
     /// <summary>
     /// Saves the persistent world, and everyone currently playing in it.
@@ -37,6 +39,20 @@ public sealed class PersistenceCommand : ToolshedCommand
         var ok = _world.TrySaveActiveWorlds();
         ctx.WriteLine(ok ? "World saved." : "Failed to save the world, check the server log.");
         return ok;
+    }
+
+    /// <summary>
+    /// Deletes every world and character save, then restarts the round so it starts over from a fresh map.
+    /// </summary>
+    [CommandImplementation("wipe")]
+    public void Wipe(IInvocationContext ctx)
+    {
+        _world ??= GetSys<WorldPersistenceRuleSystem>();
+        _ticker ??= GetSys<GameTicker>();
+
+        _world.WipeSaves();
+        ctx.WriteLine("Deleted every world and character save. Restarting the round on a fresh map.");
+        _ticker.RestartRound();
     }
 
     /// <summary>

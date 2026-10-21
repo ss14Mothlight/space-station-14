@@ -1,4 +1,3 @@
-job-name-assistant = Assistant
 job-name-stirstir = Stir Stir
 job-name-cook-assistant = Cook Assistant
 job-name-delivery-assistant = Delivery Boy

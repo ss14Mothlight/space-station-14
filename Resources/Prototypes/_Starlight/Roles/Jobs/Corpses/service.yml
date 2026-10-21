@@ -74,18 +74,18 @@
     ears: ClothingHeadsetService
 
 - type: startingGear
-  id: AssistantCorpseGear
+  id: PassengerCorpseGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitAncient
     shoes: ClothingShoesColorBlack
-    ears: ClothingHeadsetAssistant
+    ears: ClothingHeadsetPassenger
 
 - type: startingGear
   id: TiderCorpseGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitAncient
     shoes: ClothingShoesColorBlack
-    ears: ClothingHeadsetAssistant
+    ears: ClothingHeadsetPassenger
     mask: ClothingMaskGas
     gloves: ClothingHandsGlovesFingerlessInsulated
     pocket1: Multitool

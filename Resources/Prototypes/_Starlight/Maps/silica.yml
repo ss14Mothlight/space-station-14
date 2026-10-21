@@ -85,7 +85,7 @@
 
             #civilian
             AssistantManager: [ 2, 2 ]
-            Assistant: [ -1, -1 ]
+            Passenger: [ -1, -1 ]
 
             #silicon
             StationAi: [ 1, 1 ]

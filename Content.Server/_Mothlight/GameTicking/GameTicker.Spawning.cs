@@ -113,9 +113,11 @@ public sealed partial class GameTicker
 
         var spawnLoc = _robustRandom.Pick(possiblePositions);
 
-        // On a persistent world, put them back where they left off.
+        // If they left their body in the world (logged out without using cryo), they go back into it. Otherwise, on a
+        // persistent world, put them back where they left off.
         var preferSavedPosition = _worldPersistence.HasActiveRule();
-        if (!_charPersistence.TryLoadCharacter(player.UserId, character, spawnLoc, station, out var loaded, preferSavedPosition))
+        if (!_charPersistence.TryReclaimCharacter(player.UserId, character, station, out var loaded)
+            && !_charPersistence.TryLoadCharacter(player.UserId, character, spawnLoc, station, out loaded, preferSavedPosition))
         {
             // Nothing saved (or the save is broken), start them off fresh and save that instead.
             _chatManager.DispatchServerMessage(player, "No saved character found, spawning a new one.");
@@ -204,6 +206,8 @@ public sealed partial class GameTicker
         if (!_userDb.IsLoadComplete(player))
             return;
 
+        // Starting over, so whatever they left in the world goes too.
+        _charPersistence.DeleteWorldBody(player.UserId, profile.Name);
         SpawnPlayer(player, profile, station, jobId, silent: silent, save: true);
     }
 

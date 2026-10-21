@@ -54,24 +54,24 @@
 
 # Civilian
 - type: roleLoadout
-  id: JobAssistant
+  id: JobPassenger # Mothlight
   groups:
   - GroupTankHarness
-  - AssistantJumpsuit
-  - AssistantBackpack #starlight
-  - AssistantNeck
-  - AssistantFace
-  - AssistantGloves
-  - AssistantOuterClothing
-  - AssistantShoes
-  - AssistantGlasses #starlight
-  - AssistantHead #starlight
+  - PassengerJumpsuit
+  - PassengerBackpack #starlight
+  - PassengerNeck
+  - PassengerFace
+  - PassengerGloves
+  - PassengerOuterClothing
+  - PassengerShoes
+  - PassengerGlasses #starlight
+  - PassengerHead #starlight
   - Survival
   - Trinkets
   - Scarves # Starlight
   - Pins # Starlight
   - Pens # Starlight
-  - AssistantJobTrinkets # Starlight
+  - PassengerJobTrinkets # Starlight
   - GroupSpeciesBreathTool
 
 - type: roleLoadout

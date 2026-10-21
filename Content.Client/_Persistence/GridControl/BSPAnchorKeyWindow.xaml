@@ -1,0 +1,52 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      MinSize="600 290">
+    <BoxContainer Orientation="Vertical" Margin="8">
+        <BoxContainer Orientation="Horizontal">
+            <Label Text="{Loc 'bsp-window-privileged-id'}" />
+            <Button Name="PrivilegedIdButton" Access="Public" />
+        </BoxContainer>
+
+        <Control Margin="0 10" />
+
+        <!-- Idle -->
+        <BoxContainer Name="IdleContainer" Visible="False" Orientation="Vertical">
+            <Button Name="InitiateParkButton" Disabled="True" Text="{Loc 'bsp-window-park'}" Access="Public" />
+        </BoxContainer>
+
+        <!-- Parking / unparking -->
+        <BoxContainer Name="RoutineContainer" Visible="False" Orientation="Vertical">
+            <Button Name="CancelButton" Text="{Loc 'bsp-window-cancel'}" Access="Public" />
+            <ProgressBar Name="RoutineProgress"
+                         HorizontalExpand="True"
+                         MinValue="0"
+                         MaxValue="1"
+                         MinHeight="25"
+                         Margin="0 10 0 0">
+                <Label Name="RoutineTimer" HorizontalExpand="True" Align="Center" Margin="4 0" />
+            </ProgressBar>
+        </BoxContainer>
+
+        <!-- Parked -->
+        <BoxContainer Name="ParkedContainer" Visible="False" Orientation="Horizontal">
+            <Button Name="InitiateUnparkButton" Text="{Loc 'bsp-window-unpark'}" Access="Public" />
+            <Button Name="ClearOwnershipButton" Text="{Loc 'bsp-window-clear-ownership'}" ToggleMode="True" Access="Public" />
+        </BoxContainer>
+
+        <Label Name="ErrorLabel" Visible="False" FontColorOverride="Red" />
+
+        <Control VerticalExpand="True" />
+
+        <BoxContainer Orientation="Vertical">
+            <Label Name="GridSizeLabel" />
+            <Label Name="GridOwnerLabel" />
+            <Label Name="GridNameLabel" />
+        </BoxContainer>
+
+        <BoxContainer Name="ParkedDetails" Visible="False" Orientation="Horizontal">
+            <Label Name="ParkedCoordinatesLabel" HorizontalExpand="True" />
+            <Label Name="DistanceLabel" HorizontalExpand="True" Align="Center" />
+            <Label Name="MyCoordinatesLabel" HorizontalExpand="True" Align="Right" />
+        </BoxContainer>
+    </BoxContainer>
+</controls:FancyWindow>

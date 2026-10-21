@@ -87,7 +87,7 @@
         - RCDRPDStealCollectionObjective # 7-12
         - MiscSunglassesStealCollectionObjective # Musician, Beer Goggles, and all types of Security sunglasses.
         - RareSunglassesStealCollectionObjective # Administrative, Skill, BSO, Brigmed, and in theory CentComm.
-        - AssistantHeadsetsStealCollectionObjective # Assistant. It's incredibly cursed.
+        - PassengerHeadsetsStealCollectionObjective # Passenger. It's incredibly cursed.
         - ReactorFuelRodStealCollectionObjective #Far Horizons. Or, technically, but it doesn't exist in the paper there, so uh, Starlight?
         - MedicalBeltStealCollectionObjective # Various medical belts. Pretty easy to get, but hard to hold.
         # thief item objectives

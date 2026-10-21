@@ -152553,7 +152553,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -46.507103,27.476929
-- proto: PlushieLizardJobAssistant
+- proto: PlushieLizardJobPassenger
   entities:
   - uid: 23389
     components:
@@ -170528,7 +170528,7 @@ entities:
     - type: Transform
       parent: 2
       pos: 34.5,-32.5
-- proto: SpawnPointAssistant
+- proto: SpawnPointPassenger
   entities:
   - uid: 26335
     components:

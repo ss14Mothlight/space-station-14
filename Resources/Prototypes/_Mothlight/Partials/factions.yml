@@ -21,6 +21,7 @@
   id: ToolsStatic
   recipes:
   - GridConfigurator
+  - BSPAnchorKey
 
 - type: !PartialOnly latheRecipePack
   id: EngineeringBoardsStatic

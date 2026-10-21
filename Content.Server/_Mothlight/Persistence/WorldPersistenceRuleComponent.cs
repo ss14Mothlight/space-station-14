@@ -17,7 +17,9 @@ public sealed partial class WorldPersistenceRuleComponent : Component
     /// to exist.
     /// </remarks>
     [DataField("savePath")]
-    public string SavePathString = "/Mothlight/World/world.yml";
+    public string SavePathString = DefaultSavePath;
+
+    public const string DefaultSavePath = "/Mothlight/World/world.yml";
 
     public ResPath SavePath => new(SavePathString);
 

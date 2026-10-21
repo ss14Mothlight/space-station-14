@@ -166,7 +166,7 @@ namespace Content.Client.VendingMachines.UI
                 var itemName = Identity.Name(dummy, _entityManager);
                 //🌟Starlight🌟 start
                 var itemText = showPrices && entry.Price > 0 ?
-                    $"{itemName} [{entry.Amount}] - {entry.Price} ₡" :
+                    $"{itemName} [{entry.Amount}] - ${entry.Price}" : // Mothlight - spesos
                     $"{itemName} [{entry.Amount}]";
                 //🌟Starlight🌟 end
                 _amounts[entry.ID] = entry.Amount;
@@ -220,7 +220,7 @@ namespace Content.Client.VendingMachines.UI
         {
             var itemName = Identity.Name(dummy, _entityManager); // 🌟Starlight🌟
             return showPrices && price > 0 ?
-                $"{itemName} [{amount}] - {price} ₡" :
+                $"{itemName} [{amount}] - ${price}" : // Mothlight - spesos
                 $"{itemName} [{amount}]";
         }
 

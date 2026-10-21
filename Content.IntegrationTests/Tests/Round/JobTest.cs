@@ -14,7 +14,7 @@ namespace Content.IntegrationTests.Tests.Round;
 [TestFixture]
 public sealed class JobTest : GameTest
 {
-    private static readonly ProtoId<JobPrototype> Passenger = "Assistant";
+    private static readonly ProtoId<JobPrototype> Passenger = "Passenger"; // Mothlight
     private static readonly ProtoId<JobPrototype> Engineer = "StationEngineer";
     private static readonly ProtoId<JobPrototype> Captain = "Captain";
 

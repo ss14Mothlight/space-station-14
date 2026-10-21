@@ -11,7 +11,7 @@
           mapNameTemplate: "Empty"
         - type: StationJobs
           availableJobs:
-            Assistant: [ -1, -1 ]
+            Passenger: [ -1, -1 ]
 
 - type: gameMap
   id: Dev

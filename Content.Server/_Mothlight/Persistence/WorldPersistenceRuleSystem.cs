@@ -1,14 +1,17 @@
 using System.IO;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
+using Content.Server.Mind;
 using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Robust.Shared.ContentPack;
 using Robust.Shared.EntitySerialization;
 using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Utility;
 
 namespace Content.Server._Mothlight.Persistence;
 
@@ -23,6 +26,7 @@ public sealed partial class WorldPersistenceRuleSystem : GameRuleSystem<WorldPer
     [Dependency] private MapLoaderSystem _loader = null!;
     [Dependency] private SharedMapSystem _map = null!;
     [Dependency] private CharacterPersistenceSystem _characters = null!;
+    [Dependency] private MindSystem _mind = null!;
 
     public override void Initialize()
     {
@@ -48,6 +52,13 @@ public sealed partial class WorldPersistenceRuleSystem : GameRuleSystem<WorldPer
             // to come back invalid, so don't log every one of them.
             var opts = DeserializationOptions.Default with { LogInvalidEntities = false };
 
+            var existingMinds = new HashSet<EntityUid>();
+            var minds = EntityQueryEnumerator<MindComponent>();
+            while (minds.MoveNext(out var mindId, out _))
+            {
+                existingMinds.Add(mindId);
+            }
+
             Entity<MapComponent>? map;
             try
             {
@@ -72,9 +83,34 @@ public sealed partial class WorldPersistenceRuleSystem : GameRuleSystem<WorldPer
 
             comp.LoadedFromSave = true;
             ev.LoadedDefaultMap = map.Value.Comp.MapId;
+            DropLoadedMinds(existingMinds);
             Log.Info($"Loaded world save {comp.SavePath} as {ToPrettyString(map)}");
             return;
         }
+    }
+
+    /// <summary>
+    /// Characters are saved in the world along with the minds that were playing them. Nobody's playing them yet,
+    /// so get rid of those, which leaves the bodies free for their players to take back when they join.
+    /// </summary>
+    private void DropLoadedMinds(HashSet<EntityUid> existing)
+    {
+        var minds = EntityQueryEnumerator<MindComponent>();
+        var loaded = new List<(EntityUid, MindComponent)>();
+        while (minds.MoveNext(out var mindId, out var mind))
+        {
+            if (!existing.Contains(mindId))
+                loaded.Add((mindId, mind));
+        }
+
+        foreach (var (mindId, mind) in loaded)
+        {
+            _mind.WipeMind(mindId, mind);
+            Del(mindId);
+        }
+
+        if (loaded.Count > 0)
+            Log.Info($"Dropped {loaded.Count} minds that were saved with the world.");
     }
 
     protected override void Started(EntityUid uid,
@@ -139,6 +175,35 @@ public sealed partial class WorldPersistenceRuleSystem : GameRuleSystem<WorldPer
     }
 
     /// <summary>
+    /// Deletes every world and character save, and stops this round's world from being saved over them, so the next
+    /// round starts from a fresh map with fresh characters.
+    /// </summary>
+    public void WipeSaves()
+    {
+        var paths = new HashSet<ResPath> { new(WorldPersistenceRuleComponent.DefaultSavePath) };
+        var query = QueryAllRules();
+        while (query.MoveNext(out _, out var comp, out _))
+        {
+            comp.SavingDisabled = true;
+            paths.Add(comp.SavePath);
+        }
+
+        foreach (var path in paths)
+        {
+            foreach (var file in new[] { path, path.WithName(path.Filename + ".bak") })
+            {
+                if (_res.UserData.Exists(file))
+                    _res.UserData.Delete(file);
+            }
+        }
+
+        _characters.DeleteAllSaves();
+        var ev = new PersistenceSavesWipedEvent();
+        RaiseLocalEvent(ref ev);
+        Log.Info("Wiped all persistence saves.");
+    }
+
+    /// <summary>
     /// Saves the round's main map, along with every player character currently in the round.
     /// </summary>
     public bool TrySaveWorld(Entity<WorldPersistenceRuleComponent> rule)
@@ -166,6 +231,7 @@ public sealed partial class WorldPersistenceRuleSystem : GameRuleSystem<WorldPer
         var writer = new StringWriter();
         bool saved;
         using (_characters.AllowHumanoidSaving())
+        using (_characters.SaveCharactersInWorld())
         {
             saved = _loader.TrySaveMap(map.Value, writer);
         }
@@ -196,3 +262,9 @@ public sealed partial class WorldPersistenceRuleSystem : GameRuleSystem<WorldPer
         return true;
     }
 }
+
+/// <summary>
+/// Raised when every persistence save has been wiped, so other systems can delete theirs too.
+/// </summary>
+[ByRefEvent]
+public record struct PersistenceSavesWipedEvent;

@@ -2,7 +2,7 @@
   id: VendorDoubleStunbaton
   productEntity: DoubleStunbaton
   cost:
-    NTCredit: 556
+    Speso: 556
   categories:
   - SLSecurity
   conditions:
@@ -14,7 +14,7 @@
   id: VendorPurpleStunbaton
   productEntity: PurpleStunbaton
   cost:
-    NTCredit: 376
+    Speso: 376
   categories:
   - SLSecurity
   conditions:
@@ -26,7 +26,7 @@
   id: ClothingHandsGlovesCombat
   productEntity: ClothingHandsGlovesCombat
   cost:
-    NTCredit: 399
+    Speso: 399
   categories:
   - SLSecurity
   conditions:
@@ -38,7 +38,7 @@
   id: ClothingHeadHelmetDredd
   productEntity: ClothingHeadHelmetDredd
   cost:
-    NTCredit: 300
+    Speso: 300
   categories:
   - SLSecurity
   conditions:
@@ -50,7 +50,7 @@
   id: RedBrutePack
   productEntity: RedBrutePack
   cost:
-    NTCredit: 68
+    Speso: 68
   categories:
   - SLBrigmedic
   conditions:
@@ -63,7 +63,7 @@
   id: RedOintment
   productEntity: RedOintment
   cost:
-    NTCredit: 68
+    Speso: 68
   categories:
   - SLBrigmedic
   conditions:
@@ -76,7 +76,7 @@
   id: RedPunctPack
   productEntity: RedPunctPack
   cost:
-    NTCredit: 102
+    Speso: 102
   categories:
   - SLBrigmedic
   conditions:
@@ -89,7 +89,7 @@
   id: RedLacePack
   productEntity: RedLacePack
   cost:
-    NTCredit: 102
+    Speso: 102
   categories:
   - SLBrigmedic
   conditions:
@@ -102,7 +102,7 @@
   id: RedBruizPack
   productEntity: RedBruizPack
   cost:
-    NTCredit: 102
+    Speso: 102
   categories:
   - SLBrigmedic
   conditions:

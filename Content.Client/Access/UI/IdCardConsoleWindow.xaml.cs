@@ -46,7 +46,7 @@ namespace Content.Client.Access.UI
         private HashSet<ProtoId<TagPrototype>> _requiredTags = new(); // Starlight-edit
 
         // The job that will be picked if the ID doesn't have a job on the station.
-        private static ProtoId<JobPrototype> _defaultJob = "Assistant";
+        private static ProtoId<JobPrototype> _defaultJob = "Passenger"; // Mothlight
         // Starlight-edit: Start
         public Action<ProtoId<AccessGroupPrototype>>? OnGroupSelected;
 

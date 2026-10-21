@@ -480,8 +480,8 @@
 
 - type: entity
   parent: IDCardStandard
-  id: AssistantDerelictBorgiIDCard
-  name: assistant ID card
+  id: PassengerDerelictBorgiIDCard
+  name: passenger ID card
   suffix: Borgi
   components:
   - type: Sprite
@@ -489,7 +489,7 @@
     - state: default
     - sprite: *icon-rsi
       offset: *icon-offset
-      state: Assistant
+      state: Passenger # Mothlight - passenger icon
   - type: IdCard
     jobTitle: job-title-borgi
     jobIcon: JobIconBorg
@@ -507,7 +507,7 @@
     listNumber: false
 
 - type: entity
-  parent: AssistantDerelictBorgiIDCard
+  parent: PassengerDerelictBorgiIDCard
   id: XenoborgiIDCard
   name: xenoborgi ID card
   suffix: Xenoborgi

@@ -90293,7 +90293,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -12.5,11.5
-- proto: SpawnPointAssistant
+- proto: SpawnPointPassenger
   entities:
   - uid: 13303
     components:

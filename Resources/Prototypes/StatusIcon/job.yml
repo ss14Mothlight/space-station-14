@@ -436,11 +436,11 @@
 #Starlight tidebegone
 - type: jobIcon
   parent: JobIcon
-  id: JobIconAssistant
+  id: JobIconPassenger
   icon:
     sprite: *icon-rsi
-    state: Assistant # Starlight - Passenger -> Asistant
-  jobName: job-name-assistant # Starlight - passenger -> assistant
+    state: Passenger # Mothlight - passenger icon
+  jobName: job-name-passenger # Mothlight - back to passengers
   tags: # Starlight-edit: Also accessible from the task master digiboard.
   - JobIconCrew
   - JobIconAssistantManager

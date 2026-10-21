@@ -24072,7 +24072,7 @@ entities:
     - type: Transform
       parent: 2
       pos: 0.45783424,60.59316
-- proto: AssistantPDA
+- proto: PassengerPDA
   entities:
   - uid: 1098
     components:
@@ -185267,7 +185267,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -42.5,38.5
-- proto: SpawnPointAssistant
+- proto: SpawnPointPassenger
   entities:
   - uid: 27866
     components:
@@ -195905,7 +195905,7 @@ entities:
     - type: Transform
       parent: 2
       pos: 77.73113,-18.359617
-- proto: ToyFigurineAssistant
+- proto: ToyFigurinePassenger
   entities:
   - uid: 29511
     components:

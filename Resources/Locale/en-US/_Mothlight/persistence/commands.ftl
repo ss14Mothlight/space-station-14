@@ -1,5 +1,7 @@
 command-description-persistence-saveworld =
     Saves the persistent world, along with every character currently in the round.
+command-description-persistence-wipe =
+    Deletes every persistent world and character save (and bluespace-parked grid), then restarts the round on a fresh map. Can't be undone.
 command-description-persistence-savechar =
     Saves the piped persistent characters to their character save files.
 command-description-persistence-saveentity =

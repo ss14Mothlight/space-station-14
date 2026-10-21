@@ -1,9 +1,9 @@
+using Content.Server._Persistence.Bank;
 using Content.Server._Persistence.Factions;
 using Content.Server.Chat.Managers;
 using Content.Shared._Persistence.Factions.Components;
 using Content.Shared._Persistence.JobNet;
 using Content.Shared.Chat;
-using Content.Shared._NullLink;
 using Content.Shared.GameTicking;
 using Content.Shared.Implants;
 using Content.Shared.Implants.Components;
@@ -21,20 +21,15 @@ namespace Content.Server._Persistence.JobNet;
 public sealed partial class JobNetSystem : EntitySystem
 {
     [Dependency] private SharedAudioSystem _audio = null!;
+    [Dependency] private BankSystem _bank = null!;
     [Dependency] private IChatManager _chat = null!;
     [Dependency] private FactionIdCardSystem _factionIdCard = null!;
     [Dependency] private FactionSystem _faction = null!;
     [Dependency] private SharedSubdermalImplantSystem _implants = null!;
     [Dependency] private IPrototypeManager _proto = null!;
-    [Dependency] private ISharedNullLinkPlayerResourcesManager _playerResources = null!;
     [Dependency] private UserInterfaceSystem _ui = null!;
 
     public static readonly EntProtoId JobNetImplant = "JobNetworkImplant";
-
-    /// <summary>
-    /// Wages are paid in, and network levels bought with, Starlight's credits (what the ATMs use).
-    /// </summary>
-    private const string CreditsResource = "credits";
 
     public override void Initialize()
     {
@@ -210,7 +205,7 @@ public sealed partial class JobNetSystem : EntitySystem
             return;
         }
 
-        if (!_playerResources.TryUpdateResource(actor.PlayerSession, CreditsResource, assignment.Wage))
+        if (!_bank.TryBankDeposit(holder, assignment.Wage))
         {
             // Couldn't pay them after all, so the faction keeps its money.
             _faction.TryAdjustFactionBalance(station, assignment.Wage);
@@ -244,8 +239,7 @@ public sealed partial class JobNetSystem : EntitySystem
             || !_proto.Resolve(record.Level, out var current)
             || current.Next is not { } nextId
             || !_proto.Resolve(nextId, out var next)
-            || GetCredits(args.Actor) < next.Cost
-            || !_playerResources.TryUpdateResource(args.Actor, CreditsResource, -next.Cost))
+            || !_bank.TryBankWithdraw(args.Actor, next.Cost))
         {
             return;
         }
@@ -256,11 +250,6 @@ public sealed partial class JobNetSystem : EntitySystem
 
     #endregion
 
-    private int GetCredits(EntityUid user)
-    {
-        return _playerResources.TryGetResource(user, CreditsResource, out var credits) ? (int) credits.Value : 0;
-    }
-
     #region UI
 
     public void UpdateUserInterface(EntityUid user, Entity<JobNetComponent> ent)
@@ -269,7 +258,7 @@ public sealed partial class JobNetSystem : EntitySystem
         var state = new JobNetUpdateState
         {
             RemainingTime = ent.Comp.PayPeriod - ent.Comp.WorkedTime,
-            Balance = GetCredits(user),
+            Balance = _bank.GetBalance(user),
         };
 
         if (_faction.TryGetMetaRecord(name, out var meta))

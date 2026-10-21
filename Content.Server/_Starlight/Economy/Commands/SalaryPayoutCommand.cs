@@ -31,7 +31,7 @@ public sealed partial class SalaryPayoutCommand : LocalizedEntityCommands
         }
 
         var amount = _salary.PaySalary(player);
-        shell.WriteLine($"Paid {amount} credits to {player.Name}.");
+        shell.WriteLine($"Paid ${amount} to {player.Name}.");
 
         _adminLog.Add(LogType.Action, LogImpact.High,
             $"{shell.Player?.Name ?? "Console"} paid a salary of {amount} credits to {player.Name}");

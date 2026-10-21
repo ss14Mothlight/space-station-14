@@ -4,11 +4,11 @@
 
 - type: jobIcon
   parent: JobIcon
-  id: JobIconEvilAssistant
+  id: JobIconEvilPassenger
   icon:
     sprite: &rsi /Textures/_Starlight/Admeme/EvilStationJobs/Interface/Misc/job_icons.rsi
     state: EvilAssistant
-  jobName: job-name-assistant
+  jobName: job-name-passenger # Mothlight
   allowSelection: false
 
 - type: jobIcon

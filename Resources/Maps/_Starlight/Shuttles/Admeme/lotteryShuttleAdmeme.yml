@@ -2873,7 +2873,7 @@ entities:
     - type: IdCard
       jobDepartments:
       - Civilian
-      jobIcon: JobIconAssistant
+      jobIcon: JobIconPassenger
       _jobTitle: Assistant
       fullName: Jack Potts
 - proto: AirCanister
@@ -2959,7 +2959,7 @@ entities:
       loadingNetworkDemand: 19070
       currentReceiving: 19070.057
       currentSupply: 19070
-- proto: AssistantIDCard
+- proto: PassengerIDCard
   entities:
   - uid: 190
     mapInit: true
@@ -2974,7 +2974,7 @@ entities:
     - type: IdCard
       jobDepartments:
       - Civilian
-      jobIcon: JobIconAssistant
+      jobIcon: JobIconPassenger
       _jobTitle: Assistant
     - type: EmitSoundOnCollide
       nextSound: -295.666538

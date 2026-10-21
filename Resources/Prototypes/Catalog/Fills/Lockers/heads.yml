@@ -191,7 +191,7 @@
     children:
     - id: ClothingNeckCloakHopElite
     - id: AccessConfigurator
-    - id: BoxEncryptionKeyAssistant
+    - id: BoxEncryptionKeyPassenger
     - id: BoxEncryptionKeyService
     - id: BoxHeadset
     - id: BoxHoPCircuitboards

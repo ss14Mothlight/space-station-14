@@ -64,7 +64,7 @@
   parent: FiringPin
   id: FiringPinLaser
   name: laser crystal
-  description: Fragile, not unlike the assistants killed by it.
+  description: Fragile, not unlike the passengers killed by it.
   components:
   - type: Sprite
     sprite: _Starlight/Objects/Weapons/Guns/Pins/firing_pins.rsi

@@ -1,0 +1,7 @@
+# Spesos, for stores that take cash (like Starlight's vending machines). Replaces Starlight's NT credits.
+- type: currency
+  id: Speso
+  displayName: store-currency-display-speso
+  cash:
+    1: SpaceCash
+  canWithdraw: true

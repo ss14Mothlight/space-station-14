@@ -39,7 +39,7 @@
 
 # Starlight-start
 - type: loadout
-  id: RubberStampAssistant
+  id: RubberStampPassenger
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
@@ -48,7 +48,7 @@
       time: 108000 # 30hr
   storage:
     back:
-    - RubberStampAssistant
+    - RubberStampPassenger
 
 - type: loadout
   id: Soap

@@ -1,4 +1,4 @@
-using Content.Shared._NullLink;
+using Content.Shared._Persistence.Bank; // Mothlight
 
 namespace Content.Shared._Starlight.Devil.DamnationActions;
 
@@ -7,19 +7,18 @@ public sealed partial class DamnationActionDeductCredits : DamnationAction
     [DataField]
     int Amount = 5000;
 
-    private ISharedNullLinkPlayerResourcesManager _playerResources = default!;
+    // Mothlight begin - takes spesos out of the victim's bank account
+    private SharedBankSystem _bank = default!;
 
     public override bool Action(Entity<DamnedComponent> victim)
     {
-        if (!_playerResources.TryGetResource(victim.Owner, "credits", out var balance) || balance < Amount || balance < 0)
-            return false;
-
-        return _playerResources.TryUpdateResource(victim.Owner, "credits", -Amount);
+        return _bank.TryBankWithdraw(victim.Owner, Amount);
     }
 
     public override void ResolveIoC()
     {
         base.ResolveIoC();
-        _playerResources = IoCManager.Resolve<ISharedNullLinkPlayerResourcesManager>();
+        _bank = _entityManager.System<SharedBankSystem>();
     }
+    // Mothlight end
 }

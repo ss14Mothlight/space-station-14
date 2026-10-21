@@ -36587,7 +36587,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -1.6376766,-24.290537
-- proto: ClothingHeadsetAssistant
+- proto: ClothingHeadsetPassenger
   entities:
   - uid: 5715
     components:
@@ -82598,7 +82598,7 @@ entities:
     - type: Transform
       parent: 2
       pos: 17.5,-0.5
-- proto: SpawnPointAssistant
+- proto: SpawnPointPassenger
   entities:
   - uid: 12461
     components:

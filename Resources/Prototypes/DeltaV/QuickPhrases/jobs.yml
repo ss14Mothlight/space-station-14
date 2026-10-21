@@ -47,10 +47,10 @@
 
 - type: quickPhrase
   parent: BaseCivilianJobPhrase
-  # Starlight edit Start: Passenger -> Assistant
-  id: AssistantPhrase
-  text: job-name-assistant
-  # Starlight edit End: Passenger -> Assistant
+  # Starlight edit Start: Passenger -> Passenger
+  id: PassengerPhrase
+  text: job-name-passenger # Mothlight - back to passengers
+  # Starlight edit End: Passenger -> Passenger
 
 - type: quickPhrase
   parent: BaseCivilianJobPhrase

@@ -1,8 +1,9 @@
 <controls:FancyWindow xmlns="https://spacestation14.io"
                       xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
-            SetSize="300 150"
-            MinSize="300 150"
+            SetSize="400 230"
+            MinSize="400 230"
                       Title="{Loc 'cargo-pallet-console-menu-title'}">
+    <!-- Mothlight - payout mode, target faction and export tax, from SS14-Persistence -->
     <BoxContainer Orientation="Vertical" Margin="5">
         <BoxContainer Orientation="Horizontal">
             <Label Text="{Loc 'cargo-pallet-menu-appraisal-label'}"
@@ -16,10 +17,26 @@
             <Label Name="CountLabel"
                    Text="{Loc 'cargo-pallet-menu-no-goods-text'}" />
         </BoxContainer>
+        <BoxContainer Orientation="Horizontal">
+            <Label Text="{Loc 'cargo-pallet-menu-payment-label'}"
+                   StyleClasses="LabelKeyText" />
+            <OptionButton Name="PaymentModeOptions" HorizontalExpand="True" />
+        </BoxContainer>
+        <BoxContainer Name="PayToContainer" Orientation="Horizontal">
+            <Label Text="{Loc 'cargo-pallet-menu-pay-to-label'}"
+                   StyleClasses="LabelKeyText" />
+            <OptionButton Name="PayToOptions" HorizontalExpand="True" />
+        </BoxContainer>
+        <Label Name="TaxLabel" />
+        <BoxContainer Orientation="Horizontal">
+            <Label Text="{Loc 'cargo-pallet-menu-payout-label'}"
+                   StyleClasses="LabelKeyText" />
+            <Label Name="PayoutLabel" />
+        </BoxContainer>
+        <Control VerticalExpand="True" />
         <Button Name="AppraiseButton"
                 Text="{Loc 'cargo-pallet-appraise-button'}"/>
         <Button Name="SellButton"
                 Text="{Loc 'cargo-pallet-sell-button'}"/>
-        <TextureButton VerticalExpand="True" />
     </BoxContainer>
 </controls:FancyWindow>

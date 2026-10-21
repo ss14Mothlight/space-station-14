@@ -1,4 +1,4 @@
-using Content.Server._Mothlight.Economy;
+using Content.Server._Persistence.Bank;
 using Content.Server._Persistence.Factions;
 using Content.Server.Access.Systems;
 using Content.Server.Hands.Systems;
@@ -15,7 +15,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Server._Persistence.Invoices;
 
 /// <summary>
-/// Invoices and payslips, ported from SS14-Persistence. People pay with their credits, factions with their treasury
+/// Invoices and payslips, ported from SS14-Persistence. People pay from their bank account, factions with their treasury
 /// (within the payer's spending limit), and the faction owning the grid an invoice was printed on takes its sales tax.
 /// </summary>
 public sealed partial class InvoiceSystem : EntitySystem
@@ -23,7 +23,7 @@ public sealed partial class InvoiceSystem : EntitySystem
     [Dependency] private ISharedAdminLogManager _adminLogger = null!;
     [Dependency] private AppearanceSystem _appearance = null!;
     [Dependency] private SharedAudioSystem _audio = null!;
-    [Dependency] private CharacterCreditsSystem _credits = null!;
+    [Dependency] private BankSystem _bank = null!;
     [Dependency] private FactionSystem _faction = null!;
     [Dependency] private HandsSystem _hands = null!;
     [Dependency] private IdCardSystem _idCard = null!;
@@ -152,6 +152,25 @@ public sealed partial class InvoiceSystem : EntitySystem
         UpdatePrinter(ent);
     }
 
+    /// <summary>
+    /// Prints an already paid-for payslip into the user's hands, for something other than a faction (like a cargo
+    /// export) that wants to pay out without picking who it goes to.
+    /// </summary>
+    public EntityUid SpawnPayslip(EntityUid user, int cost, string title, string reason, string payerName)
+    {
+        var paper = Spawn(PayslipPrototype, Transform(user).Coordinates);
+        var invoice = EnsureComp<InvoiceComponent>(paper);
+        invoice.Cost = cost;
+        invoice.Reason = Truncate(reason);
+        invoice.PayerName = payerName;
+        invoice.Payslip = true;
+        Dirty(paper, invoice);
+
+        _metaData.SetEntityName(paper, Loc.GetString("invoice-payslip-name", ("cost", cost), ("title", Truncate(title))));
+        _hands.TryPickupAnyHand(user, paper);
+        return paper;
+    }
+
     private static string Truncate(string text)
     {
         text = text.Trim();
@@ -237,7 +256,7 @@ public sealed partial class InvoiceSystem : EntitySystem
             }
             else
             {
-                if (!_credits.TryChangeBalance(user, cost))
+                if (!_bank.TryBankDeposit(user, cost))
                     return;
 
                 paidBy = userName;
@@ -264,7 +283,7 @@ public sealed partial class InvoiceSystem : EntitySystem
             }
             else
             {
-                if (!_credits.TryChangeBalance(user, -cost))
+                if (!_bank.TryBankWithdraw(user, cost))
                 {
                     Fail(ent, user, "invoice-insufficient-funds");
                     return;
@@ -284,7 +303,7 @@ public sealed partial class InvoiceSystem : EntitySystem
             if (ent.Comp.TargetStation is { } targetId && _faction.GetStationByID(targetId) is { } target)
                 _faction.TryAdjustFactionBalance(target, cost);
             else if (ent.Comp.TargetPerson is { } person)
-                _credits.Deposit(person, cost);
+                _bank.TryBankDeposit(person, cost);
         }
 
         ent.Comp.Paid = true;
@@ -318,13 +337,15 @@ public sealed partial class InvoiceSystem : EntitySystem
             PaidBy = ent.Comp.PaidBy,
             PaidTime = ent.Comp.PaidTime,
             TaxRate = ent.Comp.Payslip ? 0 : GetTaxRate(ent.Comp),
-            Credits = _credits.GetBalance(user),
+            Balance = _bank.GetBalance(user),
         };
 
         if (ent.Comp.TargetStation is { } targetId && _faction.GetStationByID(targetId) is { } target)
             state.PayTo = Name(target);
         else if (ent.Comp.TargetPerson is { } person)
             state.PayTo = person;
+        else if (ent.Comp.PayerName is { } payer)
+            state.PayTo = payer;
 
         foreach (var station in _faction.GetStationsAvailableTo(userName))
         {

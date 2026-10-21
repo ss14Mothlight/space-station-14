@@ -1,0 +1,44 @@
+# Ported from SS14-Persistence (originally New Frontiers).
+
+- type: entity
+  id: ComputerBankATMBase
+  parent: BaseComputer
+  abstract: true
+  name: bank ATM
+  description: Used to deposit and withdraw spesos from a personal bank account.
+  components:
+  - type: ActivatableUIRequiresPower
+  - type: Computer
+    board: null
+  - type: BankATM
+    cashSlot:
+      name: bank-ATM-cashSlot
+      insertSound: /Audio/Machines/scanning.ogg
+      ejectSound: /Audio/Machines/tray_eject.ogg
+      ejectOnBreak: true
+      swap: false
+      whitelist:
+        components:
+        - Cash
+  - type: ActivatableUI
+    key: enum.BankATMMenuUiKey.ATM
+    singleUser: true
+  - type: UserInterface
+    interfaces:
+      enum.BankATMMenuUiKey.ATM:
+        type: BankATMBoundUserInterface
+
+- type: entity
+  parent: ComputerBankATMBase
+  id: ComputerBankATM
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _Persistence/Structures/Machines/atm.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: icon
+    - map: ["computerLayerScreen"]
+      state: unshaded
+  - type: Anchorable
+    flags: none

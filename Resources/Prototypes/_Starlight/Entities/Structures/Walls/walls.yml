@@ -3,7 +3,7 @@
   id: WallAbductorDiagonal
   name: shuttle wall
   suffix: Diagonal
-  description: Keeps the air in and the assistants out.
+  description: Keeps the air in and the passengers out.
   placement:
     mode: SnapgridCenter
     snap:

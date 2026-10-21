@@ -11,7 +11,7 @@ namespace Content.Shared._Persistence.Factions.Components;
 public sealed partial class IdPrinterConsoleComponent : Component
 {
     [DataField]
-    public EntProtoId IdCard = "AssistantIDCard";
+    public EntProtoId IdCard = "PassengerIDCard";
 }
 
 [Serializable, NetSerializable]

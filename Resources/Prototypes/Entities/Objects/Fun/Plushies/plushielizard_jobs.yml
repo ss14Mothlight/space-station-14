@@ -240,9 +240,9 @@
 
 - type: entity
   parent: BasePlushieLizardJob
-  id: PlushieLizardJobAssistant # Starlight - passenger->assistant
-  name: assistant lizard plushie # Starlight - passenger->assistant
-  description: An adorable stuffed toy that resembles a lizardperson as an assistant. Its eyes look at you, a little bit more beady than the rest. # Starlight - passenger->assistant
+  id: PlushieLizardJobPassenger # Starlight - passenger->passenger
+  name: passenger lizard plushie # Starlight - passenger->passenger
+  description: An adorable stuffed toy that resembles a lizardperson as an passenger. Its eyes look at you, a little bit more beady than the rest. # Starlight - passenger->passenger
   components:
   - type: Sprite
     state: passenger

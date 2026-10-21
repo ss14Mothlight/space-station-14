@@ -2,7 +2,7 @@
   id: VendorGoldenBeaker
   productEntity: GoldenBeaker
   cost:
-    NTCredit: 300
+    Speso: 300
   categories:
   - SLChemistry
   conditions:
@@ -14,7 +14,7 @@
   id: VendorSilverBeaker
   productEntity: SilverBeaker
   cost:
-    NTCredit: 200
+    Speso: 200
   categories:
   - SLChemistry
   conditions:
@@ -26,7 +26,7 @@
   id: VendorVialCase
   productEntity: VialCase
   cost:
-    NTCredit: 37
+    Speso: 37
   categories:
   - SLChemistry
   conditions:
@@ -38,7 +38,7 @@
   id: VendorCleanerGrenade
   productEntity: CleanerGrenade
   cost:
-    NTCredit: 13
+    Speso: 13
   categories:
   - SLChemistry
   conditions:
@@ -50,7 +50,7 @@
   id: VendorBluebrutepack20
   productEntity: Bluebrutepack20
   cost:
-    NTCredit: 34
+    Speso: 34
   categories:
   - SLMedical
   conditions:
@@ -62,7 +62,7 @@
   id: VendorBlueointment20
   productEntity: Blueointment20
   cost:
-    NTCredit: 34
+    Speso: 34
   categories:
   - SLMedical
   conditions:
@@ -74,7 +74,7 @@
   id: VendorMobTrueDoctorbot
   productEntity: MobTrueDoctorbot
   cost:
-    NTCredit: 999
+    Speso: 999
   categories:
   - SLMedical
   conditions:
@@ -86,7 +86,7 @@
   id: VendorMobOrganHumanHeart
   productEntity: OrganHumanHeart
   cost:
-    NTCredit: 331
+    Speso: 331
   categories:
   - SLSurgery
   conditions:
@@ -96,7 +96,7 @@
   id: VendorMobOrganHumanStomach
   productEntity: OrganHumanStomach
   cost:
-    NTCredit: 124
+    Speso: 124
   categories:
   - SLSurgery
   conditions:
@@ -106,7 +106,7 @@
   id: VendorMobOrganHumanLiver
   productEntity: OrganHumanLiver
   cost:
-    NTCredit: 143
+    Speso: 143
   categories:
   - SLSurgery
   conditions:
@@ -116,7 +116,7 @@
   id: VendorMobOrganHumanKidneys
   productEntity: OrganHumanKidneys
   cost:
-    NTCredit: 265
+    Speso: 265
   categories:
   - SLSurgery
   conditions:
@@ -126,7 +126,7 @@
   id: VendorMobOrganHumanLungs
   productEntity: OrganHumanLungs
   cost:
-    NTCredit: 297
+    Speso: 297
   categories:
   - SLSurgery
   conditions:
@@ -136,7 +136,7 @@
   id: VendorMobOrganHumanTongue
   productEntity: OrganHumanTongue
   cost:
-    NTCredit: 48
+    Speso: 48
   categories:
   - SLSurgery
   conditions:
@@ -146,7 +146,7 @@
   id: VendorMobOrganHumanEyes
   productEntity: OrganHumanEyes
   cost:
-    NTCredit: 233
+    Speso: 233
   categories:
   - SLSurgery
   conditions:
@@ -156,7 +156,7 @@
   id: VendorLeftLegHuman
   productEntity: LeftLegWithFootHuman
   cost:
-    NTCredit: 153
+    Speso: 153
   categories:
   - SLSurgery
   conditions:
@@ -166,7 +166,7 @@
   id: VendorRightLegHuman
   productEntity: RightLegWithFootHuman
   cost:
-    NTCredit: 153
+    Speso: 153
   categories:
   - SLSurgery
   conditions:
@@ -176,7 +176,7 @@
   id: VendorLeftFootHuman
   productEntity: LeftFootHuman
   cost:
-    NTCredit: 37
+    Speso: 37
   categories:
   - SLSurgery
   conditions:
@@ -186,7 +186,7 @@
   id: VendorRightFootHuman
   productEntity: RightFootHuman
   cost:
-    NTCredit: 37
+    Speso: 37
   categories:
   - SLSurgery
   conditions:
@@ -196,7 +196,7 @@
   id: VendorLeftArmHuman
   productEntity: LeftArmWithHandHuman
   cost:
-    NTCredit: 153
+    Speso: 153
   categories:
   - SLSurgery
   conditions:
@@ -206,7 +206,7 @@
   id: VendorRightArmHuman
   productEntity: RightArmWithHandHuman
   cost:
-    NTCredit: 153
+    Speso: 153
   categories:
   - SLSurgery
   conditions:
@@ -216,7 +216,7 @@
   id: VendorLeftHandHuman
   productEntity: LeftHandHuman
   cost:
-    NTCredit: 37
+    Speso: 37
   categories:
   - SLSurgery
   conditions:
@@ -226,7 +226,7 @@
   id: VendorRightHandHuman
   productEntity: RightHandHuman
   cost:
-    NTCredit: 37
+    Speso: 37
   categories:
   - SLSurgery
   conditions:
@@ -236,7 +236,7 @@
   id: VendorMobOrganAvaliHeart
   productEntity: OrganAvaliHeart
   cost:
-    NTCredit: 331
+    Speso: 331
   categories:
   - SLSurgery
   conditions:
@@ -246,7 +246,7 @@
   id: VendorMobOrganAvaliLungs
   productEntity: OrganAvaliLungs
   cost:
-    NTCredit: 297
+    Speso: 297
   categories:
   - SLSurgery
   conditions:
@@ -256,7 +256,7 @@
   id: VendorMobOrganVoxLungs
   productEntity: OrganVoxLungs
   cost:
-    NTCredit: 297
+    Speso: 297
   categories:
   - SLSurgery
   conditions:

@@ -262,15 +262,15 @@
   - type: Objective
     difficulty: 1.4 # Hard to get these...
 
-# Assistant headsets. Yup.
+# Passenger headsets. Yup.
 - type: entity
-  parent: BaseThiefStealObjective # Not parenting collection since they're not actually on map.. but it's Assistants.
-  id: AssistantHeadsetsStealCollectionObjective
+  parent: BaseThiefStealObjective # Not parenting collection since they're not actually on map.. but it's Passengers.
+  id: PassengerHeadsetsStealCollectionObjective
   components:
   - type: NotJobRequirement
-    jobs: [ Assistant, HeadOfPersonnel, Quartermaster, CargoTechnician, MailTech, MiningSpecialist, SalvageSpecialist, SalvageLead ]
+    jobs: [ Passenger, HeadOfPersonnel, Quartermaster, CargoTechnician, MailTech, MiningSpecialist, SalvageSpecialist, SalvageLead ]
   - type: StealCondition
-    stealGroup: AssistantHeadsetsCollection
+    stealGroup: PassengerHeadsetsCollection
     minCollectionSize: 8
     maxCollectionSize: 14
   - type: Objective

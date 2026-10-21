@@ -1,0 +1,30 @@
+- type: job
+  id: Passenger # Mothlight - back to passengers
+  name: job-name-passenger # Mothlight
+  description: job-description-passenger # Mothlight
+  playTimeTracker: JobPassenger
+  startingGear: PassengerGear
+  icon: "JobIconPassenger"
+  supervisors: job-supervisors-everyone # Mothlight
+  access:
+  - Maintenance
+
+- type: startingGear
+  id: PassengerGear
+  equipment:
+    id: PassengerPDA
+    ears: ClothingHeadsetPassenger
+  #storage:
+    #back:
+    #- Stuff
+
+- type: chameleonOutfit
+  id: PassengerChameleonOutfit
+  job: Passenger
+  equipment:
+    head: ClothingHeadHatWelding
+    eyes: ClothingEyesGlassesCheapSunglasses
+    mask: ClothingMaskGas
+    neck: ClothingNeckMantle
+    outerClothing: ClothingOuterWinterCoat
+    gloves: ClothingHandsGlovesColorYellowBudget

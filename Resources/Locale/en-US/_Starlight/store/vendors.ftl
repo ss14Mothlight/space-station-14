@@ -8,6 +8,6 @@ vendor-fashion-o-mat = Fashion-o-Mat
 vendor-salvage-ticket-machine = salvage ticket machine
 vendor-mining-ticket-machine = mining ticket machine
 
-vending-machine-balance = Balance: { $balance }₡
-vending-machine-debited = Debited { $price }₡. Balance: { $balance }₡
-vending-machine-insufficient-funds = Insufficient funds. Required: { $price }₡
+vending-machine-balance = Balance: ${ $balance }
+vending-machine-debited = Debited ${ $price }. Balance: ${ $balance }
+vending-machine-insufficient-funds = Insufficient funds. Required: ${ $price }

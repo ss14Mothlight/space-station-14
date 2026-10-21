@@ -78,7 +78,6 @@ job-title-universal = Universal
 job-title-visitor = Visitor
 
 # Role timers - Make these alphabetical or I cut you
-JobAssistant = Assistant
 JobAtmosphericTechnician = Atmospheric Technician
 JobBartender = Bartender
 JobBorg = Borg
@@ -113,7 +112,8 @@ JobMedicalIntern = Medical Intern
 JobMime = Mime
 JobMusician = Musician
 JobParamedic = Paramedic
-# JobPassenger = Passenger # Starlight - de-passenger
+# Mothlight - back to passengers
+JobPassenger = Passenger
 JobPsychologist = Psychologist
 JobQuartermaster = Quartermaster
 JobReporter = Reporter

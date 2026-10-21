@@ -67,7 +67,7 @@
   parent: ClothingHandsMittensBase # That's why these exist in real life.
   id: ClothingHandsCatPaws
   name: cat paw mittens
-  description: Extra soft cat paws, especially made for the most stern assistants.
+  description: Extra soft cat paws, especially made for the most stern passengers.
   abstract: true
   components:
   - type: Sprite

@@ -20,6 +20,11 @@ public sealed class CargoPalletConsoleInterfaceState : BoundUserInterfaceState
     /// </summary>
     public bool Enabled;
 
+    /// <summary>
+    /// Mothlight - who the sale pays, and how.
+    /// </summary>
+    public Content.Shared._Persistence.Cargo.CargoPalletSaleState? Sale;
+
     public CargoPalletConsoleInterfaceState(int appraisal, int count, bool enabled)
     {
         Appraisal = appraisal;

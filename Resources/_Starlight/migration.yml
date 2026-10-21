@@ -16,7 +16,7 @@ AbductorDispencer: VendingMachineAbductorDispenser
 
 # 2025-04-13
 
-ClothingHeadsetGrey: ClothingHeadsetAssistant
+ClothingHeadsetGrey: ClothingHeadsetPassenger # Mothlight
 ToyFigurineGreytider: null
 RubberStampGreytide: null
 PosterContrabandGreyTide: null
@@ -326,7 +326,7 @@ MinaPlush: PlushieLizardJobHeadofpersonnel
 PlushieMorgana: PlushieVulp
 PlushieMorganaRound: PlushieVulp
 PlushieOog: PlushieHuman
-PlushiePercy: ToyFigurineAssistant
+PlushiePercy: ToyFigurinePassenger # Mothlight
 PlushiePoley: PlushieLizardJobSalvagespecialist
 PlushieRedwoods: PlushieVulp
 PlushieRemiie: PlushieLizard

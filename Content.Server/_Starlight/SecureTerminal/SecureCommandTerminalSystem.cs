@@ -31,7 +31,7 @@ using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
 using Content.Shared.Toggleable;
 using Content.Server._Starlight.Administration.Systems;
-using Content.Shared._NullLink;
+using Content.Server._Persistence.Bank; // Mothlight
 using Content.Shared._Starlight.Computers.PodConsole;
 
 namespace Content.Server._Starlight.SecureTerminal;
@@ -66,7 +66,7 @@ public sealed partial class SecureCommandTerminalSystem : EntitySystem
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private AutoDiscordLogSystem _autolog = default!;
     [Dependency] private RoundStatisticsSystem _roundStatistics = default!;
-    [Dependency] private ISharedNullLinkPlayerResourcesManager _playerResources = default!;
+    [Dependency] private BankSystem _bank = default!; // Mothlight - fees come out of the bank, in spesos
     [Dependency] private EuiManager _euiManager = default!;
 
     private static readonly TimeSpan UIUpdateInterval = TimeSpan.FromSeconds(5.0);
@@ -392,13 +392,12 @@ public sealed partial class SecureCommandTerminalSystem : EntitySystem
         // We charge charge the requester when requested so we don't have to deal with them not having the funds when approved.
         if (proto.Fee > 0)
         {
-            if (_playerResources.TryGetResource(actor, "credits", out var balance) && balance < proto.Fee)
+            if (!_bank.TryBankWithdraw(actor, proto.Fee)) // Mothlight - bank
             {
                 _popup.PopupCursor(Loc.GetString("secure-terminal-insufficient-funds", ("fee", proto.Fee)), actor, PopupType.Medium);
                 return;
             }
 
-            _playerResources.TryUpdateResource(actor, "credits", -proto.Fee);
             _popup.PopupCursor(Loc.GetString("secure-terminal-fee-held", ("fee", proto.Fee)), actor, PopupType.Medium);
         }
 
@@ -960,7 +959,7 @@ public sealed partial class SecureCommandTerminalSystem : EntitySystem
         var amount = (int)(proto.Fee * fraction);
         if (amount > 0)
         {
-            _playerResources.TryUpdateResource(requester, "credits", amount);
+            _bank.TryBankDeposit(requester, amount); // Mothlight - bank
             _roundStatistics.RecordSecureTerminalRefund(proto.ID, proto.ActionType, amount);
         }
     }

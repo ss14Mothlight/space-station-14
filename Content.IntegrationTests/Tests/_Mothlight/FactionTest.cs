@@ -25,7 +25,7 @@ public sealed class FactionTest : GameTest
     private const string Stranger = "Stranger Sam";
     private const string TaggedReader = "FactionTestTaggedReader";
     private const string OpenReader = "FactionTestOpenReader";
-    private const string IdCard = "AssistantIDCard";
+    private const string IdCard = "PassengerIDCard";
 
     // YAML indentation, not C#.
     // editorconfig-checker-disable

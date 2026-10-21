@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using Content.Server.GameTicking;
+using Content.Server.Mind;
 using Content.Server.Station.Systems;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Humanoid;
@@ -42,6 +43,7 @@ public sealed partial class CharacterPersistenceSystem : EntitySystem
     [Dependency] private StationSpawningSystem _spawning = null!;
     [Dependency] private GameTicker _ticker = null!;
     [Dependency] private SharedMapSystem _map = null!;
+    [Dependency] private MindSystem _mind = null!;
 
     private static readonly ResPath SaveRoot = new("/Mothlight/Characters");
 
@@ -55,7 +57,6 @@ public sealed partial class CharacterPersistenceSystem : EntitySystem
         "Damageable",
         "Hunger",
         "Thirst",
-        "CharacterCredits",
     ];
 
     /// <summary>
@@ -63,6 +64,11 @@ public sealed partial class CharacterPersistenceSystem : EntitySystem
     /// "don't save player-controlled mobs" filter.
     /// </summary>
     private EntityUid? _savingCharacter;
+
+    /// <summary>
+    /// Whether the world is being saved, which keeps every persistent character's body in it, played or not.
+    /// </summary>
+    private bool _savingWorld;
 
     public override void Initialize()
     {
@@ -117,10 +123,32 @@ public sealed partial class CharacterPersistenceSystem : EntitySystem
         if (!serializable || ent.Owner == _savingCharacter)
             return;
 
+        // Characters stay where they were left in the world, even when nobody's playing them.
+        if (_savingWorld && HasComp<PersistentCharacterComponent>(ent))
+            return;
+
         // Player characters are saved separately, keep them out of map saves (and out of each other's saves,
         // e.g. a player-controlled mouse in someone's pocket).
         if (TryComp<MindContainerComponent>(ent, out var mind) && Exists(mind.Mind))
             serializable = false;
+    }
+
+    /// <summary>
+    /// Keeps persistent characters' bodies in map saves until the returned scope is disposed, whether or not
+    /// they're being played. Used for saving the world.
+    /// </summary>
+    public WorldSavingScope SaveCharactersInWorld()
+    {
+        _savingWorld = true;
+        return new WorldSavingScope(this);
+    }
+
+    public readonly struct WorldSavingScope(CharacterPersistenceSystem system) : IDisposable
+    {
+        public void Dispose()
+        {
+            system._savingWorld = false;
+        }
     }
 
     #endregion
@@ -137,6 +165,15 @@ public sealed partial class CharacterPersistenceSystem : EntitySystem
     public bool HasSave(NetUserId user, string profileName)
     {
         return _res.UserData.Exists(GetSavePath(user, profileName));
+    }
+
+    /// <summary>
+    /// Deletes every character save.
+    /// </summary>
+    public void DeleteAllSaves()
+    {
+        if (_res.UserData.Exists(SaveRoot))
+            _res.UserData.Delete(SaveRoot);
     }
 
     #endregion
@@ -260,6 +297,82 @@ public sealed partial class CharacterPersistenceSystem : EntitySystem
         // The old mind reference was dropped while saving. The stale MindContainer data is harmless, it gets
         // overwritten as soon as the caller transfers a new mind in.
 
+        mob = ApplyProfile(saved, user, profile, station);
+        return true;
+    }
+
+    /// <summary>
+    /// Finds the body of a character who was left in the world, e.g. because they logged out, or the world was saved
+    /// with them in it.
+    /// </summary>
+    public EntityUid? FindWorldBody(NetUserId user, string profileName)
+    {
+        var query = EntityQueryEnumerator<PersistentCharacterComponent>();
+        while (query.MoveNext(out var uid, out var character))
+        {
+            if (character.UserId == user
+                && character.ProfileName == profileName
+                && !TerminatingOrDeleted(uid)
+                && Transform(uid).MapUid != null)
+            {
+                return uid;
+            }
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// Takes back control of a character's body that was left in the world, applying the current profile's
+    /// appearance and name. Characters only end up back in their save files when they go into cryo.
+    /// </summary>
+    /// <returns>False if the character has no body in the world, or someone else is controlling it.</returns>
+    public bool TryReclaimCharacter(
+        NetUserId user,
+        HumanoidCharacterProfile profile,
+        EntityUid? station,
+        [NotNullWhen(true)] out EntityUid? mob)
+    {
+        mob = null;
+        if (FindWorldBody(user, profile.Name) is not { } body)
+            return false;
+
+        if (_mind.TryGetMind(body, out var oldMind, out var oldMindComp))
+        {
+            if (oldMindComp.UserId is { } other && other != user)
+            {
+                Log.Warning($"Not giving {ToPrettyString(body)} back to {user}, {other} is controlling it.");
+                return false;
+            }
+
+            // Whatever's left of the last time they played it. The caller gives them a fresh mind.
+            _mind.WipeMind(oldMind, oldMindComp);
+            QueueDel(oldMind);
+        }
+
+        mob = ApplyProfile(body, user, profile, station);
+        return true;
+    }
+
+    /// <summary>
+    /// Deletes a character's body if it was left in the world, for when they're starting over.
+    /// </summary>
+    public void DeleteWorldBody(NetUserId user, string profileName)
+    {
+        while (FindWorldBody(user, profileName) is { } body)
+        {
+            _transform.DetachEntity(body, Transform(body));
+            Del(body);
+        }
+    }
+
+    /// <summary>
+    /// Puts the profile's appearance and name on a character's saved body, or if the species changed, moves their
+    /// belongings over to a fresh body built from the profile.
+    /// </summary>
+    private EntityUid ApplyProfile(EntityUid saved, NetUserId user, HumanoidCharacterProfile profile, EntityUid? station)
+    {
+        EntityUid? mob;
         if (MetaData(saved).EntityPrototype?.ID == GetBodyPrototype(profile))
         {
             // Same body type, reuse the saved body as-is and just put the profile's look back on it.
@@ -270,7 +383,7 @@ public sealed partial class CharacterPersistenceSystem : EntitySystem
         else
         {
             // Species changed, so the old body can't be reused. Build a new one and move everything over.
-            var fresh = _spawning.SpawnPlayerMob(coords, null, profile, station);
+            var fresh = _spawning.SpawnPlayerMob(Transform(saved).Coordinates, null, profile, station);
             TransferBelongings(saved, fresh);
             CopyCarriedOverComponents(saved, fresh);
             Del(saved);
@@ -278,7 +391,7 @@ public sealed partial class CharacterPersistenceSystem : EntitySystem
         }
 
         MarkPersistent(mob.Value, user, profile.Name);
-        return true;
+        return mob.Value;
     }
 
     /// <summary>

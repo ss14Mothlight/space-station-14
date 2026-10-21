@@ -4,7 +4,7 @@ using Content.Server.Chat.Managers;
 using Content.Server.GameTicking.Events;
 using Content.Server.Mind;
 using Content.Server.Roles;
-using Content.Shared._NullLink;
+using Content.Server._Persistence.Bank; // Mothlight
 using Content.Shared.Chat;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -25,7 +25,7 @@ public sealed partial class SalarySystem : SharedSalarySystem
     [Dependency] private IEntityManager _entityManager = default!;
     [Dependency] private INullLinkPlayerManager _nullLinkRoles = default!;
     [Dependency] private IPlayerRolesManager _playerRolesManager = default!;
-    [Dependency] private ISharedNullLinkPlayerResourcesManager _playerResources = default!;
+    [Dependency] private BankSystem _bank = default!; // Mothlight - paid into the character's bank, in spesos
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private IGameTiming _time = default!;
     [Dependency] private IPrototypeManager _prototypes = default!;
@@ -123,8 +123,10 @@ public sealed partial class SalarySystem : SharedSalarySystem
 
     private int PaySalary(ICommonSession session, Entity<MindComponent?> mind)
     {
-        if (!_playerResources.TryGetResource(session, "credits", out _))
+        // Mothlight begin - paid to the character they're playing
+        if (session.AttachedEntity is not { } character || !_bank.TryGetBalance(character, out _))
             return 0;
+        // Mothlight end
 
         var total = 0;
         var roles = _roles.MindGetAllRoleInfo(mind);
@@ -135,7 +137,7 @@ public sealed partial class SalarySystem : SharedSalarySystem
 
             var sender = _salaries.Sender.GetValueOrDefault(role.Prototype, "NanoTrasen");
             var amount = CalculateSalaryWithBonuses(salary, session, sender);
-            _playerResources.TryUpdateResource(session, "credits", amount);
+            _bank.TryBankDeposit(character, amount); // Mothlight - bank
 
             var message = Loc.GetString("economy-chat-salary-message", ("amount", amount), ("sender", sender));
             var wrappedMessage = Loc.GetString("economy-chat-salary-wrapped-message", ("amount", amount), ("sender", sender), ("senderColor", "#2384CE"));
@@ -148,10 +150,10 @@ public sealed partial class SalarySystem : SharedSalarySystem
 
     internal void Donate(ICommonSession session, int amount)
     {
-        if (!_playerResources.TryGetResource(session, "credits", out var balance))
+        // Mothlight begin - paid to the character they're playing
+        if (session.AttachedEntity is not { } character || !_bank.TryBankDeposit(character, amount))
             return;
-
-        _playerResources.TryUpdateResource(session, "credits", amount);
+        // Mothlight end
 
         // We need to make a prototype
         var i = _random.Next(0, 20);

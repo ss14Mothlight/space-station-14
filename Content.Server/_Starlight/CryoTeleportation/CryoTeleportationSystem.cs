@@ -1,3 +1,4 @@
+using Content.Server._Mothlight.Persistence; // Mothlight
 using Content.Server._Starlight.Bed.Cryostorage;
 using Content.Server.Bed.Cryostorage;
 using Content.Shared._Starlight.Polymorph.Components;
@@ -35,6 +36,7 @@ public sealed partial class CryoTeleportationSystem : EntitySystem
     [Dependency] private IPlayerManager _playerMan = default!;
     [Dependency] private IConfigurationManager _configurationManager = default!;
     [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private WorldPersistenceRuleSystem _worldPersistence = default!; // Mothlight
 
     public TimeSpan _nextTick = TimeSpan.Zero;
     private readonly TimeSpan _refreshCooldown = TimeSpan.FromSeconds(5);
@@ -66,7 +68,8 @@ public sealed partial class CryoTeleportationSystem : EntitySystem
                 || comp.ExitTime == null
                 || _timing.CurTime - comp.ExitTime - comp.TimeDelay < stationComp.TransferDelay
                 || HasComp<CryostorageContainedComponent>(uid)
-                || HasComp<UncryoableComponent>(uid))
+                || HasComp<UncryoableComponent>(uid)
+                || HasComp<PersistentCharacterComponent>(uid) && _worldPersistence.HasActiveRule()) // Mothlight - characters who log out stay where they are in a persistent world
                 continue;
 
             var stationGrid = _stationSystem.GetLargestGrid((comp.Station.Value, stationData));

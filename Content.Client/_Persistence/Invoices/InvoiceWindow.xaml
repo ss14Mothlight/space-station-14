@@ -9,7 +9,7 @@
         <Control VerticalExpand="True" />
         <Label Name="PaidLabel" FontColorOverride="#50e050" />
         <BoxContainer Name="PaySection" Orientation="Vertical">
-            <Label Name="CreditsLabel" />
+            <Label Name="BalanceLabel" />
             <BoxContainer Orientation="Horizontal">
                 <OptionButton Name="PayFromOptions" HorizontalExpand="True" />
                 <Button Name="PayButton" />

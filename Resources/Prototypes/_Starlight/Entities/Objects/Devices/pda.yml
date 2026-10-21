@@ -702,7 +702,7 @@
   suffix: Borgi
   components:
   - type: Pda
-    id: AssistantDerelictBorgiIDCard
+    id: PassengerDerelictBorgiIDCard
   - type: Tag #  Ignore Chameleon tags
     tags:
     - DoorBumpOpener

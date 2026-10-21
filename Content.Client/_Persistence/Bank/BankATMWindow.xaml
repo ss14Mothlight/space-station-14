@@ -1,0 +1,18 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
+                      Title="{Loc 'bank-atm-menu-title'}"
+                      MinSize="300 176">
+    <BoxContainer Margin="10 2 10 2" Orientation="Vertical">
+        <BoxContainer Orientation="Horizontal">
+            <Label Text="{Loc 'bank-atm-menu-balance-label'}" StyleClasses="LabelKeyText" />
+            <Label Name="BalanceLabel" Text="{Loc 'bank-atm-menu-no-bank'}" />
+        </BoxContainer>
+        <LineEdit Name="WithdrawEdit" MinSize="80 0" PlaceHolder="{Loc 'bank-atm-menu-amount-placeholder'}" />
+        <Button Name="WithdrawButton" Text="{Loc 'bank-atm-menu-withdraw-button'}" />
+        <BoxContainer Orientation="Horizontal" Margin="0 8 0 0">
+            <Label Text="{Loc 'bank-atm-menu-deposit-label'}" StyleClasses="LabelKeyText" />
+            <Label Name="DepositLabel" Text="{Loc 'bank-atm-menu-no-deposit'}" />
+        </BoxContainer>
+        <Button Name="DepositButton" Text="{Loc 'bank-atm-menu-deposit-button'}" />
+    </BoxContainer>
+</controls:FancyWindow>

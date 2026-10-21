@@ -70,7 +70,7 @@ public sealed partial class ChassisSpriteSelection : Control
             };
 
             content.AddChild(CreateTextureRect(subtype.SpritePath ?? borgTypePrototype.SpritePath, subtype.SpriteBodyState ?? borgTypePrototype.SpriteBodyState));
-            content.AddChild(new Label{ Text = subtype.Price is not null and > 0 ? ent.Name + $" ({subtype.Price}₡)" : ent.Name });
+            content.AddChild(new Label{ Text = subtype.Price is not null and > 0 ? ent.Name + $" (${subtype.Price})" : ent.Name });
             button.AddChild(content);
             button.OnPressed += _ =>
             {

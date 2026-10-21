@@ -63,7 +63,7 @@
   id: BoxFolderHoPClipboard
   parent: [BoxFolderClipboard, BaseGrandTheftContraband]
   name: bureaucratic digi-board
-  description: A bulky electric clipboard, filled with bureaucracy. Contains a portable ID card computer. Vulnerable to assistants.
+  description: A bulky electric clipboard, filled with bureaucracy. Contains a portable ID card computer. Vulnerable to passengers.
   components:
     - type: Sprite
       sprite: _Starlight/Objects/Misc/hop_clipboard.rsi

@@ -26,7 +26,6 @@ highlights-roboticist = Roboticist, Science, Robo, "Sci", Robotics
 # Civilian
 highlights-boxer = Boxer
 highlights-performer = Performer
-highlights-assistant = Assistant
 
 # Law
 highlights-internal-affairs-agent = Internal Affairs Agent, "IAA", "Law", "SOP", Standard Operating Procedure, Lawyer

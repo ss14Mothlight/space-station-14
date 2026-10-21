@@ -35,3 +35,13 @@
   parent: [ BaseCircuitboardRecipe, BaseGeneralComputerRecipeCategory ]
   id: InvoicePrinterCircuitboard
   result: InvoicePrinterCircuitboard
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: BSPAnchorKey
+  result: BSPAnchorKey
+  completetime: 2
+  materials:
+    Steel: 300
+    Plastic: 100
+    Glass: 200

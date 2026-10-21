@@ -110,7 +110,7 @@
         orGroup: GiftPool
       - id: ToyNuke
         orGroup: GiftPool
-      - id: ToyFigurineAssistant
+      - id: ToyFigurinePassenger
         orGroup: GiftPool
       - id: ToyFigurineGriffin
         orGroup: GiftPool

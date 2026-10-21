@@ -4,7 +4,7 @@
   id: VendorClothingOuterHardsuitEngineeringGolden
   productEntity: ClothingOuterHardsuitEngineeringGolden
   cost:
-    NTCredit: 1140
+    Speso: 1140
   categories:
   - SLEngineering
   conditions:
@@ -17,7 +17,7 @@
   id: VendorJetpackMiniFilled
   productEntity: JetpackMiniFilled
   cost:
-    NTCredit: 400
+    Speso: 400
   categories:
   - SLEngineering
   conditions:
@@ -30,7 +30,7 @@
   id: VendorPrototypeJawsOfLife
   productEntity: PrototypeJawsOfLife
   cost:
-    NTCredit: 153
+    Speso: 153
   categories:
   - SLEngineering
   conditions:
@@ -43,7 +43,7 @@
   id: VendorWelderIndustrial
   productEntity: WelderIndustrial
   cost:
-    NTCredit: 150
+    Speso: 150
   categories:
   - SLEngineering
   conditions:
@@ -56,7 +56,7 @@
   id: VendorWelderIndustrialAdvanced
   productEntity: WelderIndustrialAdvanced
   cost:
-    NTCredit: 350
+    Speso: 350
   categories:
   - SLEngineering
   conditions:
@@ -71,7 +71,7 @@
   id: VendorClothingOuterHardsuitAtmosGolden
   productEntity: ClothingOuterHardsuitAtmosGolden
   cost:
-    NTCredit: 1140
+    Speso: 1140
   categories:
   - SLAtmospherics
   conditions:
@@ -84,7 +84,7 @@
   id: VendorDoubleEmergencyNitrogenTankFilled
   productEntity: DoubleEmergencyNitrogenTankFilled
   cost:
-    NTCredit: 250
+    Speso: 250
   categories:
   - SLAtmospherics
   conditions:
@@ -97,7 +97,7 @@
   id: VendorDoubleEmergencyOxygenTankFilled
   productEntity: DoubleEmergencyOxygenTankFilled
   cost:
-    NTCredit: 250
+    Speso: 250
   categories:
   - SLAtmospherics
   conditions:
@@ -110,7 +110,7 @@
   id: VendorHolofanProjector
   productEntity: HolofanProjector
   cost:
-    NTCredit: 160
+    Speso: 160
   categories:
   - SLAtmospherics
   conditions:

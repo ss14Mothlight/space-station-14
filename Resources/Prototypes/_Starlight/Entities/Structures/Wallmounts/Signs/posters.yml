@@ -122,7 +122,7 @@
   parent: PosterBase
   id: PosterLegitKillEmAll
   name: "Kill Em All Advert"
-  description: "A poster of the Head of Security shooting a hole through an assistant, particularly violent."
+  description: "A poster of the Head of Security shooting a hole through an passenger, particularly violent."
   components:
   - type: Sprite
     sprite: _Starlight/Structures/Wallmounts/posters/killemall.rsi
@@ -402,7 +402,7 @@
   parent: PosterBase
   id: PosterLegitKeepItClean
   name: "Keep It Clean"
-  description: "A plea every janitor makes before the assistants dump a vending machine's worth of soda then get found dead in disposals mysteriously."
+  description: "A plea every janitor makes before the passengers dump a vending machine's worth of soda then get found dead in disposals mysteriously."
   components:
   - type: Sprite
     sprite: _Starlight/Structures/Wallmounts/posters/keep_it_clean.rsi

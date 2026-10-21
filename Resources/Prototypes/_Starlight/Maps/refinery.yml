@@ -67,7 +67,7 @@
             SalvageLead: [ 1, 1 ]
             SalvageMedic: [ 1, 1 ]
             #civilian
-            Assistant: [ -1, -1 ]
+            Passenger: [ -1, -1 ]
             AssistantManager: [ 2, 2 ]
             Clown: [ 2, 2 ]
             Mime: [ 2, 2 ]

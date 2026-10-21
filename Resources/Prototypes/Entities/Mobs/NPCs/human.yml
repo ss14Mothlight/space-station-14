@@ -7,7 +7,7 @@
   - type: InputMover
   - type: MobMover
   - type: Loadout
-    prototypes: [LimitedAssistantGear]
+    prototypes: [LimitedPassengerGear]
   - type: NpcFactionMember
     factions:
     - NanoTrasen

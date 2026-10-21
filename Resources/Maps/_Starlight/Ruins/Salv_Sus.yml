@@ -4479,7 +4479,7 @@ entities:
     - type: Transform
       pos: 1.9012399,-37.958923
       parent: 1
-- proto: ClothingHeadsetAssistant
+- proto: ClothingHeadsetPassenger
   entities:
   - uid: 1698
     components:

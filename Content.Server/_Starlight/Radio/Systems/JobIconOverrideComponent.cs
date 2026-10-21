@@ -10,9 +10,9 @@ namespace Content.Server._Starlight.Radio.Systems;
 [RegisterComponent]
 public sealed partial class JobIconOverrideComponent : Component
 {
-    [DataField] public ProtoId<JobIconPrototype> JobIconOverride = "JobIconAssistant";
+    [DataField] public ProtoId<JobIconPrototype> JobIconOverride = "JobIconPassenger";
 
-    [DataField] public LocId JobTitleOverride = "job-name-assistant";
+    [DataField] public LocId JobTitleOverride = "job-name-passenger"; // Mothlight
 
     public string LocalizedJobTitle =>
         field ??= Loc.GetString(JobTitleOverride);

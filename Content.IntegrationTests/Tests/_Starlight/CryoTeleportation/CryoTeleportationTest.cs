@@ -26,7 +26,7 @@ public sealed class CryoTeleportationTest : GameTest
 {
     private const string Map = "CryoTeleportationTestMap";
     private static readonly EntProtoId _cryoPod = "CryogenicSleepUnit";
-    private static readonly ProtoId<JobPrototype> _passenger = "Assistant";
+    private static readonly ProtoId<JobPrototype> _passenger = "Passenger"; // Mothlight
     private static readonly ProtoId<JobPrototype> _mime = "Mime";
 
     // Long enough to cover the auto-cryo refresh cooldown (5s) plus a margin.

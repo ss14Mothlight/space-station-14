@@ -36,16 +36,18 @@ public sealed partial class CargoSystem
         SubscribeLocalEvent<CargoPalletConsoleComponent, BoundUIOpenedEvent>(OnPalletUIOpen);
 
         _cfg.OnValueChanged(CCVars.LockboxCutEnabled, (enabled) => { _lockboxCutEnabled = enabled; }, true);
+        InitializePalletSale(); // Mothlight
     }
 
     #region Console
-    private void UpdatePalletConsoleInterface(EntityUid uid)
+    private void UpdatePalletConsoleInterface(EntityUid uid, EntityUid? actor = null) // Mothlight - actor
     {
+        var sale = GetSaleState((uid, Comp<CargoPalletConsoleComponent>(uid)), actor); // Mothlight
         if (Transform(uid).GridUid is not { } gridUid)
         {
             _uiSystem.SetUiState(uid,
                 CargoPalletConsoleUiKey.Sale,
-                new CargoPalletConsoleInterfaceState(0, 0, false));
+                new CargoPalletConsoleInterfaceState(0, 0, false) { Sale = sale }); // Mothlight - sale
             return;
         }
         GetPalletGoods(gridUid, out var toSell, out var goods);
@@ -53,12 +55,12 @@ public sealed partial class CargoSystem
         var totalAmount = goods.Sum(t => t.Item3) + gasValues.Sum(t => t.Item2); //Starlight-edit - add gasValues
         _uiSystem.SetUiState(uid,
             CargoPalletConsoleUiKey.Sale,
-            new CargoPalletConsoleInterfaceState((int) totalAmount, toSell.Count, true));
+            new CargoPalletConsoleInterfaceState((int) totalAmount, toSell.Count, true) { Sale = sale }); // Mothlight - sale
     }
 
     private void OnPalletUIOpen(EntityUid uid, CargoPalletConsoleComponent component, BoundUIOpenedEvent args)
     {
-        UpdatePalletConsoleInterface(uid);
+        UpdatePalletConsoleInterface(uid, args.Actor); // Mothlight - actor
     }
 
     /// <summary>
@@ -71,7 +73,7 @@ public sealed partial class CargoSystem
 
     private void OnPalletAppraise(EntityUid uid, CargoPalletConsoleComponent component, CargoPalletAppraiseMessage args)
     {
-        UpdatePalletConsoleInterface(uid);
+        UpdatePalletConsoleInterface(uid, args.Actor); // Mothlight - actor
     }
 
     #endregion
@@ -300,24 +302,42 @@ public sealed partial class CargoSystem
     {
         var xform = Transform(uid);
 
-        if (_station.GetOwningStation(uid) is not { } station ||
-            !TryComp<StationBankAccountComponent>(station, out var bankAccount))
-        {
-            return;
-        }
-
+        // Mothlight begin - consoles not on a station can still sell for cash, a payslip or to a chosen faction,
+        // and every way of failing says why instead of doing nothing
+        var station = GetSaleOwner(uid);
         if (xform.GridUid is not { } gridUid)
         {
-            _uiSystem.SetUiState(uid,
-                CargoPalletConsoleUiKey.Sale,
-                new CargoPalletConsoleInterfaceState(0, 0, false));
+            UpdatePalletConsoleInterface(uid, args.Actor);
             return;
         }
 
-        if (!SellPallets(gridUid, station, out var goods, out var gasses)) //Starlight-edit - add gasses
+        if (!CanPayOutSale((uid, component), station, out var error))
+        {
+            _popup.PopupEntity(Loc.GetString(error), uid, args.Actor);
+            _audio.PlayPvs(SaleDenySound, uid);
             return;
+        }
 
-        var baseDistribution = CreateAccountDistribution((station, bankAccount));
+        if (!SellPallets(gridUid, station ?? EntityUid.Invalid, out var goods, out var gasses)) //Starlight-edit - add gasses
+        {
+            _popup.PopupEntity(Loc.GetString("cargo-pallet-sale-nothing"), uid, args.Actor);
+            UpdatePalletConsoleInterface(uid, args.Actor);
+            return;
+        }
+
+        if (TryPayOutSale((uid, component), station, args.Actor, goods.Sum(t => t.Item3) + gasses.Sum(t => t.Item2))
+            || station is not { } owner
+            || !TryComp<StationBankAccountComponent>(owner, out var bankAccount))
+        {
+            _audio.PlayPvs(ApproveSound, uid);
+            UpdatePalletConsoleInterface(uid, args.Actor);
+            return;
+        }
+
+        station = owner;
+        // Mothlight end
+
+        var baseDistribution = CreateAccountDistribution((station.Value, bankAccount)); // Mothlight - nullable station
         foreach (var (_, sellComponent, value) in goods)
         {
             Dictionary<ProtoId<CargoAccountPrototype>, double> distribution;
@@ -335,20 +355,20 @@ public sealed partial class CargoSystem
                 distribution = baseDistribution;
             }
 
-            UpdateBankAccount((station, bankAccount), (int) Math.Round(value), distribution, false);
+            UpdateBankAccount((station.Value, bankAccount), (int) Math.Round(value), distribution, false); // Mothlight - nullable station
         }
 
         // Starlight - start
         foreach (var (_, value) in gasses)
         {
                 // TODO: Consider if we want raw gasses to count as lockbox cut to engineering if lockbox cut is enabled
-                UpdateBankAccount((station, bankAccount), (int) Math.Round(value), baseDistribution, false);
+                UpdateBankAccount((station.Value, bankAccount), (int) Math.Round(value), baseDistribution, false); // Mothlight - nullable station
         }
         // Starlight - end
 
-        Dirty(station, bankAccount);
+        Dirty(station.Value, bankAccount); // Mothlight - nullable station
         _audio.PlayPvs(ApproveSound, uid);
-        UpdatePalletConsoleInterface(uid);
+        UpdatePalletConsoleInterface(uid, args.Actor); // Mothlight - actor
     }
 
     #endregion

@@ -1518,7 +1518,7 @@
     head: ClothingHeadHelmetMerc
     back: ClothingBackpackMerc
     belt: ClothingBeltMercWebbing
-    ears: ClothingHeadsetAssistant
+    ears: ClothingHeadsetPassenger
     outerClothing: ClothingOuterVestWebMerc
     pocket1: WeaponLaserSvalinn
     pocket2: RadioHandheld

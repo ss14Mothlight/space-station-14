@@ -4,10 +4,10 @@
   overrideConsoleVisibility: false
   hidden: true
   weight: 0
-  description: job-description-assistant
+  description: job-description-passenger
   playTimeTracker: JobMakeshiftID
   icon: "JobIconMakeshiftID"
   supervisors: job-supervisors-everyone
-  startingGear: AssistantGear #you shouldnt be able to start as them but its better to be safe
+  startingGear: PassengerGear #you shouldnt be able to start as them but its better to be safe
   access:
     - Maintenance

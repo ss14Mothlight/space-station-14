@@ -2,7 +2,7 @@
   id: VendorClothingEyesGlassesCheapSunglasses
   productEntity: ClothingEyesGlassesCheapSunglasses
   cost:
-    NTCredit: 100
+    Speso: 100
   categories:
   - SLMime
   conditions:
@@ -14,7 +14,7 @@
   id: VendorClothingMaskMime
   productEntity: ClothingMaskMime
   cost:
-    NTCredit: 60
+    Speso: 60
   categories:
   - SLMime
   conditions:
@@ -26,7 +26,7 @@
   id: VendorClothingMaskBlushingMime
   productEntity: ClothingMaskBlushingMime
   cost:
-    NTCredit: 60
+    Speso: 60
   categories:
   - SLMime
   conditions:
@@ -38,7 +38,7 @@
   id: VendorClothingMaskScaredMime
   productEntity: ClothingMaskScaredMime
   cost:
-    NTCredit: 60
+    Speso: 60
   categories:
   - SLMime
   conditions:
@@ -50,7 +50,7 @@
   id: VendorClothingMaskSadMime
   productEntity: ClothingMaskSadMime
   cost:
-    NTCredit: 60
+    Speso: 60
   categories:
   - SLMime
   conditions:
@@ -62,7 +62,7 @@
   id: VendorDrinkBottleOfNothingFull
   productEntity: DrinkBottleOfNothingFull
   cost:
-    NTCredit: 120
+    Speso: 120
   categories:
   - SLMime
   conditions:
@@ -74,7 +74,7 @@
   id: VendorFoodMimana
   productEntity: FoodMimana
   cost:
-    NTCredit: 30
+    Speso: 30
   categories:
   - SLMime
   conditions:
@@ -86,7 +86,7 @@
   id: VendorToolboxInvisibleFilled
   productEntity: ToolboxInvisibleFilled
   cost:
-    NTCredit: 300
+    Speso: 300
   categories:
   - SLMime
   conditions:

@@ -85,7 +85,7 @@
             SalvageMedic: [ 1, 1 ]
 
             # Civilian
-            Assistant: [ -1, -1 ]
+            Passenger: [ -1, -1 ]
             AssistantManager: [ 2, 2 ]
 
             # Silicon

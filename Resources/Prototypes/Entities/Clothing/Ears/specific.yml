@@ -1,7 +1,7 @@
 ﻿- type: entity
-  parent: [ClothingHeadsetAssistant, BaseChameleon] #Starlight de-tidification
+  parent: [ClothingHeadsetPassenger, BaseChameleon] #Starlight de-tidification
   id: ClothingHeadsetChameleon
-  name: assistant headset
+  name: passenger headset
   description: An updated, modular intercom that fits over the head. Takes encryption keys.
   suffix: Chameleon
   components:
@@ -13,4 +13,4 @@
       sprite: Clothing/Ears/Headsets/base.rsi
     - type: ChameleonClothing
       slot: [ears]
-      default: ClothingHeadsetAssistant
+      default: ClothingHeadsetPassenger

@@ -2,7 +2,7 @@
   id: VendorFakeGrenade
   productEntity: FakeGrenade
   cost:
-    NTCredit: 86
+    Speso: 86
   categories:
   - SLClown
   conditions:
@@ -14,7 +14,7 @@
   id: VendorHoloparasiteFakeInjector
   productEntity: HoloparasiteFakeInjector
   cost:
-    NTCredit: 327
+    Speso: 327
   categories:
   - SLClown
   conditions:
@@ -26,7 +26,7 @@
   id: VendorToySwordDoubled
   productEntity: ToySwordDoubled
   cost:
-    NTCredit: 127
+    Speso: 127
   categories:
   - SLClown
   conditions:
@@ -38,7 +38,7 @@
   id: VendorFakeAnomalyFlatpack
   productEntity: FakeAnomalyFlatpack
   cost:
-    NTCredit: 98
+    Speso: 98
   categories:
   - SLClown
   conditions:
@@ -50,7 +50,7 @@
   id: VendorFoodPieBananaCream
   productEntity: FoodPieBananaCream
   cost:
-    NTCredit: 64
+    Speso: 64
   categories:
   - SLClown
   conditions:
@@ -62,7 +62,7 @@
   id: VendorLauncherCreamPie
   productEntity: LauncherCreamPie
   cost:
-    NTCredit: 156
+    Speso: 156
   categories:
   - SLClown
   conditions:
@@ -74,7 +74,7 @@
   id: VendorWhoopieCushion
   productEntity: WhoopieCushion
   cost:
-    NTCredit: 35
+    Speso: 35
   categories:
   - SLClown
   conditions:
@@ -86,7 +86,7 @@
   id: VendorCandyClownUniformSuit
   productEntity: CandyClownUniformSuit
   cost:
-    NTCredit: 50
+    Speso: 50
   categories:
   - SLClown
   conditions:
@@ -98,7 +98,7 @@
   id: VendorStripedClownUniformSuit
   productEntity: StripedClownUniformSuit
   cost:
-    NTCredit: 50
+    Speso: 50
   categories:
   - SLClown
   conditions:
@@ -110,7 +110,7 @@
   id: VendorLubeGrenade
   productEntity: LubeGrenade
   cost:
-    NTCredit: 1000
+    Speso: 1000
   categories:
   - SLClown
   conditions:
@@ -122,7 +122,7 @@
   id: VendorGlueGrenade
   productEntity: GlueGrenade
   cost:
-    NTCredit: 1000
+    Speso: 1000
   categories:
   - SLClown
   conditions:
@@ -134,7 +134,7 @@
   id: VendorChonoLokeBundleBag
   productEntity: ChonoLokeBundleBag
   cost:
-    NTCredit: 4500
+    Speso: 4500
   categories:
   - SLClown
   conditions:
@@ -146,7 +146,7 @@
   id: VendorChonoLokeFakeBlastShell
   productEntity: ChonoLokeFakeBlastShell
   cost:
-    NTCredit: 50
+    Speso: 50
   categories:
   - SLClown
   conditions:
@@ -156,7 +156,7 @@
   id: VendorChonoLokeFakeFragShell
   productEntity: ChonoLokeFakeFragShell
   cost:
-    NTCredit: 50
+    Speso: 50
   categories:
   - SLClown
   conditions:
@@ -166,7 +166,7 @@
   id: VendorChonoLokeCreamPieShell
   productEntity: ChonoLokeCreamPieShell
   cost:
-    NTCredit: 75
+    Speso: 75
   categories:
   - SLClown
   conditions:

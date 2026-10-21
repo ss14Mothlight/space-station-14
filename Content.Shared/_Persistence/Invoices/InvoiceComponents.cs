@@ -32,6 +32,12 @@ public sealed partial class InvoiceComponent : Component
     public string? TargetPerson;
 
     /// <summary>
+    /// Who paid for a payslip, when it wasn't a faction (e.g. a cargo export).
+    /// </summary>
+    [DataField]
+    public string? PayerName;
+
+    /// <summary>
     /// The faction (by id) owning the grid the invoice was printed on, which takes its sales tax when it's paid.
     /// </summary>
     [DataField]
@@ -170,7 +176,10 @@ public sealed class InvoiceBoundUserInterfaceState : BoundUserInterfaceState
     /// </summary>
     public Dictionary<int, string> Factions = new();
 
-    public int Credits;
+    /// <summary>
+    /// The viewer's bank balance, in spesos.
+    /// </summary>
+    public int Balance;
 }
 
 /// <summary>

@@ -74,7 +74,14 @@ public sealed partial class StationJobsComponent : Component
     /// Mapping of jobs to an int[2] array that specifies jobs available at round start, and midround.
     /// Negative values implies that there is no limit.
     /// </summary>
-    [DataField("availableJobs", required: true)]
+    [DataField("availableJobs")] // Mothlight - not required, defaults to no jobs
     [Access(typeof(StationSystem))] // Starlight
-    public Dictionary<ProtoId<JobPrototype>, int[]> SetupAvailableJobs = default!;
+    public Dictionary<ProtoId<JobPrototype>, int[]> SetupAvailableJobs = new(); // Mothlight - was null by default
+
+    /// <summary>
+    /// Mothlight - whether <see cref="JobList"/> has been set up from <see cref="SetupAvailableJobs"/> yet.
+    /// Saved, so a station loaded from a persistent world keeps the job slots it had instead of starting over.
+    /// </summary>
+    [DataField]
+    public bool JobListInitialized;
 }

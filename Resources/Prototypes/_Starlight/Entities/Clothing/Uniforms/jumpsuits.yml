@@ -323,7 +323,7 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitPerformerClown
-  name: assistant clown jumpsuit
+  name: passenger clown jumpsuit
   description: Yet to be worthy of honking.
   components:
   - type: Sprite
@@ -1105,8 +1105,8 @@
 
 - type: entity
   parent: ClothingUniformBase
-  id: ClothingUniformJumpsuitAssistant
-  name: assistant jumpsuit
+  id: ClothingUniformJumpsuitPassenger
+  name: passenger jumpsuit
   description: A tasteful green jumpsuit that reminds you of the good old days.
   components:
   - type: RollUpSleeves

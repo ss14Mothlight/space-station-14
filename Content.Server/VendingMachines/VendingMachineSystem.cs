@@ -21,7 +21,7 @@ using Content.Shared.Tag;
 using Content.Shared.Cargo.Components;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
-using Content.Shared._NullLink;
+using Content.Server._Persistence.Bank; // Mothlight
 using Robust.Shared.Player;
 using Content.Server._Starlight.Economy;
 using Content.Shared._Starlight.Economy;
@@ -38,7 +38,7 @@ namespace Content.Server.VendingMachines
         // 🌟Starlight🌟 start
         [Dependency] private ItemPriceManager _itemPriceManager = default!;
         [Dependency] private IComponentFactory _componentFactory = default!;
-        [Dependency] private ISharedNullLinkPlayerResourcesManager _playerResources = default!;
+        [Dependency] private BankSystem _bank = default!; // Mothlight - pay from the bank, in spesos
         [Dependency] private TagSystem _tag = default!;
         [Dependency] private CargoSystem _cargoSystem = default!;
         [Dependency] private Content.Server.Station.Systems.StationSystem _stationSystem = default!;
@@ -240,18 +240,18 @@ namespace Content.Server.VendingMachines
                 var price = entry?.Price ?? 0;
                 if (price > 0)
                 {
-                    if (_playerResources.TryGetResource(buyerUid, "credits", out var balance) && balance >= price) // Double-check sufficient funds
+                    if (_bank.TryGetBalance(buyerUid, out var balance) && _bank.TryBankWithdraw(buyerUid, price)) // Double-check sufficient funds // Mothlight - bank
                     {
-                        _playerResources.TryUpdateResource(buyerUid, "credits", -price);
                         vendComponent.DebitApplied = true;
-                        Popup.PopupEntity(Loc.GetString("vending-machine-debited", ("price", price), ("balance", balance -= price)), uid, buyerUid);
-                        SendBalanceUpdate(uid, buyerUid, (int)(balance -= price)!);
+                        balance -= price; // Mothlight - only take it off once
+                        Popup.PopupEntity(Loc.GetString("vending-machine-debited", ("price", price), ("balance", balance)), uid, buyerUid);
+                        SendBalanceUpdate(uid, buyerUid, balance);
 
                         // Alogs
                         _adminLogger.Add(
                             LogType.Action,
                             LogImpact.Medium,
-                            $"{ToPrettyString(buyerUid):player} bought {ToPrettyString(ent):entity} for {price}₡ from {ToPrettyString(uid):entity} Balance left: {balance}₡");
+                            $"{ToPrettyString(buyerUid):player} bought {ToPrettyString(ent):entity} for ${price} from {ToPrettyString(uid):entity} Balance left: ${balance}"); // Mothlight - spesos
 
                         // Credit cargo 10x price
                         var stationUid = _stationSystem.GetOwningStation(uid);
@@ -320,10 +320,10 @@ namespace Content.Server.VendingMachines
         {
             if (!Equals(args.UiKey, VendingMachineUiKey.Key)
                 || !component.ShowPrices
-                || !_playerResources.TryGetResource(args.Actor, "credits", out var balance))
+                || !_bank.TryGetBalance(args.Actor, out var balance)) // Mothlight - bank
                 return;
 
-            SendBalanceUpdate(uid, args.Actor, (int)balance);
+            SendBalanceUpdate(uid, args.Actor, balance);
         }
 
         private void OnTryVocalize(Entity<VendingMachineComponent> ent, ref TryVocalizeEvent args)
@@ -439,10 +439,10 @@ namespace Content.Server.VendingMachines
         protected override void OnRequestBalanceMessage(Entity<VendingMachineComponent> entity, ref VendingMachineRequestBalanceMessage args)
         {
             if (args.Actor is not { Valid: true } actor
-                || !_playerResources.TryGetResource(actor, "credits", out var balance))
+                || !_bank.TryGetBalance(actor, out var balance)) // Mothlight - bank
                 return;
 
-            SendBalanceUpdate(entity.Owner, actor, (int)balance);
+            SendBalanceUpdate(entity.Owner, actor, balance);
         }
 
         /// <summary>
@@ -474,7 +474,7 @@ namespace Content.Server.VendingMachines
                 return;
 
             // Get balance for payment
-            if (!_playerResources.TryGetResource(sender, "credits", out var balance))
+            if (!_bank.TryGetBalance(sender, out var balance)) // Mothlight - bank
                 return;
 
             // Get inventory entry for the correct inventory bucket

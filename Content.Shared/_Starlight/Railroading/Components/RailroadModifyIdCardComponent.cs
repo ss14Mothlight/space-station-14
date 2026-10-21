@@ -29,5 +29,5 @@ public sealed partial class RailroadModifyIdCardComponent : Component
     public IReadOnlyCollection<ProtoId<AccessLevelPrototype>> AccessRemove = Array.Empty<ProtoId<AccessLevelPrototype>>();
 
     [DataField]
-    public string DefaultIdPrototypeIfNoneFound = "AssistantIdCard";
+    public string DefaultIdPrototypeIfNoneFound = "PassengerIDCard"; // Mothlight
 }
